@@ -1,6 +1,7 @@
 import App from '../components/Layouts/App.svelte';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
+import '../stylesheets/constants.css';
 import '../stylesheets/styles.css';
 
 const app = new App({
