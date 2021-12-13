@@ -13,12 +13,14 @@ Flight::set('flight.views.path', 'app/views');
 Flight::set('env', $_ENV);
 Flight::set('config', App\Config\Constants[$_ENV['ENV']]);
 
-Flight::route('/', function(){
+$home = function(){
   $locals = array(
     'title' => 'Bienvenido',
   );
   Flight::render('home.php', $locals);
-});
+};
+
+Flight::route('GET /', $home);
 
 Flight::map('notFound', function(){
   $locals = array(

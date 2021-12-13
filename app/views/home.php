@@ -13,7 +13,6 @@
   <title><?php echo $title ?></title>
 </head>
 <body>
-  home
   <?php if(Flight::get('config')['env'] == 'local'){ ?>
     <script src="<?php echo Flight::get('config')['static_url']; ?>build/bundle.app.js"type="text/javascript"></script>
   <?php } ?>
