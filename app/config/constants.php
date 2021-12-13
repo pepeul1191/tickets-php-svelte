@@ -1,9 +1,16 @@
 <?php namespace App\Config;
 
 const Constants = array(
-  'base_url' => '/',
-  'static_url' => '/public/',
-  'ambiente' => 'desarrollo',
+  'local' => array( 
+    'base_url' => '/',
+    'static_url' => '/public/',
+    'env' => 'local',
+  ),
+  'prod' => array( 
+    'base_url' => '/',
+    'static_url' => '/public/',
+    'env' => 'prod',
+  ),
 );
 
 ?>

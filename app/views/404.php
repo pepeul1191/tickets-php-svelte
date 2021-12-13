@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?php echo $title ?><</title>
   <link href="<?php echo Flight::get('config')['static_url']; ?>build/bundle.error.css" rel="stylesheet"/>
+  <title><?php echo $title ?><</title>
 </head>
 <body>
   <div class="row text-center">

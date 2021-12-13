@@ -2,13 +2,16 @@
 
 require 'vendor/autoload.php';
 
+$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 Flight::before('start', function(&$params, &$output){
   header('x-powered-by: PHP');
   header('Server: Ubuntu');
 });
-
 Flight::set('flight.views.path', 'app/views');
-Flight::set('config', App\Config\Constants);
+Flight::set('env', $_ENV);
+Flight::set('config', App\Config\Constants[$_ENV['ENV']]);
 
 Flight::route('/', function(){
   $locals = array(
