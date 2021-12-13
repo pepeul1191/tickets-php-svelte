@@ -8,6 +8,7 @@ Flight::before('start', function(&$params, &$output){
 });
 
 Flight::set('flight.views.path', 'app/views');
+Flight::set('config', App\Config\Constants);
 
 Flight::route('/', function(){
   $locals = array(

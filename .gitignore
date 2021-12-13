@@ -42,3 +42,7 @@ package-lock.json
 
 .vscode
 .env
+
+public/build
+public/fonts
+public/vendor
