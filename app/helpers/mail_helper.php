@@ -38,7 +38,6 @@ function mailToUs($data, $config){
     '%about' => $_ENV['ABOUT'],
     '%adress' => $_ENV['ADRESS'],
     '%phone' => $_ENV['PHONE'],
-    '%email' => $_ENV['EMAIL'],
     '%year' => date('Y'),
   );
   $message = str_replace(
@@ -58,14 +57,15 @@ function mailToUs($data, $config){
     $mail->SMTPAuth = true;
     $mail->Username = $_ENV['MAIL_USER'];
     $mail->Password = $_ENV['MAIL_PASS'];
-    $mail->SMTPSecure = 'ssl';
+    $mail->SMTPSecure = 'tls'; // gmail tls, otro ssl
+    $mail->SMTPAuth   = true; 
     $mail->Port = $_ENV['MAIL_PORT'];
     // recipients
-    $mail->setFrom($_ENV['MAIL_USER'], $_ENV['NAME']);
-    $mail->addAddress($email, $name);     // Add a recipient
+    $mail->setFrom($_ENV['MAIL_SENDER'], $_ENV['NAME']);
+    $mail->addAddress($_ENV['MAIL_US'], $name);     // Add a recipient
     // content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = $_ENV['NAME'] . ' - Gracias por contactarnos';
+    $mail->Subject = $_ENV['NAME'] . ' - Mensaje desde el sitio web';
     $mail->Body = $message;
     // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
     // send
@@ -126,14 +126,16 @@ function mailToVisitor($data, $config){
     $mail->SMTPAuth = true;
     $mail->Username = $_ENV['MAIL_USER'];
     $mail->Password = $_ENV['MAIL_PASS'];
-    $mail->SMTPSecure = 'ssl';
+    $mail->SMTPSecure = 'tls'; // gmail tls, otro ssl
+    $mail->SMTPAuth   = true; 
     $mail->Port = $_ENV['MAIL_PORT'];
     // recipients
-    $mail->setFrom($_ENV['MAIL_USER'], $_ENV['NAME']);
-    $mail->addAddress($_ENV['MAIL_US']);     // Add a recipient
+    $mail->setFrom($_ENV['MAIL_SENDER'], $_ENV['NAME']);
+    $mail->AddReplyTo($_ENV['MAIL_SENDER'], $name);
+    $mail->addAddress($email);     // Add a recipient
     // content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = $_ENV['NAME'] . ' - Mensaje desde el sitio web';
+    $mail->Subject = $_ENV['NAME'] . ' - Gracias por contactarnos';
     $mail->Body = $message;
     // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
     // send

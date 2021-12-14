@@ -27,8 +27,7 @@ Flight::route('POST /mail', function(){
   $payload = json_decode($request->getBody());
   $resp1 = App\Helper\mailToUs($payload, Flight::get('config'));
   if($resp1['status'] == 200){
-    App\Helper\mailToVisitor($payload, Flight::get('config'));
-    $resp2 = App\Helper\mailToUs($payload, Flight::get('config'));
+    $resp2 = App\Helper\mailToVisitor($payload, Flight::get('config'));
     if($resp2['status'] == 200){
       echo 'ok';
     }else{

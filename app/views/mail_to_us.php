@@ -331,7 +331,7 @@ return <<<EOD
 			<tbody>
 				<tr>
 					<td class="bg_white logo" style="padding: 1em 2.5em; text-align: center">
-						<img src="%logo_url" alt="Centro Odontológico Americano" width="200">
+						<img src="%logo_url" alt="%enterprise_name" width="200">
 					</td>
 				</tr>
 				<tr>

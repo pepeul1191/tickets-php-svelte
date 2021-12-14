@@ -1,4 +1,4 @@
-# FlightPHP con Backbone Rollup
+# FlightPHP con Svelte JS
 
 Instalación de dependencias:
 
@@ -14,6 +14,7 @@ Servidor de desarrollo
 
 ## Archivo .env en configs
 
+    MAIL_SENDER="contacto@antergo.pe"
     MAIL_USER="demo@correo.pe"
     MAIL_PASS="demo123"
     MAIL_US="demo@correo.pe"
@@ -35,3 +36,5 @@ Fuentes:
 + https://github.com/pepeul1191/flightphp-boilerplate
 + https://codepen.io/wowthemesnet/pen/LgeQKd
 + https://www.wowthemes.net/bootstrap-4-split-screen-layout/
++ https://www.hostinger.es/tutoriales/como-usar-el-servidor-smtp-gmail-gratuito/
++ https://support.google.com/accounts/answer/185833?hl=es (contraseña de aplicaciones)
