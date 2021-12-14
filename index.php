@@ -22,6 +22,23 @@ $home = function(){
 
 Flight::route('GET /', $home);
 
+Flight::route('POST /mail', function(){
+  $request = Flight::request();
+  $payload = json_decode($request->getBody());
+  $resp1 = App\Helper\mailToUs($payload, Flight::get('config'));
+  if($resp1['status'] == 200){
+    App\Helper\mailToVisitor($payload, Flight::get('config'));
+    $resp2 = App\Helper\mailToUs($payload, Flight::get('config'));
+    if($resp2['status'] == 200){
+      echo 'ok';
+    }else{
+      Flight::json($resp2, $code = 500);
+    }
+  }else{
+    Flight::json($resp1, $code = 500);
+  }
+});
+
 Flight::map('notFound', function(){
   $locals = array(
     'title' => 'Recurso no encontrado',
