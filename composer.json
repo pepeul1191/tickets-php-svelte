@@ -23,7 +23,8 @@
 			"vendor/j4mie/idiorm/idiorm.php",
 			"vendor/j4mie/paris/paris.php",
 			"app/config/constants.php",
-			"app/helpers/mail_helper.php"
+			"app/helpers/mail_helper.php",
+			"app/helpers/before_helper.php"
 		],
 		"classmap": [
 		]

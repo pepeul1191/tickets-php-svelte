@@ -6,8 +6,7 @@ $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 Flight::before('start', function(&$params, &$output){
-  header('x-powered-by: PHP');
-  header('Server: Ubuntu');
+  App\Helper\filter($_ENV['ENV']);
 });
 Flight::set('flight.views.path', 'app/views');
 Flight::set('env', $_ENV);
