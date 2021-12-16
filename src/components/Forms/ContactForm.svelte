@@ -96,7 +96,6 @@
       <button type="submit" on:click|preventDefault={() => sendMessage()} class="btn btn-default"  disabled={disabled}>Enviar</button>
       </div>
     </div>
-    <p>El sitio está siendo desarrollado por <a href="http://softweb.pe/"> Softtware Web Perú</a> © 2011-2021</p>
   </div>
 </form>
 
@@ -120,5 +119,9 @@
 
   p{
     font-size: 13px;
+  }
+
+  .p-5 {
+    padding: 1rem !important;
   }
 </style>

@@ -48,3 +48,4 @@ public/fonts
 public/vendor
 
 error_log
+*.pdf

@@ -31,6 +31,10 @@ Servidor de desarrollo
 
 ---
 
+Video Tutorial Diseño
+
++ https://www.youtube.com/watch?v=XLp5kEfKe2k
+
 Fuentes:
 
 + https://github.com/pepeul1191/flightphp-boilerplate

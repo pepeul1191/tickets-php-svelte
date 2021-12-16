@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Antergo, Diseño de Interiores">
   <link rel='icon' type='image/png' href='<?php echo Flight::get('config')['static_url']; ?>/favicon.png'>
   <link href="<?php echo Flight::get('config')['static_url']; ?>build/bundle.app.css" rel="stylesheet"/>
   <title><?php echo $title ?></title>
@@ -12,7 +13,7 @@
     const STATIC_URL = '<?php echo Flight::get('config')['static_url']; ?>';
   </script>
 </head>
-<body>
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
   <?php if(Flight::get('config')['env'] == 'local'){ ?>
     <script src="<?php echo Flight::get('config')['static_url']; ?>build/bundle.app.js"type="text/javascript"></script>
   <?php } ?>
