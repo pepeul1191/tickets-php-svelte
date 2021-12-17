@@ -121,7 +121,11 @@
     font-size: 13px;
   }
 
-  .p-5 {
-    padding: 1rem !important;
+  .p-5{
+    padding: 3rem 11rem 3rem 2.5rem !important;
+  }
+
+  h3, .contact-form{
+    width: 150%;
   }
 </style>

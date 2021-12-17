@@ -1,4 +1,9 @@
 :root {
   --primary-color: #c49536;
   --secondary-color: #7c7c80;
+  --white-color: #fff;
+  --text-color: #b0b0b0;
+  --black-color: #1E1D23;
+  --primary-font: 'Roboto', 'sans-serif';
+  --primary-font: 'Quicksand', 'sans-serif';
 }

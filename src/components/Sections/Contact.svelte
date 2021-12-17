@@ -5,7 +5,7 @@
   let email = 'proyectos@antergo.pe';
 </script>
 
-<div class="d-md-flex h-md-100 align-items-center">
+<div class="d-md-flex h-md-100 align-items-center" id="contact">
 	<div class="col-md-6 p-0 bg-left h-md-100">
 		<div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
 			<div class="logoarea pt-5 pb-5">
@@ -23,7 +23,7 @@
 		</div>
 	</div>
 	<div class="col-md-6 p-0 bg-white h-md-100 loginarea">
-		<div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
+		<div class="d-md-flex align-items-center h-md-100 p-3 justify-content-center">
 			<ContactForm />
 		</div>
 	</div>
@@ -86,9 +86,4 @@
     font-weight: 500;
   }
 
-  @media (max-width: 768px) { 
-    .p-5 {
-      padding: 1rem !important;
-    }
-  }
 </style>

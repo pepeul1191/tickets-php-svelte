@@ -19,6 +19,7 @@
     padding-bottom: 10px;
     color: #c8beb7;
     margin-bottom: 0rem;
+    letter-spacing: 0px;
   }
 
   a{
