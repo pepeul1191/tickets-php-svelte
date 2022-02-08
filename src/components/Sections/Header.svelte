@@ -17,6 +17,10 @@
       }
     }
   });
+
+  const togglerMenu = () => {
+    alert()
+  };
 </script>
 <nav class="navbar navbar-expand-lg navigation-wrap {navScroll}">
   <div class="container">
@@ -24,7 +28,9 @@
       <img src="{static_url}assets/img/mail-logo.png" alt="{enterpriseName}" height="60">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -41,7 +47,7 @@
           <a class="nav-link" href="#contact">Contacto</a>
         </li>
         <li>
-          <button class="btn-main">
+          <button class="btn-main" on:click={togglerMenu}>
             <i class="fa fa-whatsapp" aria-hidden="true"></i>
             +51 901 268 633
           </button>
@@ -68,6 +74,7 @@
     -o-transition: all .4s ease-out 0s;
     -moz-transition: all .4s ease-out 0s;
     transition: all .4s ease-out 0s;
+    border-radius: 0px;
   }
 
   .btn-main:hover{
@@ -139,5 +146,37 @@
   .navigation-wrap.scroll-on .nav-link:hover,
   .navigation-wrap.scroll-on .nav-link:active{
     color:var(--primary-color);
+  }
+
+  .navbar-toggler-icon{
+    font-size: 1.5rem;
+    height: 1.25em;
+  }
+
+  @media(max-width: 991px){
+    .text-content{
+      width: 100%;
+
+    }
+
+    .navigation-wrap .navbar-brand img {
+      height: 3.8125rem;
+    }
+
+    .navigation-wrap{
+      text-align: center;
+      background-color: var(--white-color);
+    }
+  }
+
+  @media(max-width: 767px){
+    h1{
+      font-size: 2.8rem;
+    }
+
+    h2{
+      font-size: 1.3rem;
+      line-height: 28px;
+    }
   }
 </style>
