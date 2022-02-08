@@ -1,10 +1,24 @@
 <script>
+  import jQuery from 'jquery';
   const base_url = BASE_URL;
   const static_url = STATIC_URL;
   const enterpriseName = "Antergo";
+  let navScroll = "XD";
+  
+  jQuery(window).scroll(function(event){
+    var pathname = window.location.pathname; 
+    if(true/*pathname == '/'*/){
+      var sc = jQuery(window).scrollTop();
+      // console.log(sc);
+      if(sc >= 250){
+        navScroll = "nav-scroll";
+      }else{
+        navScroll = "";
+      }
+    }
+  });
 </script>
-
-<nav class="navbar navbar-expand-lg navigation-wrap">
+<nav class="navbar navbar-expand-lg navigation-wrap {navScroll}">
   <div class="container">
     <a class="navbar-brand" href="{base_url}">
       <img src="{static_url}assets/img/mail-logo.png" alt="{enterpriseName}" height="60">
