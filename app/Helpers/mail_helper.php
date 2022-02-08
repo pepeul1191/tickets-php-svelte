@@ -1,11 +1,16 @@
-<?php 
-
-namespace App\Helper;
+<?php
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-function mailToUs($data, $config){
+function sendActivationMail()
+{
+  # TODO
+  return null;
+}
+
+function mailToUs($data, $f3)
+{
   $resp = array(
     'status' => 200,
     'message' => '',
@@ -18,11 +23,11 @@ function mailToUs($data, $config){
   // load .env
   $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
   $dotenv->load();
-  // mail to visitor
-  $layout = require __DIR__ . '/../views/mail_to_us.php';
-  $logo_url = $config['static_url'] . 'assets/img/mail-logo.png';
-  $img_url = $config['static_url'] . 'assets/img/mail-background.jpeg';
-  $favicon = $config['static_url'] . 'favicon.png';
+  // mail to us
+  $layout = require VIEW_PATH . '/mails/mail_to_us.php';
+  $logo_url = $f3->get('staticURL') . 'assets/img/mail-logo.png';
+  $img_url = $f3->get('staticURL') . 'assets/img/mail-background.jpeg';
+  $favicon = $f3->get('staticURL') . 'favicon.png';
   $data_layout = array(
     '%name' => $name, 
     '%email' => $email,
@@ -30,7 +35,7 @@ function mailToUs($data, $config){
     '%comment' => $comment, 
     '%logo_url' => $logo_url,
     '%img_url' => $img_url,
-    '%base_url' => $config['base_url'],
+    '%base_url' => $f3->get('baseURL'),
     '%favicon' => $favicon,
     '%primary' => $_ENV['PRIMARY'],
     '%secondary' => $_ENV['SECONDARY'],
@@ -77,7 +82,8 @@ function mailToUs($data, $config){
   return $resp;
 }
 
-function mailToVisitor($data, $config){
+function mailToVisitor($data, $f3)
+{
   $resp = array(
     'status' => 200,
     'message' => '',
@@ -89,15 +95,15 @@ function mailToVisitor($data, $config){
   $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
   $dotenv->load();
   // mail to visitor
-  $layout = require __DIR__ . '/../views/mail_to_visitor.php';
-  $logo_url = $config['static_url'] . 'assets/img/mail-logo.png';
-  $img_url = $config['static_url'] . 'assets/img/mail-background.jpeg';
-  $favicon = $config['static_url'] . 'favicon.png';
+  $layout = require VIEW_PATH . '/mails/mail_to_visitor.php';
+  $logo_url = $f3->get('staticURL') . 'assets/img/mail-logo.png';
+  $img_url = $f3->get('staticURL') . 'assets/img/mail-background.jpeg';
+  $favicon = $f3->get('staticURL') . 'favicon.png';
   $data_layout = array(
     '%name' => $name, 
     '%logo_url' => $logo_url,
     '%img_url' => $img_url,
-    '%base_url' => $config['base_url'],
+    '%base_url' => $f3->get('baseURL'),
     '%favicon' => $favicon,
     '%primary' => $_ENV['PRIMARY'],
     '%secondary' => $_ENV['SECONDARY'],
@@ -146,5 +152,3 @@ function mailToVisitor($data, $config){
   }
   return $resp;
 }
-
-?>

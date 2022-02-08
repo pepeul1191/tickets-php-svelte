@@ -48,7 +48,7 @@
           inputName.focus();
           setTimeout(() => {message = ''}, 5000);
         }).catch((resp => {
-          // console.log(resp);
+          console.log(resp);
           messageClass = 'text-danger';
           message = 'Ocurrió un error al mandar su mensaje';
           setTimeout(() => {message = ''}, 5000);

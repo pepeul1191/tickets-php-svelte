@@ -94,7 +94,7 @@
     font-size: 0.9375rem;
     font-weight: 600;
     text-transform: capitalize;
-    color:var(--white-color) !important;
+    color:var(--black-color) !important;
   }
 
   .nav-link:hover,
