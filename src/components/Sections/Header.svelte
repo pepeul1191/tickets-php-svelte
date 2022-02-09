@@ -10,7 +10,7 @@
     if(true/*pathname == '/'*/){
       var sc = jQuery(window).scrollTop();
       // console.log(sc);
-      if(sc >= 250){
+      if(sc >= 180){
         navScroll = "nav-scroll";
       }else{
         navScroll = "";
@@ -19,7 +19,15 @@
   });
 
   const togglerMenu = () => {
-    alert()
+    const navLinks = document.querySelectorAll('.nav-item')
+    console.log(navLinks)
+    const menuToggle = document.getElementById('navbarSupportedContent')
+    const bsCollapse = new bootstrap.Collapse(menuToggle)
+    navLinks.forEach((l) => {
+      l.addEventListener('click', () => { console.log('XD');bsCollapse.toggle() })
+    })
+    const btnToggle = document.getElementById('btnToggle')
+    btnToggle.addEventListener('click', () => { console.log('XD');bsCollapse.toggle() })
   };
 </script>
 <nav class="navbar navbar-expand-lg navigation-wrap {navScroll}">
@@ -27,7 +35,7 @@
     <a class="navbar-brand" href="{base_url}">
       <img src="{static_url}assets/img/mail-logo.png" alt="{enterpriseName}" height="60">
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" id="btnToggle" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" on:click={togglerMenu}>
       <span class="navbar-toggler-icon">
         <i class="fa fa-bars" aria-hidden="true"></i>
       </span>
@@ -35,19 +43,19 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#home">Home</a>
+          <a class="nav-link" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#aboutUs">Nosotros</a>
+          <a class="nav-link" href="#aboutUs" on:click|preventDefault={() => {}}>Nosotros</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#projects">Proyectos</a>
-        </li>
+          <a class="nav-link" href="#projects" on:click|preventDefault={() => {}}>Proyectos</a>
+        </li> 
         <li class="nav-item">
-          <a class="nav-link" href="#contact">Contacto</a>
+          <a class="nav-link" href="/contacto">Contacto</a>
         </li>
         <li>
-          <button class="btn-main" on:click={togglerMenu}>
+          <button class="btn-main">
             <i class="fa fa-whatsapp" aria-hidden="true"></i>
             +51 901 268 633
           </button>
@@ -75,6 +83,10 @@
     -moz-transition: all .4s ease-out 0s;
     transition: all .4s ease-out 0s;
     border-radius: 0px;
+  }
+
+  .nav-scroll{
+    background: white;
   }
 
   .btn-main:hover{

@@ -42,3 +42,4 @@ Fuentes:
 + https://www.wowthemes.net/bootstrap-4-split-screen-layout/
 + https://www.hostinger.es/tutoriales/como-usar-el-servidor-smtp-gmail-gratuito/
 + https://support.google.com/accounts/answer/185833?hl=es (contraseña de aplicaciones)
++ https://visionmedia.github.io/page.js/

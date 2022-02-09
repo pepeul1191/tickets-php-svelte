@@ -2,6 +2,7 @@
 
 # website
 $f3->route('GET /', '\App\Controllers\HomeController->index');
+$f3->route('GET /contacto', '\App\Controllers\HomeController->index');
 $f3->route('POST /mail', '\App\Controllers\MailController->mail');
 #### login
 $f3->route('GET /login', '\App\Controllers\LoginController->index');
