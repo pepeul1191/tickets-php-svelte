@@ -1,0 +1,54 @@
+<html>
+<head>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  <!-- Download from here: http://imakewebthings.com/jquery-waypoints/ -->
+  <script src="https://raw.githubusercontent.com/imakewebthings/jquery-waypoints/master/waypoints.js"></script>
+  
+  <style type="text/css">
+    /* A box that is 500px tall */
+    .content {
+      height: 500px;
+      border: 1px solid black;
+    }
+  </style>
+
+</head>
+<body>
+
+  <div class="content" data-url="#1">
+    Content 1
+  </div>
+
+  <div class="content" data-url="#2">
+    Content 2
+  </div>
+
+  <div class="content" data-url="#3">
+    Content 3
+  </div>
+
+  <div class="content" data-url="#4">
+    Content 4
+  </div>
+
+  <div class="content" data-url="#5">
+    Content 5
+  </div>
+
+  <div class="content">
+    Footer
+  </div>
+
+  <script>
+
+    // When the user scrolls past the top of a <div> tag, change the URL.
+    var changeUrl = function() {
+      var url = $(this).data('url');
+      window.history.replaceState({}, '', url);
+    };
+    $('.content').waypoint(changeUrl);
+
+  </script>
+
+</body>
+</html>

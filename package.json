@@ -27,6 +27,7 @@
     "page": "^1.11.6",
     "query-string": "^7.0.1",
     "sirv-cli": "^1.0.0",
-    "svelte-routing": "^1.6.0"
+    "svelte-routing": "^1.6.0",
+    "waypoints": "^4.0.1"
   }
 }

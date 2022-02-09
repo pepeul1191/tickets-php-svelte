@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import page from 'page';
   import jQuery from 'jquery';
+  import 'waypoints/lib/noframework.waypoints.js';
   import Header from '../Sections/Header.svelte';
   import Contact from '../Sections/Contact.svelte';
   import DevelopedBy from '../Sections/DevelopedBy.svelte';
@@ -20,13 +21,33 @@
     });
     // activate router
     page.start();
+    // waypoints
+    new Waypoint({
+      element: document.getElementById('header'),
+      handler: function(direction) {
+        console.log('header')
+
+      }
+    })
+    new Waypoint({
+      element: document.getElementById('contact'),
+      handler: function(direction) {
+        console.log('contact')
+
+      }
+    })
   });
 </script>
-
-<section id="header"><Header /></section>
-<TopBanner />
-<section id="contact"> <Contact /> </section>
-<DevelopedBy />
+<div id="overflow-scroll">
+  <section id="header" class="sectionStage">
+    <Header />
+  </section>
+  <TopBanner />
+  <section id="contact" class="sectionStage"> 
+    <Contact /> 
+  </section>
+  <DevelopedBy />
+</div>
 
 <style>
 </style>
