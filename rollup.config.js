@@ -33,11 +33,16 @@ export default [
 	{
 		input: 'src/entries/app.js',
 		output: {
-			sourcemap: true,
+			sourcemap: false,
 			format: 'iife',
 			name: 'app',
 			file: production ? 'public/build/bundle.app.min.js' : 'public/build/bundle.app.js', 
+			strict: false,
+			globals: {
+				jquery: '$'
+			},
 		},
+		external: ['owl.carousel2/dist/owl.carousel.min.js'],
 		plugins: [
 			svelte({
 				compilerOptions: {

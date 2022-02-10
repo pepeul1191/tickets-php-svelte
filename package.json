@@ -20,14 +20,19 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.0.0",
+    "animate.css": "^4.1.1",
     "axios": "^0.21.4",
     "bootstrap": "^5.1.0",
-    "font-awesome": "^4.7.0",
-    "jquery": "^3.6.0",
+    "bootstrap-icons": "^1.8.1",
+    "jquery": "^3.4.1",
+    "jquery.easing": "^1.4.1",
+    "owl.carousel2": "^2.2.2",
     "page": "^1.11.6",
     "query-string": "^7.0.1",
     "sirv-cli": "^1.0.0",
     "svelte-routing": "^1.6.0",
-    "waypoints": "^4.0.1"
+    "waypoints": "^4.0.1",
+    "wowjs": "^1.1.3"
   }
 }

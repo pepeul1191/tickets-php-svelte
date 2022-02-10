@@ -1,115 +1,15 @@
-.btn{
-  border-radius: 0px !important;
+/********** Template CSS **********/
+:root {
+  --primary: #00B98E;
+  --secondary: #FF6922;
+  --light: #EFFDF5;
+  --dark: #0E2E50;
 }
 
-*,
-*:after,
-*:before {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  margin:0px;
-  padding:0px;
-}
-
-:active,
-:hover,
-:focus {
-  outline: 0 !important;
-  outline-offset: 0;
-}
-
-a,
-a:hover{
-  text-decoration: none;
-}
-
-a:hover{
-  color:var(--primary-color) !important;
-}
-
-ul,
-ol{
-  margin:0;
-  padding: 0;
-}
-
-html{
-  scroll-behavior: smooth;
-}
-
-body{
-  font-family: var(--primary-font);
-  font-size: 100%;
-  font-weight: 400;
-}
-
-/* 
-===============================
-Custom Scrollbar 
-===============================
-*/
-
-::-webkit-scrollbar{
-  width: 0.625em;
-}
-
-::-webkit-scrollbar-track{
-  width: var(--white-color);
-}
-
-::-webkit-scrollbar-thumb{
-  background: var(--secondary-color);
-}
-
-/* 
-===============================
-Custom CSS Design
-===============================
-*/
-
-h1{
-  font-size: 58px;
-  font-weight: 900;
-  margin-bottom: 1rem;
-  color: var(--white-color);
-  text-shadow: 1px 0 6px #000;
-}
-
-h1 > span {
-  color: var(--primary-color);
-}
-
-h2 {
-  font-weight: 700;
-  font-size: 2rem;
-  text-transform: capitalize;
-  font-family: var(--secondary-font);
-  color: var(--secondary-color);
-  line-height: 3rem;
-}
-
-h4{
-  color:var(--secondary-color);
-  font-family: var(--secondary-font);
-  text-transform: capitalize;
-  font-size: 1.125rem;
-  font-weight: 800;
-  margin-bottom: 0.5rem;
-}
-
-h5{
-  color:var(--black-color);
-  font-family: var(--secondary-font);
-  text-transform: capitalize;
-  font-size: 1.125rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-p{
-  font-size:1rem;
-  color:var(--text-color);
-  font-weight: 400;
-  line-height: 1.75rem;
-  letter-spacing: 1px;
+.back-to-top {
+  position: fixed;
+  display: none;
+  right: 45px;
+  bottom: 45px;
+  z-index: 99;
 }
