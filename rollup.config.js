@@ -56,6 +56,10 @@ export default [
 						src: 'node_modules/font-awesome/fonts/*', 
 						dest: 'public/fonts'
 					},
+					{ 
+						src: 'node_modules/bootstrap-icons/font/fonts/*', 
+						dest: 'public/build/fonts'
+					},
 					{
 						src: "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
 						dest: "public/vendor/bootstrap",

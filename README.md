@@ -35,6 +35,10 @@ Video Tutorial Diseño
 
 + https://www.youtube.com/watch?v=XLp5kEfKe2k
 
+Diseño Template
+
++ https://themewagon.com/themes/makan-free-responsive-bootstrap-5-html5-business-website-template/
+
 Fuentes:
 
 + https://github.com/pepeul1191/flightphp-boilerplate
