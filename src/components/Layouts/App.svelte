@@ -24,17 +24,17 @@
     // waypoints
     new Waypoint({
       element: document.getElementById('header'),
-      handler: function(direction) {
-        console.log('header')
-
-      }
+      handler: function(direction, event) {
+        page('/');
+      },
+      offset: '-10%'
     })
     new Waypoint({
       element: document.getElementById('contact'),
-      handler: function(direction) {
-        console.log('contact')
-
-      }
+      handler: function() {
+        page('/contacto');
+      },
+      offset: '-10%'
     })
   });
 </script>
