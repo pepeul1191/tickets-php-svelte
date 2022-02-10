@@ -8,7 +8,7 @@
   let phone = '+51901268633';
 </script>
 
-<div class="container-xxl bg-white p-0" id="demo">
+<div class="container-xxl bg-white p-0">
   <Spinner />
   <Header />
   <TopBanner />

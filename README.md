@@ -38,6 +38,7 @@ Video Tutorial Diseño
 Diseño Template
 
 + https://themewagon.com/themes/makan-free-responsive-bootstrap-5-html5-business-website-template/
++ https://technext.github.io/makan/
 
 Fuentes:
 

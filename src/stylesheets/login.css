@@ -130,3 +130,7 @@ button{
 h1{
   text-shadow: 0px;
 }
+
+.btn, .form-control{
+  border-radius: 0px;
+}

@@ -2,7 +2,7 @@
   import { navigate } from 'svelte-routing';
   import { onMount } from 'svelte';
 
-  let disabled = true;
+  let disabled = false;
   onMount(() => {
 		console.log('reset password');
 	});

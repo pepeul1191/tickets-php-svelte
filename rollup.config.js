@@ -42,7 +42,10 @@ export default [
 				jquery: '$'
 			},
 		},
-		external: ['owl.carousel2/dist/owl.carousel.min.js'],
+		external: [
+			'owl.carousel2/dist/owl.carousel.min.js',
+			'bootstrap/dist/js/bootstrap.min.js',
+		],
 		plugins: [
 			svelte({
 				compilerOptions: {

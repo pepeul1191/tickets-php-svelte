@@ -7,7 +7,7 @@
   let message = '';
   let messageColor = '';
   let queryParams;
-  let disabled = true;
+  let disabled = false;
   $: queryParams = queryString.parse(location.search);
 
   onMount(() => {
