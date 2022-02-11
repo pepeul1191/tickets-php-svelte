@@ -52,13 +52,27 @@ class LoginController extends BaseController
       $_SESSION['csrfValue'] = \App\Libraries\RandomLib::lowerStringNumber(30);
       $_SESSION['status'] = 'active';
       $_SESSION['user'] = $user;
-      $_SESSION['name'] = 'Pepe Valdivia';
+      $_SESSION['name'] = 'Antergo Design';
       $_SESSION['img'] = $f3->get('staticURL') . 'assets/img/default-user.png';
       $_SESSION['time'] = date('Y-m-d H:i:s');
-      $f3->reroute('/');
+      $f3->reroute('/admin');
     }else{
       $f3->reroute($f3->get('PATH') . '?error=user-pass-mismatch');
     }
+  }
+
+  function info($f3) 
+  {
+    // data
+    $resp = json_encode([
+      'user' => $_SESSION['user'],
+      'name' => $_SESSION['name'],
+      'img' => $_SESSION['img'],
+    ]);
+    $status = 200;
+    // resp
+    http_response_code($status);
+    echo $resp;
   }
 
   function logout($f3)

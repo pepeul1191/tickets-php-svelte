@@ -68,11 +68,7 @@ export default [
 					{ 
 						src: 'node_modules/bootstrap-icons/font/fonts/*', 
 						dest: 'public/build/fonts'
-					},
-					{
-						src: "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-						dest: "public/vendor/bootstrap",
-					},
+					}
 				]
 			}),
 			// we'll extract any component CSS out into
@@ -172,6 +168,68 @@ export default [
 			// a separate file - better for performance
 			css({ output: 'bundle.error.css' }),
 
+			// If you have external dependencies installed from
+			// npm, you'll most likely need these plugins. In
+			// some cases you'll need additional configuration -
+			// consult the documentation for details:
+			// https://github.com/rollup/plugins/tree/master/packages/commonjs
+			resolve({
+				browser: true,
+				dedupe: ['svelte']
+			}),
+			commonjs(),
+
+			// In dev mode, call `npm run start` once
+			// the bundle has been generated
+			!production && serve(),
+
+			// Watch the `public` directory and refresh the
+			// browser on changes when not in production
+			//!production && livereload('public'),
+
+			// If we're building for production (npm run build
+			// instead of npm run dev), minify
+			production && terser()
+		],
+		watch: {
+			clearScreen: true
+		}
+	},
+	{
+		input: 'src/entries/admin.js',
+		output: {
+			sourcemap: false,
+			format: 'iife',
+			name: 'admin',
+			file: production ? 'public/build/bundle.admin.min.js' : 'public/build/bundle.admin.js', 
+			strict: false,
+			globals: {
+				jquery: '$'
+			},
+		},
+		external: [
+			'bootstrap/dist/js/bootstrap.min.js',
+		],
+		plugins: [
+			svelte({
+				compilerOptions: {
+					// enable run-time checks when not in production
+					dev: !production
+				}
+			}),
+			copy({
+				targets: [
+					{
+						src: "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+						dest: "public/vendor/bootstrap",
+					},
+				]
+			}),
+			// we'll extract any component CSS out into
+			// a separate file - better for performance
+			css({ output: 'bundle.admin.css' }),
+			// json for axios
+			json(),
 			// If you have external dependencies installed from
 			// npm, you'll most likely need these plugins. In
 			// some cases you'll need additional configuration -

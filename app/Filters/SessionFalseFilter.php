@@ -17,7 +17,7 @@ class SessionFalseFilter
         $pass = false;
       }
       if($pass){
-        $f3->reroute('/');
+        $f3->reroute('/admin');
         exit();
       }
     }
