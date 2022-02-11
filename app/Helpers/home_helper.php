@@ -4,14 +4,14 @@ function stylesheetsHome($staticURL)
 {
   $stylesheets = [];
   switch ($_ENV['FF_ENVIRONMENT']) {
-    case 'production': // development
+    case 'development': // development
       $stylesheets = [
         $staticURL . 'build/bundle.app',
         $staticURL . 'build/vendor',
         $staticURL . 'assets/css/styles',
       ];
       break;
-    case 'development': // production
+    case 'production': // production
       $stylesheets = [
         $staticURL . 'build/site.min',
       ];
@@ -26,14 +26,14 @@ function javascriptsHome($staticURL)
 {
   $javascripts = [];
   switch ($_ENV['FF_ENVIRONMENT']) {
-    case 'production': // development
+    case 'development': // development
       $javascripts = [
         $staticURL . 'build/bundle.app',
         $staticURL . 'build/vendor',
         $staticURL . 'assets/js/site',
       ];
       break;
-    case 'development': // production
+    case 'production': // production
       $javascripts = [
         $staticURL . 'build/site.min',
       ];

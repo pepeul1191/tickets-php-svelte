@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "rollup -c && cross-env ENV=prod NODE_ENV2=xo npx gulp build",
-    "dev": "rollup -c -w",
+    "dev": "cross-env ENV=dev npx gulp build && rollup -c -w",
     "start": "sirv public --no-clear",
     "gulp": "cross-env ENV=prod npx gulp build"
   },

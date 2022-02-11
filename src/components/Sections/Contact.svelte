@@ -22,7 +22,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-6 p-0 bg-white h-md-100 loginarea">
+	<div class="col-md-6 p-0 bg-white h-md-100 loginarea wow">
 		<div class="d-md-flex align-items-center h-md-100 p-3 justify-content-center">
 			<ContactForm />
 		</div>
