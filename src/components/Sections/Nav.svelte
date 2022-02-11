@@ -54,7 +54,7 @@
     padding: 0 3rem;
     transition: .5s;
     z-index: 9999;
-  }
+    }
 
   .nav-bar.sticky-top {
     position: sticky !important;

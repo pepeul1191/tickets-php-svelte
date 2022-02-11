@@ -6,13 +6,17 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear",
-    "gulp:dev": "NODE_ENV=xdddd NODE_ENV2=xo npx gulp"
+    "gulp:dev": "NODE_ENV2=xo npx gulp build",
+    "gulp:prod": "_ENV=prod NODE_ENV2=xo npx gulp build"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-uglify": "^3.0.2",
     "rollup": "^2.3.4",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-css-only": "^3.1.0",

@@ -7,6 +7,7 @@ function stylesheetsHome($staticURL)
     case 'development':
       $stylesheets = [
         $staticURL . 'build/bundle.app',
+        $staticURL . 'build/vendor.min',
         $staticURL . 'assets/css/styles',
       ];
       break;
@@ -29,12 +30,14 @@ function javascriptsHome($staticURL)
     case 'development':
       $javascripts = [
         $staticURL . 'build/bundle.app',
+        $staticURL . 'build/vendor.min',
         $staticURL . 'assets/js/site',
       ];
       break;
     case 'production':
       $javascripts = [
         $staticURL . 'build/bundle.app.min',
+        $staticURL . 'build/vendor.min',
         $staticURL . 'assets/js/site',
       ];
       break;

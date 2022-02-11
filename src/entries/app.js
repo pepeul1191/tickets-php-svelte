@@ -1,7 +1,5 @@
 import App from '../components/Layouts/App.svelte';
-import 'animate.css/animate.min.css';
 import 'font-awesome/css/font-awesome.min.css';
-import 'owl.carousel2/dist/assets/owl.carousel.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
 import '../stylesheets/styles.css';
