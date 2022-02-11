@@ -8,7 +8,12 @@
       <h1 class="display-5 animated fadeIn mb-4">Find A <span class="text-primary">Perfect Home</span> To Live With Your Family</h1>
       <p class="animated fadeIn mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet
           sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
-      <a href="" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">Get Started</a>
+      <a href="" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">
+        <i class="fa fa-search" aria-hidden="true"></i>Ver Proyectos
+      </a>
+      <a href="" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">
+        <i class="fa fa-download" aria-hidden="true"></i>Descargar Brochure
+      </a>
     </div>
     <div class="col-md-6 animated fadeIn">
       <div class="owl-carousel header-carousel">
@@ -24,5 +29,16 @@
 </div>
 
 <style>
+  .text-primary{
+    color: var(--primary) !important;
+  }
 
+  .btn-primary, .btn-primary:hover{
+    background-color: var(--secondary) !important;
+    border: 1px solid var(--secondary) !important;
+  }
+
+  a > i{
+    margin-right: 10px;
+  }
 </style>

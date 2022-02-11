@@ -135,4 +135,8 @@
     line-height: 1.2;
     color: #0E2E50;
   }
+
+  .py-5 {
+    padding-bottom: 0rem!important;
+  }
 </style>

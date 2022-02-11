@@ -6,6 +6,7 @@
   import Spinner from '../Sections/Spinner.svelte';
   import About from '../Sections/About.svelte';
   import Services from '../Sections/Services.svelte';
+  import Projects from '../Sections/Projects.svelte';
   
   let phone = '+51901268633';
 </script>
@@ -16,6 +17,7 @@
   <Header />
   <About />
   <Services />
+  <Projects />
   <Contact /> 
   <DevelopedBy />
 </div>

@@ -25,6 +25,10 @@
       <div class="navbar-nav ms-auto">
         <a href="index.html" class="nav-item nav-link active">Home</a>
         <a href="about.html" class="nav-item nav-link">Nosotros</a>
+        <a href="/contacto" class="nav-item nav-link">Servicios</a>
+        <a href="/contacto" class="nav-item nav-link">Proyectos</a>
+        <a href="/contacto" class="nav-item nav-link">Contacto</a>
+        <!--
         <div class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Servicios</a>
           <div class="dropdown-menu rounded-0 m-0">
@@ -40,7 +44,7 @@
             <a href="404.html" class="dropdown-item">404 Error</a>
           </div>
         </div>
-        <a href="/contacto" class="nav-item nav-link">Contacto</a>
+        -->
       </div>
       <a href="/login" class="btn btn-primary px-3 d-none d-lg-flex">Intranet</a>
     </div>
