@@ -50,3 +50,4 @@ Fuentes:
 + https://visionmedia.github.io/page.js/
 + https://stackoverflow.com/questions/25112510/how-to-set-environment-variables-from-within-package-json
 + https://gulpjs.com/docs/en/getting-started/creating-tasks
++ https://www.npmjs.com/package/cross-env

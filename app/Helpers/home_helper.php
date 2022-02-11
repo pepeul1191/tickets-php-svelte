@@ -4,17 +4,16 @@ function stylesheetsHome($staticURL)
 {
   $stylesheets = [];
   switch ($_ENV['FF_ENVIRONMENT']) {
-    case 'development':
+    case 'production': // development
       $stylesheets = [
         $staticURL . 'build/bundle.app',
-        $staticURL . 'build/vendor.min',
+        $staticURL . 'build/vendor',
         $staticURL . 'assets/css/styles',
       ];
       break;
-    case 'production':
+    case 'development': // production
       $stylesheets = [
-        $staticURL . 'build/bundle.app',
-        $staticURL . 'assets/css/styles',
+        $staticURL . 'build/site.min',
       ];
       break;
     default:
@@ -27,18 +26,16 @@ function javascriptsHome($staticURL)
 {
   $javascripts = [];
   switch ($_ENV['FF_ENVIRONMENT']) {
-    case 'development':
+    case 'production': // development
       $javascripts = [
         $staticURL . 'build/bundle.app',
-        $staticURL . 'build/vendor.min',
+        $staticURL . 'build/vendor',
         $staticURL . 'assets/js/site',
       ];
       break;
-    case 'production':
+    case 'development': // production
       $javascripts = [
-        $staticURL . 'build/bundle.app.min',
-        $staticURL . 'build/vendor.min',
-        $staticURL . 'assets/js/site',
+        $staticURL . 'build/site.min',
       ];
       break;
     default:
