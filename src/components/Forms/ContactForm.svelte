@@ -107,14 +107,14 @@
 
   .btn-default{
     margin-top: 10px;
-    background-color: var(--secondary-color);
+    background-color: var(--secondary);
     color: #FDFDFD;
     width: 100%;
     margin-bottom: 10px;
   }
 
   .btn-default:hover{
-    background-color: var(--primary-color);
+    background-color: var(--primary);
   }
 
   p{

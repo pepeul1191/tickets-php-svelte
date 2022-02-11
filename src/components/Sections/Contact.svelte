@@ -41,7 +41,7 @@
   }
 
   .bg-left {
-    background: var(--primary-color);
+    background: var(--primary);
   }
 
   .text-cyan { 
@@ -72,7 +72,7 @@
   }
 
   .btn-outline-light:hover{
-    color: var(--secondary-color);
+    color: var(--primary);
     text-decoration: none !important;
   }
 

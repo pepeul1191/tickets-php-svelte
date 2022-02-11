@@ -1,8 +1,8 @@
 <script>
-  import Header from '../Sections/Header.svelte';
+  import Nav from '../Sections/Nav.svelte';
   import Contact from '../Sections/Contact.svelte';
   import DevelopedBy from '../Sections/DevelopedBy.svelte';
-  import TopBanner from '../Sections/TopBanner.svelte';
+  import Header from '../Sections/Header.svelte';
   import Spinner from '../Sections/Spinner.svelte';
   
   let phone = '+51901268633';
@@ -10,8 +10,8 @@
 
 <div class="container-xxl bg-white p-0">
   <Spinner />
+  <Nav />
   <Header />
-  <TopBanner />
   <Contact /> 
   <DevelopedBy />
 </div>

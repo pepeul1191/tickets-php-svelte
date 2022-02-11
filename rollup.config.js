@@ -43,8 +43,12 @@ export default [
 			},
 		},
 		external: [
+			'jquery/dist/jquery.min.js',
 			'owl.carousel2/dist/owl.carousel.min.js',
 			'bootstrap/dist/js/bootstrap.min.js',
+			'wowjs/dist/wow.min.js',
+			'jquery.easing/jquery.easing.min.js',
+			'waypoints/lib/noframework.waypoints.min.js',
 		],
 		plugins: [
 			svelte({

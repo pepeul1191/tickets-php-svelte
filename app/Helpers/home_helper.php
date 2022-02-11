@@ -7,11 +7,13 @@ function stylesheetsHome($staticURL)
     case 'development':
       $stylesheets = [
         $staticURL . 'build/bundle.app',
+        $staticURL . 'assets/css/styles',
       ];
       break;
     case 'production':
       $stylesheets = [
         $staticURL . 'build/bundle.app',
+        $staticURL . 'assets/css/styles',
       ];
       break;
     default:
@@ -26,14 +28,14 @@ function javascriptsHome($staticURL)
   switch ($_ENV['FF_ENVIRONMENT']) {
     case 'development':
       $javascripts = [
-        $staticURL . 'vendor/bootstrap/bootstrap.bundle.min',
         $staticURL . 'build/bundle.app',
+        $staticURL . 'assets/js/site',
       ];
       break;
     case 'production':
       $javascripts = [
-        $staticURL . 'vendor/bootstrap/bootstrap.bundle.min',
         $staticURL . 'build/bundle.app.min',
+        $staticURL . 'assets/js/site',
       ];
       break;
     default:

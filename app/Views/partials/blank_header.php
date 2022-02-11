@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css">
   <?php if($SESSION != false){ ?><meta name="csrf" key="<?php echo $SESSION['csrfKey']; ?>" value="<?php echo $SESSION['csrfValue']; ?>"><?php } ?>
   <?php if(isset($stylesheets)) echo loadStylesheets($stylesheets); ?>
   <base href="<?php echo $href; ?>">
