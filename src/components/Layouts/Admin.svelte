@@ -7,6 +7,7 @@
 	import { Router, Route } from 'svelte-routing';
   import Index from '../Pages/Admin/Index.svelte';
   import ProjectType from '../Pages/Admin/ProjectType.svelte';
+  import Service from '../Pages/Admin/Service.svelte';
 	import Redirect404 from '../Pages/Error/Redirect404.svelte';
   import Footer from './../Widgets/Footer.svelte';
   import Navigation from './../Widgets/Navigation.svelte';
@@ -60,6 +61,7 @@
   <div>
     <Route path="/"><Index on:showModal={showModal}/></Route>
     <Route path="/project-type" component="{ProjectType}" />
+    <Route path="/service" component="{Service}" />
     <Route path="/*" component="{Redirect404}" />
   </div>
 </Router>
