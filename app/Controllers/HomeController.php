@@ -27,7 +27,7 @@ class HomeController extends BaseController
     parent::loadHelper('home');
     $f3->mset(array(
       'title' => 'Inicio',
-      'href' => '/login',
+      'href' => '/',
       'stylesheets' => stylesheetsHome($f3->get('staticURL')),
       'javascripts' => javascriptsHome($f3->get('staticURL')),
     ));

@@ -26,7 +26,7 @@
         <a href="index.html" class="nav-item nav-link active">Home</a>
         <a href="about.html" class="nav-item nav-link">Nosotros</a>
         <div class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Servicios</a>
           <div class="dropdown-menu rounded-0 m-0">
             <a href="property-list.html" class="dropdown-item">Property List</a>
             <a href="property-type.html" class="dropdown-item">Property Type</a>
