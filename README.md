@@ -8,6 +8,14 @@ Servidor de desarrollo
 
     $ composer start
 
+### Migraciones
+
+Migraciones con DBMATE - accesos/sqlite3:
+
+    $ dbmate -d "db/migrations" -e "DB" new <<nombre_de_migracion>>
+    $ dbmate -d "db/migrations" -e "DB" up
+    $ dbmate -d "db/migrations" -e "DB" rollback
+
 ## Archivo .env
 
     ENV="local"||"prod"
