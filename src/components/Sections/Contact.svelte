@@ -41,7 +41,7 @@
   }
 
   .bg-left {
-    background: var(--primary);
+    background: var(--secondary);
   }
 
   .text-cyan { 
