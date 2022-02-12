@@ -69,7 +69,7 @@
 			<DataTable bind:this={projectDataTable} 
 				urlServices={{ 
 					list: `${base_url}admin/project/list`, 
-					save: `${base_url}admin/project/save` 
+					save: `${base_url}admin/project/delete` 
 				}}
 				buttonSave={true}
 				buttonAddRecord={'/admin/project/add'}

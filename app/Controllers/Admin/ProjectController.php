@@ -218,4 +218,43 @@ class ProjectController extends BaseController
     http_response_code($status);
     echo $resp;
   }
+  
+  function delete($f3)
+  {
+    // data
+    $resp = [];
+    $status = 200;
+    $payload = json_decode(file_get_contents('php://input'), true);
+    $createdIds = [];
+    $deletes = $payload['deletes'];
+    // logic
+    \ORM::get_db('app')->beginTransaction();
+    try {
+      // deletes
+      if(count($deletes) > 0){
+				foreach ($deletes as &$delete) {
+          // delete ProjectTypeProject
+          $typesProject = \Model::factory('App\\Models\\ProjectTypeProject', 'app')
+            ->where('project_id', $delete['id'])
+            ->find_many();
+          foreach ($typesProject as &$tp) {
+            $tp->delete();
+          }
+          // delete Project
+			    $d = \Model::factory('App\\Models\\Project', 'app')->find_one($delete['id']);
+			    $d->delete();
+				}
+      }
+      // commit
+      \ORM::get_db('app')->commit();
+      // response data
+      $resp = json_encode($createdIds);
+    }catch (\Exception $e) {
+      $status = 500;
+      $resp = json_encode(['ups', $e->getMessage()]);
+    }
+    // resp
+    http_response_code($status);
+    echo $resp;
+  }
 }

@@ -28,6 +28,7 @@ $f3->route('POST /admin/service/save', '\App\Controllers\Admin\ServiceController
 $f3->route('GET /admin/project/list', '\App\Controllers\Admin\ProjectController->list');
 $f3->route('GET /admin/project/project-type', '\App\Controllers\Admin\ProjectController->projectType');
 $f3->route('POST /admin/project/detail/save', '\App\Controllers\Admin\ProjectController->save');
+$f3->route('POST /admin/project/delete', '\App\Controllers\Admin\ProjectController->delete');
 $f3->route('POST /admin/project/type/save', '\App\Controllers\Admin\ProjectController->projectTypeSave');
 $f3->route('GET /admin/project/get', '\App\Controllers\Admin\ProjectController->get');
 #### rest - file
