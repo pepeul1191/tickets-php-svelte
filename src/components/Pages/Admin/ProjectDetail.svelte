@@ -3,10 +3,14 @@
   import UploadFile from '../../Widgets/UploadFile.svelte';
   import InputText from '../../Widgets/InputText.svelte';
   import InputDate from '../../Widgets/InputDate.svelte';
+  import AlertMessage from '../../Widgets/AlertMessage.svelte';
+  import InputCheckGroup from '../../Widgets/InputCheckGroup.svelte';
   import { alertMessage as alertMessageStore} from '../../Stores/alertMessage.js';
-  import { getProjectById, saveProjectDetail } from '../../../services/project_service.js';
+  import { getProjectById, saveProjectDetail, saveProjectTypes } from '../../../services/project_service.js';
   export let id;
   export let disabled = false;
+  export let disabledProjectType = false;
+  let projectCheckGroup;
   let baseURL = BASE_URL;
   let staticURL = STATIC_URL;
   let disabledInCreate = true;
@@ -31,14 +35,26 @@
       console.log('if')
       title = 'Crear Proyecto';
       id = 'E';
-      disabledInCreate = true;
+      disabledProjectType = true;
     }else{
       console.log('else')
       title = 'Editar Proyecto';
       loadDetail(id);
-      disabledInCreate = false;
+      disabledProjectType = false;
     }
+    projectCheckGroup.url = `${baseURL}admin/project/project-type?id=${id}`;
+    projectCheckGroup.list();
   });
+
+  const launchAlert = (event, message, type) => {
+    alertMessage = null;
+    alertMessage = AlertMessage;
+    alertMessageProps = {
+      message: message,
+      type: type,
+      timeOut: 5000
+    }
+  };
 
   const saveDetail = () => {
     // run validations
@@ -64,7 +80,7 @@
           id = data;
           title = 'Editar Usuario';
           launchAlert(null, 'Se ha creado un nuevo usuario', 'success');
-          disabledInCreate = false;
+          disabledProjectType = false;
         }else{
           launchAlert(null, 'Se ha editado un usuario', 'success');
         }
@@ -95,6 +111,30 @@
         launchAlert(null, 'Ocurrió un error en obtener los datos del proyecto', 'danger');
       }
     })
+  };
+
+  const saveTypes = () => {
+    if(id != 'E'){
+      var params = {
+        id: id,
+        data: projectCheckGroup.data,
+      };
+      saveProjectTypes(params).then((resp) => {
+        var data = resp.data;
+        console.log(resp.data)
+        if(data == ''){
+          launchAlert(null, 'Se ha asociado el tipo(s) de evento', 'success');
+        }
+      }).catch((resp) =>  {
+        if(resp.status == 404){
+          launchAlert(null, 'Recurso asosiar los tipos no existe en el servidor', 'danger');
+        }else if(resp.status == 501){ 
+          launchAlert(null, resp.data, 'danger');
+        }else { 
+          launchAlert(null, 'Ocurrió un error en asosiar los tipos de eventos del evento', 'danger');
+        }
+      })
+    }
   };
 </script>
 
@@ -178,6 +218,23 @@
         {title}</button>
     </div>
   </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-9">
+      <InputCheckGroup bind:this={projectCheckGroup} 
+        url={`${baseURL}admin/project/project-type`}
+        key = {{ id: 'id', name: 'name', exist: 'exist' }}
+        inline = {true}
+        label = {'Seleccionar el Tipo(s) de Proyecto'}
+        disabled = {disabledProjectType}
+      />
+    </div>
+    <div class="col-md-3 pull-right">
+      <button class="btn btn-primary btn-actions" style="margin-top: 35px;" disabled="{disabledProjectType}" on:click="{saveTypes}"><i class="fa fa-list" aria-hidden="true"></i>
+        Asosiar Tipo de Proyecto</button>
+    </div>
+  </div>
+  <hr>
 </div>
 
 <style>

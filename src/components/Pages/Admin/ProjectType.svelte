@@ -32,8 +32,8 @@
 		<div class="col-md-5">
 			<DataTable bind:this={projectTypeDataTable} 
 				urlServices={{ 
-					list: `${base_url}project-type/list`, 
-					save: `${base_url}project-type/save` 
+					list: `${base_url}admin/project-type/list`, 
+					save: `${base_url}admin/project-type/save` 
 				}}
 				buttonAddRow={true},
 				buttonSave={true},
