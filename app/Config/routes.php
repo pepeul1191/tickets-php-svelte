@@ -31,6 +31,9 @@ $f3->route('POST /admin/project/detail/save', '\App\Controllers\Admin\ProjectCon
 $f3->route('POST /admin/project/delete', '\App\Controllers\Admin\ProjectController->delete');
 $f3->route('POST /admin/project/type/save', '\App\Controllers\Admin\ProjectController->projectTypeSave');
 $f3->route('GET /admin/project/get', '\App\Controllers\Admin\ProjectController->get');
+### admin - project_image
+$f3->route('GET /admin/project/image/list', '\App\Controllers\Admin\ProjectImageController->list');
+$f3->route('POST /admin/project/image/save', '\App\Controllers\Admin\ProjectImageController->save');
 #### rest - file
 $f3->route('POST /upload', '\App\Controllers\FileController->upload');
 # error handler

@@ -109,7 +109,7 @@ class ProjectController extends BaseController
     // data
     $resp = [];
     $status = 200;
-    $project_id = $f3->get('GET.id');
+    $project_id = $f3->get('GET.project_id');
     // logic
     try {
       $pdo = \ORM::get_db('app');

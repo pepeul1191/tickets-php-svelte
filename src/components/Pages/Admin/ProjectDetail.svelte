@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import DataTable from '../../Widgets/DataTable.svelte';
   import UploadFile from '../../Widgets/UploadFile.svelte';
   import InputText from '../../Widgets/InputText.svelte';
   import InputDate from '../../Widgets/InputDate.svelte';
@@ -13,7 +14,7 @@
   let projectCheckGroup;
   let baseURL = BASE_URL;
   let staticURL = STATIC_URL;
-  let disabledInCreate = true;
+  let imagesDataTable;
   let title = '';
   let alertMessage = null;
   let alertMessageProps = {};
@@ -42,8 +43,12 @@
       loadDetail(id);
       disabledProjectType = false;
     }
-    projectCheckGroup.url = `${baseURL}admin/project/project-type?id=${id}`;
+    projectCheckGroup.url = `${baseURL}admin/project/project-type?project_id=${id}`;
     projectCheckGroup.list();
+    // image table
+    imagesDataTable.urlServices.list = `${baseURL}admin/project/image/list?project_id=${id}`;
+    imagesDataTable.list();
+    imagesDataTable.extraData.project_id = id;
   });
 
   const launchAlert = (event, message, type) => {
@@ -81,6 +86,7 @@
           title = 'Editar Usuario';
           launchAlert(null, 'Se ha creado un nuevo usuario', 'success');
           disabledProjectType = false;
+          imagesDataTable.extraData.project_id = data;
         }else{
           launchAlert(null, 'Se ha editado un usuario', 'success');
         }
@@ -235,6 +241,70 @@
     </div>
   </div>
   <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <br>
+      <h6>Galería de Imágenes</h6>
+      <DataTable bind:this={imagesDataTable} 
+				urlServices={{ 
+					list: `${baseURL}admin/project/image/list`, 
+					save: `${baseURL}admin/project/image/save` 
+				}}
+				buttonSave={true},
+        buttonAddRow={true},
+				rows={{
+					id: {
+						style: 'color: red; display:none;',
+						type: 'id',
+					},
+					description:{
+						type: 'input[text]',
+					},
+          url:{
+						type: 'upload',
+            style: 'text-align: center',
+            tableKeyURL: 'url',
+            tableRecordKey: 'id',
+					},
+          actions:{
+						type: 'actions',
+						buttons: [
+							{
+								type: 'delete',
+							},
+						],
+						style: 'text-align:center;'
+					},
+				}}
+				headers={[
+					{
+						caption: 'codigo',
+						style: 'display:none;',
+					},
+					{
+						caption: 'Descripción',
+					},
+          {
+						caption: 'Imágenes del Proyecto',
+            style: 'text-align: center',
+					},
+          {
+						caption: 'Operaciones',
+						style:'text-align: center;',
+					},
+				]}
+				messages={{
+					notChanges: 'No ha ejecutado cambios en la tabla de imágenes del proyecto',
+					list404: 'Rercuso no encontrado para listar los elmentos de la tabla de imágenes del proyecto',
+					list500: 'Ocurrió un error en listar los elementos de la tabla de imágenes del proyecto',
+					save404: 'Rercuso no encontrado para guardar los cambios de la tabla de imágenes del proyecto',
+					save500: 'Ocurrió un error para guardar los cambios de la table de imágenes del proyecto',
+					save200: 'Se han actualizado los registros de la tabla de imágenes del proyecto',
+				}}
+        disabled={disabledProjectType}
+			/>
+    </div>
+  </div>
 </div>
 
 <style>
