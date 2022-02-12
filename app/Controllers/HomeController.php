@@ -15,11 +15,6 @@ class HomeController extends BaseController
   function beforeroute($f3) 
   {
     parent::beforeroute($f3);
-    $path = $f3->get('PATH');
-    $method = $f3->get('VERB');
-    if($path == '/'){
-      SessionTrueFilter::before($f3);
-    }
   }
 
   function index($f3) 
@@ -33,25 +28,5 @@ class HomeController extends BaseController
     ));
     http_response_code(200);
     echo $this->render('home/index', $locals);
-  }
-
-  function specialisms($f3)
-  {
-    parent::loadHelper('orm');
-    // data
-    $resp = [];
-    $status = 200;
-    // logic
-    try {
-      $rs = \Model::factory('App\\Models\\Speciailism', 'classroom')
-        ->find_array();
-      $resp = json_encode($rs);
-    }catch (\Exception $e) {
-      $status = 500;
-      $resp = json_encode(['ups', $e->getMessage()]);
-    }
-    // resp
-    http_response_code($status);
-    echo $resp;
   }
 }

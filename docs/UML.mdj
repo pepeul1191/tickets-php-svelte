@@ -499,7 +499,7 @@
 											"top": 359,
 											"width": 157.142578125,
 											"height": 13,
-											"text": "project_images"
+											"text": "project_image"
 										},
 										{
 											"_type": "LabelView",
@@ -2131,7 +2131,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "project_images",
+					"name": "project_image",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",

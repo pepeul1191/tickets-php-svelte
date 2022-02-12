@@ -30,10 +30,18 @@ CREATE TABLE IF NOT EXISTS 'project_types_projects' (
   FOREIGN KEY ('project_id') REFERENCES 'projects'('id') ON DELETE CASCADE,
   FOREIGN KEY ('project_type_id') REFERENCES 'project_types'('id') ON DELETE CASCADE
 );
+CREATE VIEW vw_project_types_projects AS
+  SELECT PT.id as project_type_id, PT.name as project_type_name, P.id as project_id, PT.name as project_name
+    FROM projects P
+    JOIN project_types_projects PTP ON PTP.project_id= P.id
+    JOIN project_types PT ON PTP.project_type_id= PT.id
+    LIMIT 2000
+/* vw_project_types_projects(project_type_id,project_type_name,project_id,project_name) */;
 -- Dbmate schema migrations
 INSERT INTO "schema_migrations" (version) VALUES
   ('20220211210442'),
   ('20220211212904'),
   ('20220211230353'),
   ('20220211230414'),
-  ('20220211230433');
+  ('20220211230433'),
+  ('20220212150347');
