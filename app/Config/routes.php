@@ -15,12 +15,19 @@ $f3->route('GET /user/info', '\App\Controllers\AdminController->info');
 $f3->route('GET /admin',              '\App\Controllers\AdminController->index');
 $f3->route('GET /admin/project-type', '\App\Controllers\AdminController->index');
 $f3->route('GET /admin/service',      '\App\Controllers\AdminController->index');
+$f3->route('GET /admin/project',      '\App\Controllers\AdminController->index');
+$f3->route('GET /admin/project/add',          '\App\Controllers\AdminController->index');
+$f3->route('GET /admin/project/edit/@num',    '\App\Controllers\AdminController->index');
 ### admin - project-type
 $f3->route('GET /project-type/list', '\App\Controllers\Admin\ProjectTypeController->list');
 $f3->route('POST /project-type/save', '\App\Controllers\Admin\ProjectTypeController->save');
 ### admin - service
 $f3->route('GET /admin/service/list', '\App\Controllers\Admin\ServiceController->list');
 $f3->route('POST /admin/service/save', '\App\Controllers\Admin\ServiceController->save');
+### admin - project
+$f3->route('GET /admin/project/list', '\App\Controllers\Admin\ProjectController->list');
+$f3->route('POST /admin/project/detail/save', '\App\Controllers\Admin\ProjectController->save');
+$f3->route('GET /admin/project/get', '\App\Controllers\Admin\ProjectController->get');
 #### rest - file
 $f3->route('POST /upload', '\App\Controllers\FileController->upload');
 # error handler
