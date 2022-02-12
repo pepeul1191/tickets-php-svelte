@@ -7,6 +7,7 @@ $f3->route('POST /mail', '\App\Controllers\MailController->mail');
 # api
 $f3->route('GET  /api/service/list', '\App\Controllers\Admin\ApiController->serviceList');
 $f3->route('GET  /api/project_type/list', '\App\Controllers\Admin\ApiController->typesWithProjects');
+$f3->route('GET  /api/service/project', '\App\Controllers\Admin\ApiController->projects');
 #### login
 $f3->route('GET  /login', '\App\Controllers\LoginController->index');
 $f3->route('GET  /login/sign-in', '\App\Controllers\LoginController->index');
