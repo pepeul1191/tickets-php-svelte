@@ -56,6 +56,9 @@ class ServiceController extends BaseController
       // news
       if(count($news) > 0){
 				foreach ($news as &$new) {
+          if ($new['url'] == 'E'){
+            $new['url'] = 'assets/img/default-service.png';
+          }
 				  $n = \Model::factory('App\\Models\\Service', 'app')->create();
 					$n->name = $new['name'];
           $n->url = $new['url'];

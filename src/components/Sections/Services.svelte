@@ -1,95 +1,43 @@
 <script>
+  import { onMount } from 'svelte';
+	import { getServicesList } from '../../services/site_service.js';
   const static_url = STATIC_URL;
+	export let services = [];
+
+	onMount(() => {    
+    getServicesList().then((resp) => {
+      services = resp.data;
+    }).catch((resp) =>  {
+      disabled = true;
+      if(resp.status == 404){
+        launchAlert(null, 'Proyecto a editar no existe', 'warning');
+      }else{
+        launchAlert(null, 'Ocurrió un error en obtener los datos del proyecto', 'danger');
+      }
+    })
+  });
 </script>
 
 <div class="container-xxl py-5">
   <div class="container">
-      <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-          <h1 class="mb-3">Servicios</h1>
-          <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
-      </div>
-      <div class="row g-4">
-          <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-              <a class="cat-item d-block bg-light text-center rounded p-3" href="#" on:click|preventDefault={(event) => {return false;}}>
-                  <div class="rounded p-4">
-                      <div class="icon mb-3">
-                          <img class="img-fluid" src="{static_url}assets/img/icon-apartment.png" alt="Icon">
-                      </div>
-                      <h6>Apartment</h6>
-                  </div>
-              </a>
-          </div>
-          <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-              <a class="cat-item d-block bg-light text-center rounded p-3" href="#" on:click|preventDefault={(event) => {return false;}}>
-                  <div class="rounded p-4">
-                      <div class="icon mb-3">
-                          <img class="img-fluid" src="{static_url}assets/img/icon-villa.png" alt="Icon">
-                      </div>
-                      <h6>Villa</h6>
-                  </div>
-              </a>
-          </div>
-          <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-              <a class="cat-item d-block bg-light text-center rounded p-3" href="#" on:click|preventDefault={(event) => {return false;}}>
-                  <div class="rounded p-4">
-                      <div class="icon mb-3">
-                          <img class="img-fluid" src="{static_url}assets/img/icon-house.png" alt="Icon">
-                      </div>
-                      <h6>Home</h6>
-                  </div>
-              </a>
-          </div>
-          <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-              <a class="cat-item d-block bg-light text-center rounded p-3" href="#" on:click|preventDefault={(event) => {return false;}}>
-                  <div class="rounded p-4">
-                      <div class="icon mb-3">
-                          <img class="img-fluid" src="{static_url}assets/img/icon-housing.png" alt="Icon">
-                      </div>
-                      <h6>Office</h6>
-                  </div>
-              </a>
-          </div>
-          <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-              <a class="cat-item d-block bg-light text-center rounded p-3" href="#" on:click|preventDefault={(event) => {return false;}}>
-                  <div class="rounded p-4">
-                      <div class="icon mb-3">
-                          <img class="img-fluid" src="{static_url}assets/img/icon-building.png" alt="Icon">
-                      </div>
-                      <h6>Building</h6>
-                  </div>
-              </a>
-          </div>
-          <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-              <a class="cat-item d-block bg-light text-center rounded p-3" href="#" on:click|preventDefault={(event) => {return false;}}>
-                  <div class="rounded p-4">
-                      <div class="icon mb-3">
-                          <img class="img-fluid" src="{static_url}assets/img/icon-neighborhood.png" alt="Icon">
-                      </div>
-                      <h6>Townhouse</h6>
-                  </div>
-              </a>
-          </div>
-          <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-              <a class="cat-item d-block bg-light text-center rounded p-3" href="#" on:click|preventDefault={(event) => {return false;}}>
-                  <div class="rounded p-4">
-                      <div class="icon mb-3">
-                          <img class="img-fluid" src="{static_url}assets/img/icon-condominium.png" alt="Icon">
-                      </div>
-                      <h6>Shop</h6>
-                  </div>
-              </a>
-          </div>
-          <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-              <a class="cat-item d-block bg-light text-center rounded p-3" href="#" on:click|preventDefault={(event) => {return false;}}>
-                  <div class="rounded p-4">
-                      <div class="icon mb-3">
-                          <img class="img-fluid" src="{static_url}assets/img/icon-luxury.png" alt="Icon">
-                      </div>
-                      <h6>Garage</h6>
-                  </div>
-              </a>
-          </div>
-      </div>
+		<div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+			<h1 class="mb-3">Servicios</h1>
+			<p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+		</div>
+		<div class="row g-4">
+			{#each services as service}
+				<div class="col-lg-3 col-sm-6 col-6 wow fadeInUp" data-wow-delay="0.1s">
+					<a class="cat-item d-block bg-light text-center rounded p-3" href="#" on:click|preventDefault={(event) => {return false;}}>
+						<div class="rounded p-4">
+							<div class="icon mb-3">
+								<img class="img-fluid" src="{static_url}{service.url}" alt="Icon">
+							</div>
+							<h6>{service.name}</h6>
+						</div>
+					</a>
+				</div>
+			{/each}
+		</div>
   </div>
 </div>
 
