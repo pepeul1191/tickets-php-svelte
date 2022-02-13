@@ -8,11 +8,10 @@
     getServicesList().then((resp) => {
       services = resp.data;
     }).catch((resp) =>  {
-      disabled = true;
       if(resp.status == 404){
-        launchAlert(null, 'Proyecto a editar no existe', 'warning');
+        console.error('Recurso para listar los servicios no existe');
       }else{
-        launchAlert(null, 'Ocurrió un error en obtener los datos del proyecto', 'danger');
+        console.error('Ocurrió un error en obtener los servicios');
       }
     })
   });

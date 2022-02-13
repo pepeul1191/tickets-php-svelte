@@ -1,5 +1,24 @@
 <script>
+  import { onMount } from 'svelte';
+	import { getProjectTypeList } from '../../services/site_service.js';
   const static_url = STATIC_URL;
+	export let projectTypes = [];
+
+	onMount(() => {    
+    getProjectTypeList().then((resp) => {
+      projectTypes = resp.data;
+    }).catch((resp) =>  {
+      if(resp.status == 404){
+        console.error('Recurso para listar los tipos de proyectos no existe');
+      }else{
+        console.error('Ocurrió un error en obtener los tipos de proyectos');
+      }
+    })
+  });
+
+	const projectList = (projectType) => {
+		console.log(projectType);
+	};
 </script>
 
 <div class="container-xxl py-5">
@@ -8,19 +27,18 @@
       <h1 class="mb-3">Proyectos</h1>
       <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
     </div>
-    <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+    <div class="col-lg-12 text-start text-center wow slideInRight" data-wow-delay="0.1s">
       <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
-          <li class="nav-item me-2">
-              <a class="btn btn-outline-primary active" data-bs-toggle="pill" href="#tab-1">Featured</a>
-          </li>
-          <li class="nav-item me-2">
-              <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-2">For Sell</a>
-          </li>
-          <li class="nav-item me-0">
-              <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-3">For Rent</a>
-          </li>
+				<li class="nav-item me-2">
+					<a class="btn btn-outline-primary active" data-bs-toggle="pill" href="#" on:click|preventDefault={() => {projectList(null)}}>Todos</a>
+				</li>
+				{#each projectTypes as projectType}
+					<li class="nav-item me-2">
+						<a class="btn btn-outline-primary" data-bs-toggle="pill" href="#" on:click|preventDefault={() => {projectList(projectType.id)}}>{projectType.name}</a>
+					</li>
+				{/each}
       </ul>
-  </div>
+  	</div>
     <div class="tab-content">
       <div id="tab-1" class="tab-pane fade show p-0 active">
           <div class="row g-4">
