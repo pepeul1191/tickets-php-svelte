@@ -39,3 +39,23 @@ export const getProjectTypeList = () => {
     });
   });
 }
+
+export const getProjects = () => {
+  return new Promise((resolve, reject) => {
+    axios.get('api/service/project', {
+      params: {}
+    }).then(function (response) {
+      resolve(response);
+    }).catch(function (error) {
+      if(error.response.status == 404){
+        console.error('Lista de proyectos')
+      }else{
+        console.error(error.response.data);
+      }
+      reject(error.response);
+    })
+    .then(function () {
+      // todo?
+    });
+  });
+}

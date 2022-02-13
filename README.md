@@ -48,6 +48,10 @@ Diseño Template
 + https://themewagon.com/themes/makan-free-responsive-bootstrap-5-html5-business-website-template/
 + https://technext.github.io/makan/
 
+Iconos de servicios
+
++ https://www.flaticon.es/packs/interior-design-48?word=interior%20design
+
 Fuentes:
 
 + https://github.com/pepeul1191/flightphp-boilerplate
