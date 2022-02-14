@@ -41,11 +41,7 @@
 				}
 			});
 			availableProjects = availableProjects;
-			// buttonsPages
-			for(var i = 1; i <= page; i++){
-				buttonsPages.push(i);
-			}
-			buttonsPages = buttonsPages;
+			updateButtonPages(page);
     }).catch((resp) =>  {
       if(resp.status == 404){
         console.error('Recurso para listar los proyectos no existe');
@@ -56,6 +52,15 @@
 		modalDOM = new Modal(document.getElementById('galleryModal'));
 		modalNoGalleryDOM = new Modal(document.getElementById('noGalleryModal'));
   });
+
+	const updateButtonPages = (page) => {
+		// buttonsPages
+		buttonsPages = []
+		for(var i = 1; i <= page; i++){
+			buttonsPages.push(i);
+		}
+		buttonsPages = buttonsPages;
+	}
 
 	const projectList = (projectTypeId) => {
 		projectTypeSelected = projectTypeId;
@@ -77,7 +82,6 @@
 			});
 			availableProjects = newAvailableProjects;
 		}else{
-			
 			projects.forEach((project) => {
 				project.project_types.forEach((type) => {
 					if(i < pageSize && type.id == projectTypeId){
@@ -95,6 +99,7 @@
 			availableProjects = newAvailableProjects;
 		}
 		actualPage = 1;
+		updateButtonPages(page);
 	};
 
 	const showGallery = (projectId) => {
