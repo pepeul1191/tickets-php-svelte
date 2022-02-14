@@ -1,4 +1,7 @@
 <script>
+  import { onMount } from 'svelte';
+  import page from 'page';
+  import jQuery from 'jquery';
   import Nav from '../Sections/Nav.svelte';
   import Contact from '../Sections/Contact.svelte';
   import DevelopedBy from '../Sections/DevelopedBy.svelte';
@@ -7,8 +10,49 @@
   import About from '../Sections/About.svelte';
   import Services from '../Sections/Services.svelte';
   import Projects from '../Sections/Projects.svelte';
+  import { changeNav } from '../Stores/changeNav.js'
   
   let enterpriseData = ENTERPRISE_DATA;
+  let pos = 0;
+
+  onMount(() => {    
+    page('/', () => {
+      pos = jQuery('#home').offset().top - 100;
+      jQuery('html, body').animate({ 
+        scrollTop: pos
+      }, 900);
+      changeNav.update(nav => 'home')
+    });
+    page('/nosotros', () => {
+      pos = jQuery('#about').offset().top - 100;
+      jQuery('html, body').animate({ 
+        scrollTop: pos
+      }, 900);
+      changeNav.update(nav => 'about')
+    });
+    page('/servicios', () => {
+      pos = jQuery('#services').offset().top - 100;
+      jQuery('html, body').animate({ 
+        scrollTop: pos
+      }, 900);
+      changeNav.update(nav => 'services')
+    });
+    page('/proyectos', () => {
+      pos = jQuery('#projects').offset().top - 100;
+      jQuery('html, body').animate({ 
+        scrollTop: pos
+      }, 900);
+      changeNav.update(nav => 'projects')
+    });
+    page('/contacto', () => {
+      pos = jQuery('#contact').offset().top - 100;
+      jQuery('html, body').animate({ 
+        scrollTop: pos
+      }, 900);
+      changeNav.update(nav => 'contact')
+    });
+    page.start();
+  });
 </script>
 
 <div class="container-xxl bg-white p-0">

@@ -1,6 +1,8 @@
 <script>
   import jQuery from 'jquery';
   const static_url = STATIC_URL;
+  import { changeNav } from '../Stores/changeNav.js'
+  let tab = null;
 
   jQuery(window).scroll(function () {
     if (jQuery(this).scrollTop() > 45) {
@@ -9,6 +11,10 @@
       jQuery('.nav-bar').removeClass('sticky-top');
     }
   });
+
+  changeNav.subscribe(newTab => {
+		tab = newTab;
+	});
 </script>
 
 <div class="container-fluid nav-bar bg-transparent">
@@ -23,11 +29,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <div class="navbar-nav ms-auto">
-        <a href="/" class="nav-item nav-link active">Home</a>
-        <a href="/nosotros" class="nav-item nav-link">Nosotros</a>
-        <a href="/servicios" class="nav-item nav-link">Servicios</a>
-        <a href="/proyectos" class="nav-item nav-link">Proyectos</a>
-        <a href="/contacto" class="nav-item nav-link">Contacto</a>
+        <a href="/" class="nav-item nav-link {tab == 'home' ? 'active' : ''}" section="home">Home</a>
+        <a href="/nosotros" class="nav-item nav-link {tab == 'about' ? 'active' : ''}" section="about">Nosotros</a>
+        <a href="/servicios" class="nav-item nav-link {tab == 'services' ? 'active' : ''}" section="services">Servicios</a>
+        <a href="/proyectos" class="nav-item nav-link {tab == 'projects' ? 'active' : ''}" section="projects">Proyectos</a>
+        <a href="/contacto" class="nav-item nav-link {tab == 'contact' ? 'active' : ''}" section="contact">Contacto</a>
         <!--
         <div class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Servicios</a>
