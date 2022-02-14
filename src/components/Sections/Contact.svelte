@@ -40,7 +40,7 @@
   }
 
   .bg-left {
-    background: var(--secondary);
+    background: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;/*var(--secondary);*/
   }
 
   .text-cyan { 
@@ -52,7 +52,7 @@
   }
 
   .social{
-    color: white;
+    color: var(--secondary); /* white */
     font-size: 20px;
     margin-left: 25px;
   }
@@ -68,6 +68,7 @@
   .info{
     margin-top: 10px;
     font-size: 15px;
+    color: var(--primary);
   }
 
   .btn-outline-light:hover{
@@ -77,7 +78,11 @@
 
   .logoarea a{
     text-decoration: none;
-    color: white;
+    color: var(--secondary); /* white */
+  }
+
+  .logoarea a:hover{
+    color: var(--primary); /* white */
   }
 
   .logoarea a:hover{

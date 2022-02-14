@@ -2,7 +2,7 @@
   // https://fontawesome.com/v4/icons/
 </script>
 
-<div class="container-xxl py-5 bg-light">
+<div class="container-xxl py-5 bg-light" id="about">
   <div class="container">
     <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
       <h1 class="mb-3">Nosotros</h1>

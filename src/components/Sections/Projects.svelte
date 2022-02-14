@@ -125,7 +125,7 @@
 	};
 </script>
 
-<div class="container-xxl py-5">
+<div class="container-xxl py-5" id="projects">
   <div class="container">
     <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
       <h1 class="mb-3">Proyectos</h1>
@@ -330,5 +330,9 @@
 	.btn-number-group{
 		padding-top: 20px;
 		padding-bottom: 20px;
+	}
+
+	.py-5{
+		padding-bottom: 5rem!important;
 	}
 </style>
