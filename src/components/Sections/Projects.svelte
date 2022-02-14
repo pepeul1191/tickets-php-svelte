@@ -10,6 +10,9 @@
 	let modalProject = {images: []};
 	let modalDOM;
 	let modalNoGalleryDOM;
+	let pageSize = 6;
+	let actualPage = 1;
+	let buttonsPages = [];
 
 	onMount(() => {    
     getProjectTypeList().then((resp) => {
@@ -23,8 +26,26 @@
     })
 		getProjects().then((resp) => {
       projects = resp.data;
-			availableProjects = projects;
+			var i = 0;
+			var page = 1;
+			projects.forEach((project) => {
+				if(i < pageSize){
+					project.page = page;
+					availableProjects.push(project);
+					i = i + 1;
+				}else{
+					i = 1;
+					page = page + 1;
+					project.page = page;
+					availableProjects.push(project);
+				}
+			});
 			availableProjects = availableProjects;
+			// buttonsPages
+			for(var i = 1; i <= page; i++){
+				buttonsPages.push(i);
+			}
+			buttonsPages = buttonsPages;
     }).catch((resp) =>  {
       if(resp.status == 404){
         console.error('Recurso para listar los proyectos no existe');
@@ -38,25 +59,47 @@
 
 	const projectList = (projectTypeId) => {
 		projectTypeSelected = projectTypeId;
-		console.log(projectTypeId)
+		var newAvailableProjects = [];
+		var i = 0;
+		var page = 1;
 		if (projectTypeId == 0){
-			availableProjects = projects;
-		}else{
-			var newAvailableProjects = [];
 			projects.forEach((project) => {
-				project.project_types.forEach(function(type) {
-					if (type.id == projectTypeId) {
+				if(i < pageSize){
+					project.page = page;
+					newAvailableProjects.push(project);
+					i = i + 1;
+				}else{
+					i = 1;
+					page = page + 1;
+					project.page = page;
+					newAvailableProjects.push(project);
+				}
+			});
+			availableProjects = newAvailableProjects;
+		}else{
+			
+			projects.forEach((project) => {
+				project.project_types.forEach((type) => {
+					if(i < pageSize && type.id == projectTypeId){
+						project.page = page;
+						newAvailableProjects.push(project);
+						i = i + 1;
+					}else if(type.id == projectTypeId){
+						i = 1;
+						page = page + 1;
+						project.page = page;
 						newAvailableProjects.push(project);
 					}
 				});
 			});
 			availableProjects = newAvailableProjects;
 		}
+		actualPage = 1;
 	};
 
 	const showGallery = (projectId) => {
 		modalProject = null;
-		availableProjects.forEach(function(project) {
+		availableProjects.forEach((project) => {
 			if(project.id == projectId){
 				modalProject = project;
 			}
@@ -70,6 +113,10 @@
 		}else{
 			modalNoGalleryDOM.show();
 		}
+	};
+
+	const loadPage = (buttonNumber) => {
+		actualPage = buttonNumber;
 	};
 </script>
 
@@ -92,21 +139,32 @@
       <div id="tab-1" class="tab-pane fade show p-0 active">
 				<div class="row g-4">
 					{#each availableProjects as project}
-						<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-							<div class="property-item rounded overflow-hidden">
-								<div class="position-relative overflow-hidden">
-									<a href="" on:click|preventDefault={() => {showGallery(project.id)}}><img class="img-fluid" src="{staticUrl}{project.url}" alt=""></a>
-									<div class="bg-primary btn-gallery rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3" on:click={showGallery(project.id)}>Ver Galería</div>
-								</div>
-								<div class="p-4 pb-0">
-									<h5 class="text-primary mb-3">{project.name}</h5>
-									<p><i class="fa fa-map-marker-alt text-primary me-2"></i>{project.description}</p>
+						{#if project.page == actualPage}
+							<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+								<div class="property-item rounded overflow-hidden">
+									<div class="position-relative overflow-hidden">
+										<a href="" on:click|preventDefault={() => {showGallery(project.id)}}><img class="img-fluid" src="{staticUrl}{project.url}" alt=""></a>
+										<div class="bg-primary btn-gallery rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3" on:click={showGallery(project.id)}>Ver Galería</div>
+									</div>
+									<div class="p-4 pb-0">
+										<h5 class="text-primary mb-3">{project.name}</h5>
+										<p><i class="fa fa-map-marker-alt text-primary me-2"></i>{project.description}</p>
+									</div>
 								</div>
 							</div>
-						</div>
+						{/if}
 					{/each}
 				</div>
       </div>
+			<div class="row pull-right btn-number-group">
+				{#each buttonsPages as buttonNumber}
+					{#if actualPage == buttonNumber}
+						<span class="btn-number btn-number-active" on:click={loadPage(buttonNumber)}>{buttonNumber}</span>
+					{:else}
+						<span class="btn-number" on:click={loadPage(buttonNumber)}>{buttonNumber}</span>
+					{/if}
+				{/each}
+			</div>
     </div>
   </div>
 </div>
@@ -235,5 +293,37 @@
 	.carousel-control-prev-icon{
 		background-color: rgba(76, 76, 76, 0.90) !important;
 		border-radius: 20px;
+	}
+
+	.btn-number {
+    float: left;
+    position: relative;
+    width: fit-content;
+    font-size: 25px;
+    background: white;
+		border: 1px solid var(--secondary);
+    color:var(--secondary);
+    margin-left: 20px;
+    border-radius: 20px;
+	}
+
+	.btn-number:hover{
+		border: 1px solid var(--secondary);
+		cursor: pointer;
+		transform: perspective();
+	}
+
+	.btn-number-active {
+		color: white;
+    background: var(--secondary);
+	}
+
+	.btn-number-active:hover{
+		background: var(--primary);
+	}
+
+	.btn-number-group{
+		padding-top: 20px;
+		padding-bottom: 20px;
 	}
 </style>
