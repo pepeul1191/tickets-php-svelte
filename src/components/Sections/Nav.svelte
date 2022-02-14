@@ -57,13 +57,13 @@
     margin-top: 45px;
     padding: 0 3rem;
     transition: .5s;
-    z-index: 9999;
+    z-index: 90 !important;
     }
 
   .nav-bar.sticky-top {
     position: sticky !important;
     padding: 0 !important;
-    z-index: 9999 !important;
+    z-index: 90 !important;
   }
 
   .navbar {

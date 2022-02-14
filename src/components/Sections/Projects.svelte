@@ -1,11 +1,15 @@
 <script>
   import { onMount } from 'svelte';
+	import { Modal, Carousel } from 'bootstrap';
 	import { getProjectTypeList, getProjects } from '../../services/site_service.js';
-  const static_url = STATIC_URL;
+  const staticUrl = STATIC_URL;
 	export let projectTypes = [{id: 0, name: 'Todos'}];
 	export let projects = [];
 	export let availableProjects = [];
 	export let projectTypeSelected = 0; //btn-active
+	let modalProject = {images: []};
+	let modalDOM;
+	let modalNoGalleryDOM;
 
 	onMount(() => {    
     getProjectTypeList().then((resp) => {
@@ -20,13 +24,16 @@
 		getProjects().then((resp) => {
       projects = resp.data;
 			availableProjects = projects;
+			availableProjects = availableProjects;
     }).catch((resp) =>  {
       if(resp.status == 404){
         console.error('Recurso para listar los proyectos no existe');
       }else{
         console.error('Ocurrió un error en obtener los proyectos');
       }
-    })
+    });
+		modalDOM = new Modal(document.getElementById('galleryModal'));
+		modalNoGalleryDOM = new Modal(document.getElementById('noGalleryModal'));
   });
 
 	const projectList = (projectTypeId) => {
@@ -48,7 +55,21 @@
 	};
 
 	const showGallery = (projectId) => {
-		console.log(projectId);
+		modalProject = null;
+		availableProjects.forEach(function(project) {
+			if(project.id == projectId){
+				modalProject = project;
+			}
+		});
+		if(modalProject.images.length > 0){
+			modalDOM.show();
+			var myCarousel = document.querySelector('#carouselProjectImages')
+			var carousel = new Carousel(myCarousel, {
+				interval: 5000,
+			});
+		}else{
+			modalNoGalleryDOM.show();
+		}
 	};
 </script>
 
@@ -74,7 +95,7 @@
 						<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
 							<div class="property-item rounded overflow-hidden">
 								<div class="position-relative overflow-hidden">
-									<a href="" on:click|preventDefault={() => {showGallery(project.id)}}><img class="img-fluid" src="{static_url}{project.url}" alt=""></a>
+									<a href="" on:click|preventDefault={() => {showGallery(project.id)}}><img class="img-fluid" src="{staticUrl}{project.url}" alt=""></a>
 									<div class="bg-primary btn-gallery rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3" on:click={showGallery(project.id)}>Ver Galería</div>
 								</div>
 								<div class="p-4 pb-0">
@@ -85,6 +106,58 @@
 						</div>
 					{/each}
 				</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Gallery Modal -->
+<div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="galleryModalLabel">{modalProject.name}</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div id="carouselProjectImages" class="carousel slide" data-bs-ride="carousel">
+					<!-- inner -->
+					<div class="carousel-inner">
+						{#each modalProject.images as image, i}
+							<div class="carousel-item {i == 0 ? 'active' : '' }">
+								<img src="{staticUrl}{image.url}" class="d-block w-100" alt="{image.description}">
+								<div class="carousel-caption d-none d-md-block">
+									<p>{image.description}</p>
+								</div>
+							</div>
+						{/each}
+					</div>
+					<!-- controls -->
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselProjectImages" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselProjectImages" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Empty Gallery Modal -->
+<div class="modal fade" id="noGalleryModal" tabindex="-1" aria-labelledby="noGalleryModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="noGalleryModalLabel">Uppps</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        El proyecto aún no cuenta con una galería de imágenes.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
@@ -144,5 +217,23 @@
 
 	.btn-active:hover{
 		border: solid 1px white !important;
+	}
+
+	#galleryModal{
+		z-index: 9999;
+	}
+
+	.carousel-caption{
+		background-color: rgba(76, 76, 76, 0.60);
+		margin-bottom: 0px !important;
+	}
+
+	.carousel-caption > p{
+		margin-bottom: 0px !important;
+	}
+
+	.carousel-control-prev-icon{
+		background-color: rgba(76, 76, 76, 0.90) !important;
+		border-radius: 20px;
 	}
 </style>
