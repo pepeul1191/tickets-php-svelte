@@ -43,3 +43,14 @@ function javascriptsHome($staticURL)
   }
   return $javascripts;
 }
+
+function enterpriseData()
+{
+  return json_encode(array(
+    'facebook' => $_ENV['FACEBOOK'],
+    'instagram' => $_ENV['INSTAGRAM'],
+    'whastapp' => $_ENV['WHASTAPP'],
+    'email' => $_ENV['EMAIL_SITE'],
+    'phone' => $_ENV['PHONE'],
+  ));
+}

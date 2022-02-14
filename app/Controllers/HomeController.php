@@ -25,6 +25,7 @@ class HomeController extends BaseController
       'href' => '/',
       'stylesheets' => stylesheetsHome($f3->get('staticURL')),
       'javascripts' => javascriptsHome($f3->get('staticURL')),
+      'enterpriseData' => enterpriseData(),
     ));
     http_response_code(200);
     echo $this->render('home/index', $locals);

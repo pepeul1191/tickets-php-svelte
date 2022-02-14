@@ -3,3 +3,7 @@ FF_CSRF = true || false
 FF_SESSION = true || false
 FF_API= true || false
 DB="sqlite:db/app.db"
+FACEBOOK="https://facebook.com/antergo"
+INSTAGRAM="https://instagram.com/antergo"
+WHASTAPP="+51 901 268 633"
+EMAIL_SITE="proyectos@antergo.pe"

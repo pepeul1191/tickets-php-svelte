@@ -8,7 +8,7 @@
   import Services from '../Sections/Services.svelte';
   import Projects from '../Sections/Projects.svelte';
   
-  let phone = '+51901268633';
+  let enterpriseData = ENTERPRISE_DATA;
 </script>
 
 <div class="container-xxl bg-white p-0">
@@ -22,7 +22,7 @@
   <DevelopedBy />
 </div>
 
-<a href="https://api.whatsapp.com/send?phone={phone}&text=Consulta%20desde%20la%20web" class="btn btn-lg btn-primary btn-lg-square whatsapp-fixed">
+<a href="https://api.whatsapp.com/send?phone={enterpriseData.phone}&text=Consulta%20desde%20la%20web" class="btn btn-lg btn-primary btn-lg-square whatsapp-fixed" target="_blank">
   <i class="bi bi-whatsapp"></i>
 </a>
 

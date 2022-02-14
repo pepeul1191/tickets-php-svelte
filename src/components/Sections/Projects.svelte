@@ -172,58 +172,58 @@
 			</div>
     </div>
   </div>
-</div>
-<!-- Gallery Modal -->
-<div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="galleryModalLabel">{modalProject.name}</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<div id="carouselProjectImages" class="carousel slide" data-bs-ride="carousel">
-					<!-- inner -->
-					<div class="carousel-inner">
-						{#each modalProject.images as image, i}
-							<div class="carousel-item {i == 0 ? 'active' : '' }">
-								<img src="{staticUrl}{image.url}" class="d-block w-100" alt="{image.description}">
-								<div class="carousel-caption d-none d-md-block">
-									<p>{image.description}</p>
+	<!-- Gallery Modal -->
+	<div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="galleryModalLabel">{modalProject.name}</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div id="carouselProjectImages" class="carousel slide" data-bs-ride="carousel">
+						<!-- inner -->
+						<div class="carousel-inner">
+							{#each modalProject.images as image, i}
+								<div class="carousel-item {i == 0 ? 'active' : '' }">
+									<img src="{staticUrl}{image.url}" class="d-block w-100" alt="{image.description}">
+									<div class="carousel-caption d-none d-md-block">
+										<p>{image.description}</p>
+									</div>
 								</div>
-							</div>
-						{/each}
+							{/each}
+						</div>
+						<!-- controls -->
+						<button class="carousel-control-prev" type="button" data-bs-target="#carouselProjectImages" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#carouselProjectImages" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
 					</div>
-					<!-- controls -->
-					<button class="carousel-control-prev" type="button" data-bs-target="#carouselProjectImages" data-bs-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Previous</span>
-					</button>
-					<button class="carousel-control-next" type="button" data-bs-target="#carouselProjectImages" data-bs-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Next</span>
-					</button>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<!-- Empty Gallery Modal -->
-<div class="modal fade" id="noGalleryModal" tabindex="-1" aria-labelledby="noGalleryModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="noGalleryModalLabel">Uppps</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-center">
-        El proyecto aún no cuenta con una galería de imágenes.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
+	<!-- Empty Gallery Modal -->
+	<div class="modal fade" id="noGalleryModal" tabindex="-1" aria-labelledby="noGalleryModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="noGalleryModalLabel">Uppps</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body text-center">
+					El proyecto aún no cuenta con una galería de imágenes.
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <style>
