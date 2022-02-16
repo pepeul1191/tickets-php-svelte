@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
 	import { Modal, Carousel } from 'bootstrap';
+	import jQuery from 'jquery';
 	import { getProjectTypeList, getProjects } from '../../services/site_service.js';
   const staticUrl = STATIC_URL;
 	export let projectTypes = [{id: 0, name: 'Todos'}];
@@ -122,6 +123,12 @@
 
 	const loadPage = (buttonNumber) => {
 		actualPage = buttonNumber;
+		if(window.innerWidth > 700){
+			var pos = jQuery('#projects').offset().top + 100;
+			jQuery('html, body').animate({ 
+				scrollTop: pos
+			}, 0);
+		}
 	};
 </script>
 

@@ -14,42 +14,52 @@
   
   let enterpriseData = ENTERPRISE_DATA;
   let pos = 0;
+  let firstLoad = true;
+  let top = -200;
 
   onMount(() => {    
     page('/', () => {
-      pos = jQuery('#home').offset().top - 100;
+      if(firstLoad){ top = 300; }
+      pos = jQuery('#home').offset().top - top;
       jQuery('html, body').animate({ 
         scrollTop: pos
       }, 900);
+      if(firstLoad){ top = 50; firstLoad = false; }
       changeNav.update(nav => 'home')
     });
     page('/nosotros', () => {
-      pos = jQuery('#about').offset().top - 100;
+      pos = jQuery('#about').offset().top - top;
       jQuery('html, body').animate({ 
         scrollTop: pos
       }, 900);
       changeNav.update(nav => 'about')
+      if(firstLoad){ top = 50; firstLoad = false; }
     });
     page('/servicios', () => {
-      pos = jQuery('#services').offset().top - 100;
+      pos = jQuery('#services').offset().top - top;
       jQuery('html, body').animate({ 
         scrollTop: pos
       }, 900);
       changeNav.update(nav => 'services')
+      if(firstLoad){ top = 50; firstLoad = false; }
     });
     page('/proyectos', () => {
-      pos = jQuery('#projects').offset().top - 100;
+      if(firstLoad){ top = -850; }
+      pos = jQuery('#projects').offset().top - top;
       jQuery('html, body').animate({ 
         scrollTop: pos
       }, 900);
       changeNav.update(nav => 'projects')
+      if(firstLoad){ top = 50; firstLoad = false; }
     });
     page('/contacto', () => {
-      pos = jQuery('#contact').offset().top - 100;
+      if(firstLoad){ top = -1550; }
+      pos = jQuery('#contact').offset().top - top;
       jQuery('html, body').animate({ 
         scrollTop: pos
       }, 900);
       changeNav.update(nav => 'contact')
+      if(firstLoad){ top = 50; firstLoad = false; }
     });
     page.start();
   });

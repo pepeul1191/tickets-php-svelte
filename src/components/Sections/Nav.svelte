@@ -1,8 +1,10 @@
 <script>
   import jQuery from 'jquery';
+  import { Collapse } from 'bootstrap';
   const static_url = STATIC_URL;
   import { changeNav } from '../Stores/changeNav.js'
   let tab = null;
+  let collapsed = false;
 
   jQuery(window).scroll(function () {
     if (jQuery(this).scrollTop() > 45) {
@@ -14,7 +16,20 @@
 
   changeNav.subscribe(newTab => {
 		tab = newTab;
+    jQuery("#navbarCollapse").removeClass("show");
 	});
+
+  const collapse = (event) => {
+    console.log(collapsed)
+    var myCollapse = document.getElementById('navbarCollapse')
+    var bsCollapse = null;
+    if(collapsed == true){
+      collapsed = false;
+    }else{
+      collapsed = true;
+    }
+    new Collapse(myCollapse, { toggle: collapsed });
+  };
 </script>
 
 <div class="container-fluid nav-bar bg-transparent">
@@ -24,7 +39,7 @@
         <img class="img-fluid" src="{static_url}assets/img/logo-nav.png" alt="Icon" style="width: 170px; height: 48px;">
       </div>
     </a>
-    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" on:click|preventDefault={(event)=>collapse(event)}>
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
