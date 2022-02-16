@@ -53,6 +53,10 @@ Iconos de servicios
 + https://www.flaticon.es/packs/interior-design-48?word=interior%20design
 + https://www.flaticon.es/packs/ecology-and-environment-33
 
+Git:
+
+    $ git push origin <local>:master
+
 Fuentes:
 
 + https://github.com/pepeul1191/flightphp-boilerplate
