@@ -132,7 +132,7 @@
 	};
 </script>
 
-<div class="container-xxl py-5" id="projects">
+<div class="container-xxl py-5 {projects.length == 0 ? 'd-none' : ''}" id="projects">
   <div class="container">
     <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
       <h1 class="mb-3">Proyectos</h1>

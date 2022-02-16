@@ -1,3 +1,9 @@
+-- MySQL dump 10.13  Distrib 8.0.27, for Linux (x86_64)
+--
+-- Host: localhost    Database: antergo
+-- ------------------------------------------------------
+-- Server version	8.0.27
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -13,6 +19,7 @@
 -- Table structure for table `project_images`
 --
 
+DROP TABLE IF EXISTS `project_images`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `project_images` (
@@ -27,9 +34,19 @@ CREATE TABLE `project_images` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `project_images`
+--
+
+LOCK TABLES `project_images` WRITE;
+/*!40000 ALTER TABLE `project_images` DISABLE KEYS */;
+/*!40000 ALTER TABLE `project_images` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `project_types`
 --
 
+DROP TABLE IF EXISTS `project_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `project_types` (
@@ -40,9 +57,20 @@ CREATE TABLE `project_types` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `project_types`
+--
+
+LOCK TABLES `project_types` WRITE;
+/*!40000 ALTER TABLE `project_types` DISABLE KEYS */;
+INSERT INTO `project_types` VALUES (1,'Cocinas'),(2,'Salas Modernas'),(3,'Comedores'),(4,'Gimnasio');
+/*!40000 ALTER TABLE `project_types` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `project_types_projects`
 --
 
+DROP TABLE IF EXISTS `project_types_projects`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `project_types_projects` (
@@ -58,9 +86,19 @@ CREATE TABLE `project_types_projects` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `project_types_projects`
+--
+
+LOCK TABLES `project_types_projects` WRITE;
+/*!40000 ALTER TABLE `project_types_projects` DISABLE KEYS */;
+/*!40000 ALTER TABLE `project_types_projects` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `projects`
 --
 
+DROP TABLE IF EXISTS `projects`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `projects` (
@@ -74,9 +112,19 @@ CREATE TABLE `projects` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `projects`
+--
+
+LOCK TABLES `projects` WRITE;
+/*!40000 ALTER TABLE `projects` DISABLE KEYS */;
+/*!40000 ALTER TABLE `projects` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `schema_migrations`
 --
 
+DROP TABLE IF EXISTS `schema_migrations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `schema_migrations` (
@@ -86,9 +134,20 @@ CREATE TABLE `schema_migrations` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `schema_migrations`
+--
+
+LOCK TABLES `schema_migrations` WRITE;
+/*!40000 ALTER TABLE `schema_migrations` DISABLE KEYS */;
+INSERT INTO `schema_migrations` VALUES ('20220211210442'),('20220211212904'),('20220211230353'),('20220211230414'),('20220211230433'),('20220212150347'),('20220216145841'),('20220216145907');
+/*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `services`
 --
 
+DROP TABLE IF EXISTS `services`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `services` (
@@ -100,39 +159,14 @@ CREATE TABLE `services` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Temporary view structure for view `vw_project_types_projects`
+-- Dumping data for table `services`
 --
 
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
-/*!50001 CREATE VIEW `vw_project_types_projects` AS SELECT
- 1 AS `project_type_id`,
- 1 AS `project_type_name`,
- 1 AS `project_id`,
- 1 AS `project_name`*/;
-SET character_set_client = @saved_cs_client;
-
---
--- Dumping routines for database 'antergo'
---
-
---
--- Final view structure for view `vw_project_types_projects`
---
-
-/*!50001 DROP VIEW IF EXISTS `vw_project_types_projects`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_general_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_project_types_projects` AS select `PT`.`id` AS `project_type_id`,`PT`.`name` AS `project_type_name`,`P`.`id` AS `project_id`,`P`.`name` AS `project_name` from ((`projects` `P` join `project_types_projects` `PTP` on((`PTP`.`project_id` = `P`.`id`))) join `project_types` `PT` on((`PTP`.`project_type_id` = `PT`.`id`))) limit 2000 */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
+LOCK TABLES `services` WRITE;
+/*!40000 ALTER TABLE `services` DISABLE KEYS */;
+INSERT INTO `services` VALUES (1,'Asesoría','uploads/iew35CBSWAZNzPR9d4aK.png'),(2,'Diseño','uploads/6TbJUZna30pVwWxLd8Yz.png'),(3,'Instalación','uploads/OwedcyLQ4zHkDsKNjFmY.png'),(4,'Supervisión','uploads/bfaFiITMW7G85PAQmUL9.png'),(5,'Remodelación','uploads/mpf62FvdlGjkaWVRDQsL.png'),(6,'Diseño de Mobiliario','uploads/Hhpa3XLcCeZsPqOu7AJI.png'),(7,'Obra Civil','uploads/4vftgWOX0LZJ72QmFelh.png'),(8,'Presupuestos','uploads/dsFR7D8KLfvn5jOZJUpl.png');
+/*!40000 ALTER TABLE `services` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -143,20 +177,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed
-
---
--- Dbmate schema migrations
---
-
-LOCK TABLES `schema_migrations` WRITE;
-INSERT INTO `schema_migrations` (version) VALUES
-  ('20220211210442'),
-  ('20220211212904'),
-  ('20220211230353'),
-  ('20220211230414'),
-  ('20220211230433'),
-  ('20220212150347'),
-  ('20220216145841'),
-  ('20220216145907');
-UNLOCK TABLES;
+-- Dump completed on 2022-02-16 10:12:11

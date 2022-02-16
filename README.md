@@ -20,6 +20,15 @@ Migraciones con DBMATE - accesos/sqlite3:
 
     ENV="local"||"prod"
 
+### Dump y Restore Mysql
+
+    $ mysqldump -u root -p --ignore-table=vw_project_types_projects antergo > db/antergo.sql
+    $ mysql -u root -p antergo < db/antergo.sql
+
+## Habilitar GROUP BY MySQL
+
+    $ SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
+
 ## Archivo .env en configs
 
     MAIL_SENDER="contacto@antergo.pe"
