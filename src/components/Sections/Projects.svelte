@@ -302,7 +302,7 @@
 		margin-bottom: 0px !important;
 	}
 
-	.carousel-control-prev-icon{
+	.carousel-control-prev-icon, .carousel-control-next-icon{
 		background-color: rgba(76, 76, 76, 0.90) !important;
 		border-radius: 20px;
 	}

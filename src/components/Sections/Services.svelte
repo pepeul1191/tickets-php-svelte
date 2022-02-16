@@ -3,6 +3,8 @@
 	import { getServicesList } from '../../services/site_service.js';
   const static_url = STATIC_URL;
 	export let services = [];
+  // https://www.flaticon.es/packs/interior-design-48?word=interior%20design
+  // https://www.flaticon.es/packs/ecology-and-environment-33
 
 	onMount(() => {    
     getServicesList().then((resp) => {
@@ -29,7 +31,7 @@
 					<a class="cat-item d-block bg-light text-center rounded p-3" href="#" on:click|preventDefault={(event) => {return false;}}>
 						<div class="rounded p-4">
 							<div class="icon mb-3">
-								<img class="img-fluid" src="{static_url}{service.url}" alt="Icon">
+								<img class="img-fluid" src="{static_url}{service.url}" alt="Icon" width="64" height="64">
 							</div>
 							<h6>{service.name}</h6>
 						</div>
@@ -47,7 +49,7 @@
 
   .cat-item div {
     background: #FFFFFF;
-    border: 1px dashed rgba(0, 185, 142, .3);
+    border: 1px dashed rgba(124, 124, 128, .5);
     transition: .5s;
   }
 
@@ -71,7 +73,7 @@
     justify-content: center;
     background: #FFFFFF !important;
     border-radius: 50px;
-    border: 1px dashed var(--secondary) !important;
+    border: 1px dashed rgba(124, 124, 128, .5);
   }
 
   h6 {
@@ -80,7 +82,7 @@
     font-family: "Inter",sans-serif;
     font-weight: 700;
     line-height: 1.2;
-    color: #0E2E50;
+    color: #212529;
   }
 
   .py-5 {

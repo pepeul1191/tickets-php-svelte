@@ -17,7 +17,14 @@ class AdminController extends BaseController
     parent::beforeroute($f3);
     $path = $f3->get('PATH');
     $method = $f3->get('VERB');
-    if($path == '/admin'){
+    if(
+      $path == '/admin'
+      || $path == '/admin/project-type'
+      || $path == '/admin/service'
+      || $path == '/admin/project'
+      || $path == '/admin/project/add'
+      || strpos($path, '/admin/project/edit') == 0
+    ){
       SessionTrueFilter::before($f3);
     }
   }

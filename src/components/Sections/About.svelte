@@ -6,7 +6,7 @@
   <div class="container">
     <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
       <h1 class="mb-3">Nosotros</h1>
-      <p>Is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrar.</p>
+      <p>Somos una empresa peruana de arquitectura y diseño interior, enfocada en atender las necesidades y expectativas de nuestros clientes. <br>Algo que nos distingue:</p>
     </div>
     <div class="row g-4">
       <div class="col-12">
@@ -15,9 +15,9 @@
             <div class="bg-light rounded p-3">
               <div class="d-flex align-items-center bg-white rounded p-3 dashed-primary">
                 <div class="icon me-3" style="width: 45px; height: 45px;">
-                  <i class="fa fa-camera" aria-hidden="true"></i>
+                  <img class="img-fluid svelte-1oeojtn" src="http://localhost:8080/public/uploads/6TbJUZna30pVwWxLd8Yz.png" alt="Icon">
                 </div>
-                <span>Is simply dummy text of the printing and typesetting industry.</span>
+                <span>Diseños personalizados, funcionales y ergonómicos para el hogar o negocio.</span>
               </div>
             </div>
           </div>
@@ -27,7 +27,7 @@
                 <div class="icon me-3" style="width: 45px; height: 45px;">
                   <i class="fa fa-commenting-o" aria-hidden="true"></i>
                 </div>
-                <span>Is simply dummy text of the printing and typesetting industry.</span>
+                <span>Ofrecer una amplia gama de productos innovadores y servicios para todo tipo de espacio o ambiente.</span>
               </div>
             </div>
           </div>
@@ -37,7 +37,7 @@
                 <div class="icon me-3" style="width: 45px; height: 45px;">
                   <i class="fa fa-flag-checkered" aria-hidden="true"></i>
                 </div>
-                <span>Is simply dummy text of the printing and typesetting industry.</span>
+                <span>Profesionales que aportan experiencia y pasión en cada proyecto, para lograr una fusión de armonía y satisfacción del cliente.</span>
               </div>
             </div>
           </div>
