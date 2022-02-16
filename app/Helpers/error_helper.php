@@ -11,7 +11,7 @@ function stylesheetsAccess($staticURL)
       break;
     case 'production':
       $stylesheets = [
-        $staticURL . 'build/bundle.error.min',
+        $staticURL . 'build/bundle.error',
       ];
       break;
     default:
