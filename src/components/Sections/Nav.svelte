@@ -1,7 +1,5 @@
 <script>
   import jQuery from 'jquery';
-  import { Collapse } from 'bootstrap';
-  import { navigate } from "svelte-routing";
   const static_url = STATIC_URL;
   import { changeNav } from '../Stores/changeNav.js'
   export let page;

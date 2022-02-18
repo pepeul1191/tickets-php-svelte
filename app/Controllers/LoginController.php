@@ -47,7 +47,7 @@ class LoginController extends BaseController
     $payload = $f3->get('POST');
     $user = $payload['user'];
     $password = $payload['password'];
-    if($user == 'admin' && $password == '123'){
+    if($user == 'admin' && $password == 'LBF6$2ACc?*4t;(t'){
       $_SESSION['csrfKey'] = \App\Libraries\RandomLib::lowerStringNumber(20);
       $_SESSION['csrfValue'] = \App\Libraries\RandomLib::lowerStringNumber(30);
       $_SESSION['status'] = 'active';

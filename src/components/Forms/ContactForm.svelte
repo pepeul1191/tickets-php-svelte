@@ -63,7 +63,7 @@
   }
 </script>
 
-<form class="border rounded p-5">
+<form class="border rounded p-5 form-phone">
   <h3 class="mb-4 text-center">Contáctenos</h3>
   <div class="contact-form">
     <label for="" class={messageClass}>{message}</label>
@@ -127,5 +127,12 @@
 
   h3, .contact-form{
     width: 150%;
+  }
+
+
+  @media (max-width: 576px) {
+    .form-phone {
+      padding: 3rem 8rem 3rem 2.5rem !important;
+    }
   }
 </style>

@@ -88,4 +88,14 @@
   .py-5 {
     padding-bottom: 0rem!important;
   }
+
+  @media (max-width: 576px) {
+    h6 {
+      
+    }
+
+    .p-4 {
+      padding: 0.5rem!important;
+    }
+  }
 </style>

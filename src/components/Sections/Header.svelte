@@ -40,4 +40,11 @@
   a > i{
     margin-right: 10px;
   }
+
+  @media (max-width: 768px) {
+    .btn{
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
 </style>

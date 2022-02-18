@@ -1,5 +1,6 @@
 <script>
   // https://fontawesome.com/v4/icons/
+  const staticUrl = STATIC_URL;
 </script>
 
 <div class="container-xxl py-5 bg-light" id="about">
@@ -14,8 +15,8 @@
           <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
             <div class="bg-light rounded p-3">
               <div class="d-flex align-items-center bg-white rounded p-3 dashed-primary">
-                <div class="icon me-3" style="width: 45px; height: 45px;">
-                  <img class="img-fluid svelte-1oeojtn" src="http://localhost:8080/public/uploads/6TbJUZna30pVwWxLd8Yz.png" alt="Icon">
+                <div class="icon me-3" style="width: 145px; height: 145px;">
+                  <img class="img-fluid svelte-1oeojtn" src="{staticUrl}assets/img/services-1.png" alt="Icon">
                 </div>
                 <span>Diseños personalizados, funcionales y ergonómicos para el hogar o negocio.</span>
               </div>
@@ -24,20 +25,20 @@
           <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
             <div class="bg-light rounded p-3">
               <div class="d-flex align-items-center bg-white rounded p-3 dashed-primary" >
-                <div class="icon me-3" style="width: 45px; height: 45px;">
-                  <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                <div class="icon me-3" style="width: 145px; height: 145px;">
+                  <img class="img-fluid svelte-1oeojtn" src="{staticUrl}assets/img/services-2.png" alt="Icon">
                 </div>
-                <span>Ofrecer una amplia gama de productos innovadores y servicios para todo tipo de espacio o ambiente.</span>
+                <span>Diseños personalizados, funcionales y ergonómicos para el hogar o negocio.</span>
               </div>
             </div>
           </div>
           <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.5s">
             <div class="bg-light rounded p-3">
               <div class="d-flex align-items-center bg-white rounded p-3 dashed-primary" >
-                <div class="icon me-3" style="width: 45px; height: 45px;">
-                  <i class="fa fa-flag-checkered" aria-hidden="true"></i>
+                <div class="icon me-3" style="width: 145px; height: 145px;">
+                  <img class="img-fluid svelte-1oeojtn" src="{staticUrl}assets/img/services-3.png" alt="Icon">
                 </div>
-                <span>Profesionales que aportan experiencia y pasión en cada proyecto, para lograr una fusión de armonía y satisfacción del cliente.</span>
+                <span>Diseños personalizados, funcionales y ergonómicos para el hogar o negocio.</span>
               </div>
             </div>
           </div>
@@ -54,13 +55,13 @@
 
 
   .icon {
-    padding: 15px;
+    padding: 5px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     background: #FFFFFF !important;
     border-radius: 50px;
-    border: 1px dashed var(--secondary) !important;
+    border: 0px dashed var(--secondary) !important;
   }
 
   .text-primary {
