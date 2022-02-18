@@ -16,9 +16,10 @@
   let pos = 0;
   let firstLoad = true;
   let top = -200;
+  let myPage = page;
 
   onMount(() => {    
-    page('/', () => {
+    myPage('/', () => {
       if(firstLoad){ top = 300; }
       pos = jQuery('#home').offset().top - top;
       jQuery('html, body').animate({ 
@@ -27,7 +28,7 @@
       if(firstLoad){ top = 50; firstLoad = false; }
       changeNav.update(nav => 'home')
     });
-    page('/nosotros', () => {
+    myPage('/nosotros', () => {
       pos = jQuery('#about').offset().top - top;
       jQuery('html, body').animate({ 
         scrollTop: pos
@@ -35,7 +36,7 @@
       changeNav.update(nav => 'about')
       if(firstLoad){ top = 50; firstLoad = false; }
     });
-    page('/servicios', () => {
+    myPage('/servicios', () => {
       pos = jQuery('#services').offset().top - top;
       jQuery('html, body').animate({ 
         scrollTop: pos
@@ -43,7 +44,7 @@
       changeNav.update(nav => 'services')
       if(firstLoad){ top = 50; firstLoad = false; }
     });
-    page('/proyectos', () => {
+    myPage('/proyectos', () => {
       if(firstLoad){ top = -850; }
       pos = jQuery('#projects').offset().top - top;
       jQuery('html, body').animate({ 
@@ -52,7 +53,7 @@
       changeNav.update(nav => 'projects')
       if(firstLoad){ top = 50; firstLoad = false; }
     });
-    page('/contacto', () => {
+    myPage('/contacto', () => {
       if(firstLoad){ top = -1550; }
       pos = jQuery('#contact').offset().top - top;
       jQuery('html, body').animate({ 
@@ -61,13 +62,13 @@
       changeNav.update(nav => 'contact')
       if(firstLoad){ top = 50; firstLoad = false; }
     });
-    page.start();
+    myPage.start();
   });
 </script>
 
 <div class="container-xxl bg-white p-0">
   <Spinner />
-  <Nav />
+  <Nav page={myPage}/>
   <Header />
   <About />
   <Services />

@@ -1,8 +1,10 @@
 <script>
   import jQuery from 'jquery';
   import { Collapse } from 'bootstrap';
+  import { navigate } from "svelte-routing";
   const static_url = STATIC_URL;
   import { changeNav } from '../Stores/changeNav.js'
+  export let page;
   let tab = null;
   let collapsed = false;
 
@@ -20,15 +22,30 @@
 	});
 
   const collapse = (event) => {
-    console.log(collapsed)
-    var myCollapse = document.getElementById('navbarCollapse')
-    var bsCollapse = null;
+    //console.log(collapsed)
     if(collapsed == true){
       collapsed = false;
     }else{
       collapsed = true;
     }
-    new Collapse(myCollapse, { toggle: collapsed });
+    
+    if(!collapsed){
+      jQuery('#navbarCollapse').addClass('d-none');
+      collapsed = false;
+    }else{
+      jQuery('#navbarCollapse').removeClass('d-none');
+      collapsed = true;
+    }
+  };
+
+  const navtigation = (section) => {
+    //console.log(collapsed)
+    if(collapsed == true){
+      collapsed = false;
+    }else{
+      collapsed = true;
+    }
+    page.redirect(`/${section}`)
   };
 </script>
 
@@ -44,11 +61,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <div class="navbar-nav ms-auto">
-        <a href="/" class="nav-item nav-link {tab == 'home' ? 'active' : ''}" section="home">Home</a>
-        <a href="/nosotros" class="nav-item nav-link {tab == 'about' ? 'active' : ''}" section="about">Nosotros</a>
-        <a href="/servicios" class="nav-item nav-link {tab == 'services' ? 'active' : ''}" section="services">Servicios</a>
-        <a href="/proyectos" class="nav-item nav-link {tab == 'projects' ? 'active' : ''}" section="projects">Proyectos</a>
-        <a href="/contacto" class="nav-item nav-link {tab == 'contact' ? 'active' : ''}" section="contact">Contacto</a>
+        <a href="/" class="nav-item nav-link {tab == 'home' ? 'active' : ''}" section="home" on:click|preventDefault={(event)=>navtigation('')}>Home</a>
+        <a href="/nosotros" class="nav-item nav-link {tab == 'about' ? 'active' : ''}" section="about" on:click|preventDefault={(event)=>navtigation('nosotros')}>Nosotros</a>
+        <a href="/servicios" class="nav-item nav-link {tab == 'services' ? 'active' : ''}" section="services" on:click|preventDefault={(event)=>navtigation('servicios')}>Servicios</a>
+        <a href="/proyectos" class="nav-item nav-link {tab == 'projects' ? 'active' : ''}" section="projects" on:click|preventDefault={(event)=>navtigation('proyectos')}>Proyectos</a>
+        <a href="/contacto" class="nav-item nav-link {tab == 'contact' ? 'active' : ''}" section="contact" on:click|preventDefault={(event)=>navtigation('contacto')}>Contacto</a>
         <!--
         <div class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Servicios</a>
