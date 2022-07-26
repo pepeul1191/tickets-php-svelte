@@ -22,6 +22,7 @@
   export let observer = { new: [], edit: [], delete: []};
   export let queryParams = {};
   export let disabled = false;
+  export let colspanFooter = 4;
   export let messages = {
     notChanges: 'No ha ejecutado cambios en la tabla',
     list404: 'Rercuso no encontrado para listar los elmentos de la tabla',
@@ -429,7 +430,7 @@
         {/if}
       </td>
       {/if}
-      <td colspan="4" style="text-align:right">
+      <td colspan="{colspanFooter}" style="text-align:right">
         {#if buttonAddRow != false}
           <button disabled={disabled} class="btn btn-primary" on:click={addRow}> <i class="fa fa-plus" style="margin-right:5px"></i>Agregar Registro</button>
         {/if}

@@ -41,6 +41,9 @@ $f3->route('POST /admin/project/image/save', '\App\Controllers\Admin\ProjectImag
 ### position
 $f3->route('GET  /admin/position/list', '\App\Controllers\Admin\PositionController->list');
 $f3->route('POST /admin/position/save', '\App\Controllers\Admin\PositionController->save');
+### branch
+$f3->route('GET  /admin/branch/list', '\App\Controllers\Admin\BranchController->list');
+$f3->route('POST /admin/branch/save', '\App\Controllers\Admin\BranchController->save');
 
 #### rest - file
 $f3->route('POST /upload', '\App\Controllers\FileController->upload');
