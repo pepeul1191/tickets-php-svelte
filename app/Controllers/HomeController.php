@@ -15,19 +15,31 @@ class HomeController extends BaseController
   function beforeroute($f3) 
   {
     parent::beforeroute($f3);
+    $path = $f3->get('PATH');
+    $method = $f3->get('VERB');
+    if(
+      $path == '/'
+      || $path == '/admin/project-type'
+      || $path == '/admin/service'
+      || $path == '/admin/project'
+      || $path == '/admin/project/add'
+      || strpos($path, '/admin/project/edit') == 0
+    ){
+      SessionTrueFilter::before($f3);
+    }
   }
 
   function index($f3) 
   {
-    parent::loadHelper('home');
+    $this->beforeroute($f3);
+    parent::loadHelper('admin');
     $f3->mset(array(
-      'title' => 'Inicio',
+      'title' => 'Administrador de Contenido',
       'href' => '/',
-      'stylesheets' => stylesheetsHome($f3->get('staticURL')),
-      'javascripts' => javascriptsHome($f3->get('staticURL')),
-      'enterpriseData' => enterpriseData(),
+      'stylesheets' => stylesheetsAdmin($f3->get('staticURL')),
+      'javascripts' => javascriptsAdmin($f3->get('staticURL')),
     ));
     http_response_code(200);
-    echo $this->render('home/index', $locals);
+    echo $this->render('admin/index', $locals);
   }
 }

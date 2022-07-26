@@ -10,11 +10,15 @@
 	onMount(() => {
 		items = [
 			{name: 'Home', url: '/admin', active: true, items: []}, 
-			{name: 'Datos Maestros', url: '#', active: true, items: [
-				{name: 'Tipos de Proyecto', url: '/admin/project-type', active: true}, 
+			{name: 'Recursos', url: '#', active: true, items: [
+				{name: 'Trabajadores', url: '/admin/worker', active: true}, 
+				{name: 'Puestos de Trabajo', url: '/position', active: true}, 
+				{name: 'Sedes - Lima', url: '/admin/project-type', active: true}, 
+				{name: 'Sedes - Provincias', url: '/admin/project-type', active: true}, 
 			]}, 
 			{name: 'Servicios', url: '/admin/service', active: true, items: []}, 
-			{name: 'Proyectos', url: '/admin/project', active: true, items: []}, 
+			{name: 'Incidencias', url: '/admin/service', active: true, items: []}, 
+			{name: 'S. Técnicos', url: '/admin/project', active: true, items: []}, 
 		];
 		getUserInfo();
 	});  
@@ -32,7 +36,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
 	<div class="container">
-		<a class="navbar-brand" href="/admin">Administrador de Contenidos</a>
+		<a class="navbar-brand" href="/admin">Tickets - COA</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>

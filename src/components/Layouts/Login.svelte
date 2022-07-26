@@ -2,6 +2,7 @@
 	import 'bootstrap/dist/css/bootstrap.min.css';
 	import 'font-awesome/css/font-awesome.min.css';
   import '../../stylesheets/login.css';
+  import '../../stylesheets/styles.css';
   import { onMount } from 'svelte';
 	import { Router, Route } from 'svelte-routing';
   import Index from '../Pages/Login/Index.svelte';

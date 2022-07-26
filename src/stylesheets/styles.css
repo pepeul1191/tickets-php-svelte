@@ -5,8 +5,9 @@
   --dark: #212529;
 }
 
-.btn {
+.btn, .form-control {
   transition: .5s;
+  border-radius: 0px;
 }
 
 .btn.btn-primary,

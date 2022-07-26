@@ -47,7 +47,7 @@ class LoginController extends BaseController
     $payload = $f3->get('POST');
     $user = $payload['user'];
     $password = $payload['password'];
-    if($user == 'admin' && $password == 'LBF6$2ACc?*4t;(t'){
+    if($user == 'admin' && $password == '123'){ // LBF6$2ACc?*4t;(t
       $_SESSION['csrfKey'] = \App\Libraries\RandomLib::lowerStringNumber(20);
       $_SESSION['csrfValue'] = \App\Libraries\RandomLib::lowerStringNumber(30);
       $_SESSION['status'] = 'active';
@@ -55,7 +55,7 @@ class LoginController extends BaseController
       $_SESSION['name'] = 'Antergo Design';
       $_SESSION['img'] = $f3->get('staticURL') . 'assets/img/default-user.png';
       $_SESSION['time'] = date('Y-m-d H:i:s');
-      $f3->reroute('/admin');
+      $f3->reroute('/');
     }else{
       $f3->reroute($f3->get('PATH') . '?error=user-pass-mismatch');
     }

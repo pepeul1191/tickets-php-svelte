@@ -1,12 +1,5 @@
 <?php
 
-# website
-$f3->route('GET  /', '\App\Controllers\HomeController->index');
-$f3->route('GET  /nosotros', '\App\Controllers\HomeController->index');
-$f3->route('GET  /servicios', '\App\Controllers\HomeController->index');
-$f3->route('GET  /proyectos', '\App\Controllers\HomeController->index');
-$f3->route('GET  /contacto', '\App\Controllers\HomeController->index');
-$f3->route('POST /mail', '\App\Controllers\MailController->mail');
 # api
 $f3->route('GET  /api/service/list', '\App\Controllers\Admin\ApiController->serviceList');
 $f3->route('GET  /api/project_type/list', '\App\Controllers\Admin\ApiController->typesWithProjects');
@@ -19,7 +12,10 @@ $f3->route('POST /login', '\App\Controllers\LoginController->access');
 $f3->route('GET  /log-out', '\App\Controllers\LoginController->logout');
 ### admin
 $f3->route('GET  /user/info', '\App\Controllers\AdminController->info');
-$f3->route('GET  /admin', '\App\Controllers\AdminController->index');
+$f3->route('GET  /', '\App\Controllers\HomeController->index');
+$f3->route('GET  /position', '\App\Controllers\HomeController->index');
+$f3->route('GET  /branch/lima', '\App\Controllers\HomeController->index');
+$f3->route('GET  /branch/province', '\App\Controllers\HomeController->index');
 $f3->route('GET  /admin/project-type', '\App\Controllers\AdminController->index');
 $f3->route('GET  /admin/service', '\App\Controllers\AdminController->index');
 $f3->route('GET  /admin/project', '\App\Controllers\AdminController->index');
@@ -41,6 +37,11 @@ $f3->route('GET  /admin/project/get', '\App\Controllers\Admin\ProjectController-
 ### admin - project_image
 $f3->route('GET  /admin/project/image/list', '\App\Controllers\Admin\ProjectImageController->list');
 $f3->route('POST /admin/project/image/save', '\App\Controllers\Admin\ProjectImageController->save');
+
+### position
+$f3->route('GET  /admin/position/list', '\App\Controllers\Admin\PositionController->list');
+$f3->route('POST /admin/position/save', '\App\Controllers\Admin\PositionController->save');
+
 #### rest - file
 $f3->route('POST /upload', '\App\Controllers\FileController->upload');
 # error handler

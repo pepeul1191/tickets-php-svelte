@@ -6,6 +6,8 @@
 	import { onMount } from 'svelte';
 	import { Router, Route } from 'svelte-routing';
   import Index from '../Pages/Admin/Index.svelte';
+  import Position from '../Pages/Admin/Position.svelte';
+
   import ProjectType from '../Pages/Admin/ProjectType.svelte';
   import Project from '../Pages/Admin/Project.svelte';
   import ProjectDetail from '../Pages/Admin/ProjectDetail.svelte';
@@ -15,11 +17,12 @@
   import Navigation from './../Widgets/Navigation.svelte';
   import { modal } from '../Stores/modal.js';
   export let url = '';
-  export let basepath = '/admin';
+  export let basepath = '/';
   let modalComponent;
   let modalDOMStore;
 
   onMount(() => {
+    window.process = {env: {}} // popper
     console.log('home');
     modal.subscribe(value => {
       modalComponent = value;
@@ -61,6 +64,7 @@
 
 <Router url="{url}" basepath="{basepath}">
   <div>
+    <Route path="/position" component="{Position}" />
     <Route path="/" component="{Project}" />
     <Route path="/project-type" component="{ProjectType}" />
     <Route path="/service" component="{Service}" />
