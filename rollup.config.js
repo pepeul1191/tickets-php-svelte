@@ -220,7 +220,10 @@ export default [
 			copy({
 				targets: [
 					{
-						src: "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+						src: [
+							"node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+							"node_modules/@popperjs/core/dist/cjs/popper.js",
+						],
 						dest: "public/vendor/bootstrap",
 					},
 				]
