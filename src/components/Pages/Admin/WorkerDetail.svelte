@@ -31,6 +31,7 @@
   let phone = ''; let inputPhone; let phoneValid = false;
   let position = ''; let inputPosition; let positionValid = false;
   let branchLimaCheckGroup;
+  let messageRandomPassword = '';
   let branchProvinceCheckGroup;
   
   onMount(() => {    
@@ -150,6 +151,17 @@
       })
     }
   };
+
+  const generatePassword = () => {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!"#$%&/()=?¡[]*|@';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < 10; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    messageRandomPassword = `Contraseña generada: <b style="color: #343434;font-weight: 900;">${result}</b>`;
+    setTimeout(() => {messageRandomPassword = ''}, 5000);
+  };
 </script>
 
 <svelte:head>
@@ -242,6 +254,66 @@
   </div>
   <div class="row">
 		<div class="col-lg-12 page-header">
+			<h2>Datos de Usuario</h2>
+		</div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <InputText 
+        label={'Usuario'}
+        bind:value={lastNames}
+        placeholder={'Apellidos del trabajador'} 
+        disabled={disabled}
+        validations={[
+          {type:'notEmpty', message: 'Debe de ingresar los appelidos del trabajador'},
+          {type:'maxLength', length: 45, message: 'Nombre máximo 45 letras'},
+        ]}
+        bind:valid={lastNamesValid} 
+        bind:this={inputLastNames}
+      />
+    </div>
+    <div class="col-md-3">
+      <InputText 
+        label={'Contraseña'}
+        bind:value={lastNames}
+        placeholder={'Apellidos del trabajador'} 
+        disabled={disabled}
+        validations={[
+          {type:'notEmpty', message: 'Debe de ingresar los appelidos del trabajador'},
+          {type:'maxLength', length: 45, message: 'Nombre máximo 45 letras'},
+        ]}
+        bind:valid={lastNamesValid} 
+        bind:this={inputLastNames}
+      />
+    </div>
+    <div class="col-md-3">
+      <InputText 
+        label={'Último Acceso'}
+        bind:value={lastNames}
+        placeholder={'Apellidos del trabajador'} 
+        disabled={true}
+        validations={[
+          {type:'notEmpty', message: 'Debe de ingresar los appelidos del trabajador'},
+          {type:'maxLength', length: 45, message: 'Nombre máximo 45 letras'},
+        ]}
+        bind:valid={lastNamesValid} 
+        bind:this={inputLastNames}
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 pull-right">
+      <button class="btn btn-success btn-actions" disabled="{disabled}" on:click="{saveDetail}"><i class="fa fa-check" aria-hidden="true"></i>
+        Actualizar Datos de Usuario</button>
+      <button class="btn btn-primary btn-actions" disabled="{disabled}" on:click="{saveDetail}"><i class="fa fa-envelope-o" aria-hidden="true"></i>
+        Enviar Correo de Cambio de Contraseña</button>
+      <button class="btn btn-secondary btn-actions" disabled="{disabled}" on:click="{generatePassword}"><i class="fa fa-random" aria-hidden="true"></i>
+        Generar Contraseña</button>
+      <label class="btn-actions" style="margin-top: 20px;">{@html messageRandomPassword}</label>
+    </div>
+  </div> 
+  <div class="row">
+		<div class="col-lg-12 page-header">
 			<br><h2>Sedes Dónde Labora</h2>
 		</div>
   </div>
@@ -257,8 +329,12 @@
       />
     </div>
     <div class="col-md-12 pull-right">
-      <button class="btn btn-primary btn-actions" style="" disabled="{disabledLimaBranch}" on:click="{saveBranches(branchLimaCheckGroup.getChanges())}"><i class="fa fa-list" aria-hidden="true"></i>
+      <button class="btn btn-success btn-actions" style="" disabled="{disabledLimaBranch}" on:click="{saveBranches(branchLimaCheckGroup.getChanges())}"><i class="fa fa-list" aria-hidden="true"></i>
         Asosiar Sedes de Lima</button>
+      <button class="btn btn-secondary btn-actions" style="" disabled="{disabledLimaBranch}" on:click="{branchLimaCheckGroup.selectAll()}"><i class="fa fa-check-square-o" aria-hidden="true"></i>
+        Seleccionar Todos</button>
+      <button class="btn btn-secondary btn-actions" style="" disabled="{disabledLimaBranch}" on:click="{branchLimaCheckGroup.unselectAll()}"><i class="fa fa-square-o" aria-hidden="true"></i>
+          Deseleccionar Todos</button>
     </div>
   </div>
   <div class="row">
@@ -273,18 +349,20 @@
       />
     </div>
     <div class="col-md-12 pull-right">
-      <button class="btn btn-primary btn-actions" style="" disabled="{disabledProvinceBranch}" on:click="{saveBranches(branchProvinceCheckGroup.getChanges())}"><i class="fa fa-list" aria-hidden="true"></i>
+      <button class="btn btn-success btn-actions" style="" disabled="{disabledProvinceBranch}" on:click="{saveBranches(branchProvinceCheckGroup.getChanges())}"><i class="fa fa-list" aria-hidden="true"></i>
         Asosiar Sedes de Provincias</button>
+      <button class="btn btn-secondary btn-actions" style="" disabled="{disabledLimaBranch}" on:click="{branchProvinceCheckGroup.selectAll()}"><i class="fa fa-check-square-o" aria-hidden="true"></i>
+        Seleccionar Todos</button>
+      <button class="btn btn-secondary btn-actions" style="" disabled="{disabledLimaBranch}" on:click="{branchProvinceCheckGroup.unselectAll()}"><i class="fa fa-square-o" aria-hidden="true"></i>
+          Deseleccionar Todos</button>
     </div>
   </div>
-  <hr>
-
-  <hr>
 </div>
 
 <style>
   .btn-actions{
     float:right;
     margin-top:15px;
+    margin-left: 10px;
   }
 </style>

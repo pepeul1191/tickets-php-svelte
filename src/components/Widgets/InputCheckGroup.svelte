@@ -97,6 +97,18 @@
     }
     return resp;
   };
+
+  export const selectAll = () => {
+    for(var i = 0; i < data.length; i++){
+      data[i][key.exist] = '1';
+    }
+  };
+
+  export const unselectAll = () => {
+    for(var i = 0; i < data.length; i++){
+      data[i][key.exist] = '0';
+    }
+  };
 </script>
 
 {#if label != ''}
