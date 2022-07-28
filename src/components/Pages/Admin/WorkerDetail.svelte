@@ -119,7 +119,8 @@
     })
   };
 
-  const saveBranches = (dataChanged) => {
+  const saveBranches = (branch) => {
+    var dataChanged = branch.getChanges();
     if(id != 'E'){
       var params = {
         id: id,
@@ -127,7 +128,7 @@
       };
       saveWorkerBranch(params).then((resp) => {
         var data = resp.data;
-        console.log(resp.data)
+        branch.originData = JSON.parse(JSON.stringify(branch.data));
         if(data == ''){
           launchAlert(null, 'Se ha asociado el sedes al trabajador', 'success');
         }
@@ -323,12 +324,12 @@
       />
     </div>
     <div class="col-md-12 pull-right">
-      <button class="btn btn-success btn-actions" style="" disabled="{disabledLimaBranch}" on:click="{saveBranches(branchLimaCheckGroup.getChanges())}"><i class="fa fa-list" aria-hidden="true"></i>
+      <button class="btn btn-success btn-actions" style="" disabled="{disabledLimaBranch}" on:click="{saveBranches(branchLimaCheckGroup)}"><i class="fa fa-list" aria-hidden="true"></i>
         Asosiar Sedes de Lima</button>
-      <button class="btn btn-secondary btn-actions" style="" disabled="{disabledLimaBranch}" on:click="{branchLimaCheckGroup.selectAll()}"><i class="fa fa-check-square-o" aria-hidden="true"></i>
-        Seleccionar Todos</button>
       <button class="btn btn-secondary btn-actions" style="" disabled="{disabledLimaBranch}" on:click="{branchLimaCheckGroup.unselectAll()}"><i class="fa fa-square-o" aria-hidden="true"></i>
           Deseleccionar Todos</button>
+      <button class="btn btn-secondary btn-actions" style="" disabled="{disabledLimaBranch}" on:click="{branchLimaCheckGroup.selectAll()}"><i class="fa fa-check-square-o" aria-hidden="true"></i>
+            Seleccionar Todos</button>
     </div>
   </div>
   <div class="row">
@@ -343,12 +344,12 @@
       />
     </div>
     <div class="col-md-12 pull-right">
-      <button class="btn btn-success btn-actions" style="" disabled="{disabledProvinceBranch}" on:click="{saveBranches(branchProvinceCheckGroup.getChanges())}"><i class="fa fa-list" aria-hidden="true"></i>
+      <button class="btn btn-success btn-actions" style="" disabled="{disabledProvinceBranch}" on:click="{saveBranches(branchProvinceCheckGroup)}"><i class="fa fa-list" aria-hidden="true"></i>
         Asosiar Sedes de Provincias</button>
-      <button class="btn btn-secondary btn-actions" style="" disabled="{disabledLimaBranch}" on:click="{branchProvinceCheckGroup.selectAll()}"><i class="fa fa-check-square-o" aria-hidden="true"></i>
-        Seleccionar Todos</button>
       <button class="btn btn-secondary btn-actions" style="" disabled="{disabledLimaBranch}" on:click="{branchProvinceCheckGroup.unselectAll()}"><i class="fa fa-square-o" aria-hidden="true"></i>
           Deseleccionar Todos</button>
+      <button class="btn btn-secondary btn-actions" style="" disabled="{disabledLimaBranch}" on:click="{branchProvinceCheckGroup.selectAll()}"><i class="fa fa-check-square-o" aria-hidden="true"></i>
+        Seleccionar Todos</button>
     </div>
   </div>
 </div>

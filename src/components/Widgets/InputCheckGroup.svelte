@@ -20,7 +20,7 @@
     list500: 'Ocurrió un error en listar los elementos de la lista',
   };
   export let data = [];
-  let originData = [];
+  export let originData = [];
 
   onMount(() => {
 
