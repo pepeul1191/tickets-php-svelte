@@ -14,6 +14,12 @@ $f3->route('GET  /log-out', '\App\Controllers\LoginController->logout');
 $f3->route('GET  /user/info', '\App\Controllers\AdminController->info');
 $f3->route('GET  /', '\App\Controllers\HomeController->index');
 $f3->route('GET  /position', '\App\Controllers\HomeController->index');
+$f3->route('GET  /worker', '\App\Controllers\HomeController->index');
+$f3->route('GET  /worker/add', '\App\Controllers\HomeController->index');
+$f3->route('GET  /worker/edit/@num', '\App\Controllers\HomeController->index');
+$f3->route('GET  /service_type', '\App\Controllers\HomeController->index');
+$f3->route('GET  /service', '\App\Controllers\HomeController->index');
+$f3->route('GET  /service/add', '\App\Controllers\HomeController->index');
 $f3->route('GET  /branch/lima', '\App\Controllers\HomeController->index');
 $f3->route('GET  /branch/province', '\App\Controllers\HomeController->index');
 $f3->route('GET  /admin/project-type', '\App\Controllers\AdminController->index');
@@ -41,10 +47,18 @@ $f3->route('POST /admin/project/image/save', '\App\Controllers\Admin\ProjectImag
 ### position
 $f3->route('GET  /admin/position/list', '\App\Controllers\Admin\PositionController->list');
 $f3->route('POST /admin/position/save', '\App\Controllers\Admin\PositionController->save');
+### service_type
+$f3->route('GET  /admin/service_type/list', '\App\Controllers\Admin\ServiceTypeController->list');
+$f3->route('POST /admin/service_type/save', '\App\Controllers\Admin\ServiceTypeController->save');
 ### branch
 $f3->route('GET  /admin/branch/list', '\App\Controllers\Admin\BranchController->list');
 $f3->route('POST /admin/branch/save', '\App\Controllers\Admin\BranchController->save');
-
+### worker
+$f3->route('GET  /admin/worker/list', '\App\Controllers\Admin\WorkerController->list');
+$f3->route('POST /admin/worker/save', '\App\Controllers\Admin\WorkerController->save');
+$f3->route('GET  /admin/worker/get', '\App\Controllers\Admin\WorkerController->get');
+$f3->route('GET  /admin/worker/branch', '\App\Controllers\Admin\WorkerController->branch');
+$f3->route('POST  /admin/worker/branch/save', '\App\Controllers\Admin\WorkerController->branchSave');
 #### rest - file
 $f3->route('POST /upload', '\App\Controllers\FileController->upload');
 # error handler

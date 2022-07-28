@@ -11,16 +11,17 @@
 		items = [
 			{name: 'Home', url: '/admin', active: true, items: []}, 
 			{name: 'Recursos', url: '#', active: true, items: [
-				{name: 'Trabajadores', url: '/admin/worker', active: true}, 
+				{name: 'Trabajadores', url: '/worker', active: true}, 
 				{name: 'Puestos de Trabajo', url: '/position', active: true}, 
+				{name: 'Tipos de Servicios', url: '/service_type', active: true}, 
 				{name: 'Sedes - Lima', url: '/branch/lima', active: false}, 
 				{name: 'Sedes - Provincias', url: '/branch/province', active: false}, 
 			]}, 
-			{name: 'Servicios', url: '/admin/service', active: true, items: []}, 
+			{name: 'Servicios', url: '/service', active: true, items: []}, 
 			{name: 'Incidencias', url: '/admin/service', active: true, items: []}, 
 			{name: 'S. Técnicos', url: '/admin/project', active: true, items: []}, 
 		];
-		getUserInfo();
+		// getUserInfo();
 	});  
 
 	const getUserInfo = () => {

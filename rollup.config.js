@@ -106,7 +106,7 @@ export default [
 	{
 		input: 'src/entries/login.js',
 		output: {
-			sourcemap: true,
+			sourcemap: !production,
 			format: 'iife',
 			name: 'app',
 			file:production ? 'public/build/bundle.login.min.js' : 'public/build/bundle.login.js', 

@@ -9,6 +9,7 @@
   export let disabled = false;
   export let label = '';
   export let url = '';
+  export let columnSize = 3;
   export let key = {
     id: 'id',
     name: 'xd',
@@ -19,13 +20,14 @@
     list500: 'Ocurrió un error en listar los elementos de la lista',
   };
   export let data = [];
+  let originData = [];
 
   onMount(() => {
-    
+
   });
 
   export const list = () => {
-    console.log(url)
+    // console.log(url);    console.log(columnSize);
     axios.get( // url, data, headers
       url, 
       {
@@ -42,6 +44,7 @@
         data.push(record);
       });
       data = data;
+      originData = JSON.parse(JSON.stringify(data));
     })
     .catch(function (error) {
       console.error(error);
@@ -84,18 +87,31 @@
       }
     }
   };
+
+  export const getChanges = () => {
+    var resp = [];
+    for(var i = 0; i < data.length; i++){
+      if(data[i][key.exist] != originData[i][key.exist]){
+        resp.push(data[i]);
+      }
+    }
+    return resp;
+  };
 </script>
 
 {#if label != ''}
   <label>{label}</label><br><br>
 {/if}
-{#each data as record}
-  <div class="{inline ? 'form-check form-check-inline' : 'form-check'}">
-    <input class="form-check-input" type="checkbox" id="{`chk-${record.idDOM}`}" value="{record[key.id]}" checked={record[key.exist] == 1 ? true : false} on:change={() => checkBoxChange(event, record[key.id])} disabled={disabled}>
-    <label class="form-check-label" for="{`chk-${record.idDOM}`}">{record[key.name]}</label>
-  </div>
-{/each}
-
+<div class="row">
+  {#each data as record}
+    <div class="col-md-{columnSize}">
+      <div class="{inline ? 'form-check form-check-inline' : 'form-check'}">
+        <input class="form-check-input" type="checkbox" id="{`chk-${record.idDOM}`}" value="{record[key.id]}" checked={record[key.exist] == 1 ? true : false} on:change={() => checkBoxChange(event, record[key.id])} disabled={disabled}>
+        <label class="form-check-label" for="{`chk-${record.idDOM}`}">{record[key.name]}</label>
+      </div>
+    </div>
+  {/each}
+</div>
 <style>
 
 </style>
