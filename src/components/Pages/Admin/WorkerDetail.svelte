@@ -1,10 +1,7 @@
 <script>
   import { onMount } from 'svelte';
-  import DataTable from '../../Widgets/DataTable.svelte';
-  import UploadFile from '../../Widgets/UploadFile.svelte';
   import InputText from '../../Widgets/InputText.svelte';
   import InputSelect from '../../Widgets/InputSelect.svelte';
-  import InputDate from '../../Widgets/InputDate.svelte';
   import AlertMessage from '../../Widgets/AlertMessage.svelte';
   import InputCheckGroup from '../../Widgets/InputCheckGroup.svelte';
   import { alertMessage as alertMessageStore} from '../../Stores/alertMessage.js';
@@ -12,18 +9,12 @@
   export let id;
   export let disabled = false;
   export let disabledProjectType = false;
-
   export let disabledLimaBranch = false;
   export let disabledProvinceBranch = false;
-  let projectCheckGroup;
   let baseURL = BASE_URL;
-  let staticURL = STATIC_URL;
-  let imagesDataTable;
   let title = '';
   let alertMessage = null;
   let alertMessageProps = {};
-  let imageURL = 'E';
-  let imageUploadFile = '';
   let positionId;
   let names = ''; let inputNames; let namesValid = false;
   let lastNames = ''; let inputLastNames; let lastNamesValid = false;
@@ -53,6 +44,7 @@
       loadDetail(id);
       disabledProjectType = false;
     }
+    inputPosition.list();
     branchLimaCheckGroup.url = `${baseURL}admin/worker/branch?worker_id=${id}&branch_type_id=1`;
     branchLimaCheckGroup.list();
     branchProvinceCheckGroup.url = `${baseURL}admin/worker/branch?worker_id=${id}&branch_type_id=2`;
@@ -71,40 +63,39 @@
 
   const saveDetail = () => {
     // run validations
+    /*
     inputDate.validate();
     inputName.validate();
     inputDescription.validate();
-    // check image url
-    if(imageURL == 'E'){
-      imageURL = 'assets/img/default-project.png'
-    }
+    */
     // check if true
-    if(dateValid && nameValid && descriptionValid) {
+    //if(dateValid && nameValid && descriptionValid) {
+    if(true){
       var params = {
         id: id,
-        date: date,
-        name: name,
-        description: description,
-        url: imageURL,
+        names: names,
+        last_names: lastNames,
+        phone: phone,
+        email: email,
+        position_id: positionId,
       };
-      saveProjectDetail(params).then((resp) => {
+      saveWorkerDetail(params).then((resp) => {
         var data = resp.data;
         if(data != ''){
           id = data;
-          title = 'Editar Usuario';
-          launchAlert(null, 'Se ha creado un nuevo usuario', 'success');
+          title = 'Editar Trabajador';
+          launchAlert(null, 'Se ha creado un nuevo trabajador', 'success');
           disabledProjectType = false;
-          imagesDataTable.extraData.project_id = data;
         }else{
-          launchAlert(null, 'Se ha editado un usuario', 'success');
+          launchAlert(null, 'Se ha editado un trabajador', 'success');
         }
       }).catch((resp) =>  {
         if(resp.status == 404){
-          launchAlert(null, 'Recurso guardar detalle de usuario no existe en el servidor', 'danger');
+          launchAlert(null, 'Recurso guardar detalle de trabajador no existe en el servidor', 'danger');
         }else if(resp.status == 501){ 
           launchAlert(null, resp.data, 'danger');
         }else { 
-          launchAlert(null, 'Ocurrió un error en guardar los datos del usuario', 'danger');
+          launchAlert(null, 'Ocurrió un error en guardar los datos del trabajador', 'danger');
         }
       })
     }
@@ -238,9 +229,12 @@
         bind:value={position}
         placeholder={'Nombre del trabajador'} 
         disabled={disabled}
+        url={`${baseURL}admin/position/list`}
         validations={[
-          {type:'notEmpty', message: 'Debe de ingresar una fecha del trabajador'},
+          {type:'notEmpty', message: 'Debe seleccionar el puesto de trabajo'},
         ]}
+        key = {{ id: 'id', name: 'name'}}
+        bind:selectedValue={positionId}
         bind:valid={positionValid} 
         bind:this={inputPosition}
       />

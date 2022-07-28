@@ -68,7 +68,7 @@ class WorkerController extends BaseController
     echo $resp;
   }
 
-  function save($f3)
+  function saveDetail($f3)
   {
     // data
     $resp = [];
@@ -80,19 +80,21 @@ class WorkerController extends BaseController
     try {
       if($payload['id'] == 'E'){
         $n = \Model::factory('App\\Models\\Worker', 'app')->create();
-        $n->date = $payload['date'];
-        $n->name = $payload['name'];
-        $n->description = $payload['description'];
-        $n->url = $payload['url'];
+        $n->names = $payload['names'];
+        $n->last_names = $payload['last_names'];
+        $n->phone = $payload['phone'];
+        $n->email = $payload['email'];
+        $n->position_id = $payload['position_id'];
         $n->save();
         // response data
         $resp = $n->id;
       }else{
         $e = \Model::factory('App\\Models\\Worker', 'app')->find_one($payload['id']);
-        $e->date = $payload['date'];
-        $e->name = $payload['name'];
-        $e->description = $payload['description'];
-        $e->url = $payload['url'];
+        $e->names = $payload['names'];
+        $e->last_names = $payload['last_names'];
+        $e->phone = $payload['phone'];
+        $e->email = $payload['email'];
+        $e->position_id = $payload['position_id'];
         $e->save();
         $resp = '';
       }

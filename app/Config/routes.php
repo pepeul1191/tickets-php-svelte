@@ -59,6 +59,7 @@ $f3->route('POST /admin/worker/save', '\App\Controllers\Admin\WorkerController->
 $f3->route('GET  /admin/worker/get', '\App\Controllers\Admin\WorkerController->get');
 $f3->route('GET  /admin/worker/branch', '\App\Controllers\Admin\WorkerController->branch');
 $f3->route('POST  /admin/worker/branch/save', '\App\Controllers\Admin\WorkerController->branchSave');
+$f3->route('POST /admin/worker/detail/save', '\App\Controllers\Admin\WorkerController->saveDetail');
 #### rest - file
 $f3->route('POST /upload', '\App\Controllers\FileController->upload');
 # error handler

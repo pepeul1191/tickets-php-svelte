@@ -22,7 +22,7 @@ export const getWorkerById = (id) => {
 
 export const saveWorkerDetail = (params) => {
   return new Promise((resolve, reject) => {
-    axios.post('admin/project/detail/save', JSON.stringify(params), {
+    axios.post('admin/worker/detail/save', JSON.stringify(params), {
       headers: {
         'Content-Type': 'application/json',
       }
@@ -30,7 +30,7 @@ export const saveWorkerDetail = (params) => {
       resolve(response);
     }).catch(function (error) {
       if(error.response.status == 404){
-        console.error('Proyecto a editar no existe en el servidor')
+        console.error('Trabajador a editar no existe en el servidor')
       }else{
         console.error(error.response.data);
       }
