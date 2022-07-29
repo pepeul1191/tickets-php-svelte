@@ -51,6 +51,7 @@ class LoginController extends BaseController
       $_SESSION['csrfKey'] = \App\Libraries\RandomLib::lowerStringNumber(20);
       $_SESSION['csrfValue'] = \App\Libraries\RandomLib::lowerStringNumber(30);
       $_SESSION['status'] = 'active';
+      $_SESSION['role'] = 'admin';
       $_SESSION['user'] = $user;
       $_SESSION['name'] = 'Antergo Design';
       $_SESSION['img'] = $f3->get('staticURL') . 'assets/img/default-user.png';
@@ -67,6 +68,7 @@ class LoginController extends BaseController
     $resp = json_encode([
       'user' => $_SESSION['user'],
       'name' => $_SESSION['name'],
+      'role' => $_SESSION['role'],
       'img' => $_SESSION['img'],
     ]);
     $status = 200;

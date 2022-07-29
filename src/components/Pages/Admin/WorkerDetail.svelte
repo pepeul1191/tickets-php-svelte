@@ -1,11 +1,13 @@
 <script>
   import { onMount } from 'svelte';
   import InputText from '../../Widgets/InputText.svelte';
+  import InputPassword from '../../Widgets/InputPassword.svelte';
   import InputSelect from '../../Widgets/InputSelect.svelte';
   import AlertMessage from '../../Widgets/AlertMessage.svelte';
   import InputCheckGroup from '../../Widgets/InputCheckGroup.svelte';
   import { alertMessage as alertMessageStore} from '../../Stores/alertMessage.js';
   import { getWorkerById, saveWorkerDetail, saveWorkerBranch } from '../../../services/worker_service.js';
+  import { getUserWorkerById, updateUserPassword } from '../../../services/user_service.js';
   export let id;
   export let disabled = false;
   export let disabledProjectType = false;
@@ -15,15 +17,23 @@
   let title = '';
   let alertMessage = null;
   let alertMessageProps = {};
+  // worker data
   let positionId;
   let names = ''; let inputNames; let namesValid = false;
   let lastNames = ''; let inputLastNames; let lastNamesValid = false;
   let email = ''; let inputEmail; let emailValid = false;
   let phone = ''; let inputPhone; let phoneValid = false;
   let position = ''; let inputPosition; let positionValid = false;
-  let branchLimaCheckGroup;
+  // user-worker data
+  let userId = 'E';
+  let password = ''; let passwordOriginal = ''; let inputPassword = ''; let passwordValid = false;
+  let user = ''; let inputUser = ''; let userValid = false;
   let messageRandomPassword = '';
+  let lastLogin = '';
+  // branch-worker data
+  let branchLimaCheckGroup;
   let branchProvinceCheckGroup;
+  
   
   onMount(() => {    
     alertMessageStore.subscribe(value => {
@@ -34,17 +44,21 @@
     });
     // ajax
     if(id === undefined){
-      console.log('if')
+      // console.log('if')
       title = 'Crear Trabajador';
       id = 'E';
       disabledProjectType = true;
     }else{
-      console.log('else')
+      // console.log('else')
       title = 'Editar Trabajador';
       loadDetail(id);
       disabledProjectType = false;
     }
+    // postion select
     inputPosition.list();
+    // load user
+    loadUser(id);
+    // branches of worker
     branchLimaCheckGroup.url = `${baseURL}admin/worker/branch?worker_id=${id}&branch_type_id=1`;
     branchLimaCheckGroup.list();
     branchProvinceCheckGroup.url = `${baseURL}admin/worker/branch?worker_id=${id}&branch_type_id=2`;
@@ -119,6 +133,60 @@
     })
   };
 
+  const loadUser = (id) => {
+    getUserWorkerById(id).then((resp) => {
+      var data = resp.data;
+      user = data.user;
+      password = '1111111111';
+      userId = data.id;
+    }).catch((resp) =>  {
+      if(resp.status == 404){
+        launchAlert(null, 'El trabajador aún no tiene un usuario asignado', 'warning');
+      }else{
+        launchAlert(null, 'Ocurrió un error en obtener los datos del usuario del trabajador', 'danger');
+      }
+    })
+  };
+
+  const saveWokerUser = () => {
+    // run validations
+    inputUser.validate();
+    inputPassword.validate();
+    // check if true
+    if(passwordValid && userValid) {
+      var params = {
+        worker_id: id,
+        id: userId,
+        user: user,
+        password: password,
+        email: email,
+      };
+      updateUserPassword(params).then((resp) => {
+        var data = resp.data;
+        if(data == ''){
+          // edited
+          launchAlert(null, 'Se ha editado el usuario del trabajador', 'success');
+        }else{
+          // created
+          userId = data;
+          launchAlert(null, 'Se ha creado el usuario del trabajador', 'success');
+        }
+      }).catch((resp) =>  {
+        if(resp.status == 404){
+          launchAlert(null, 'Recurso asosiar actualizar el usuario del trabajador no existe en el servidor', 'danger');
+        }else if(resp.status == 501){ 
+          launchAlert(null, resp.data, 'danger');
+        }else { 
+          launchAlert(null, 'Ocurrió un error en asosiar el usuario del trabajador', 'danger');
+        }
+      })
+    }
+  };
+
+  const sendResetMail = () => {
+    alert('TODO: Enviar correo con reseteo de contraseña')
+  };
+
   const saveBranches = (branch) => {
     var dataChanged = branch.getChanges();
     if(id != 'E'){
@@ -146,12 +214,13 @@
 
   const generatePassword = () => {
     var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!"#$%&/()=?¡[]*|@';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#$%()=¡[]*|@';
     var charactersLength = characters.length;
     for ( var i = 0; i < 10; i++ ) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     messageRandomPassword = `Contraseña generada: <b style="color: #343434;font-weight: 900;">${result}</b>`;
+    password = result;
     setTimeout(() => {messageRandomPassword = ''}, 5000);
   };
 </script>
@@ -256,51 +325,44 @@
     <div class="col-md-3">
       <InputText 
         label={'Usuario'}
-        bind:value={lastNames}
-        placeholder={'Apellidos del trabajador'} 
+        bind:value={user}
+        placeholder={'Usuario de trabajador'} 
         disabled={disabled}
         validations={[
-          {type:'notEmpty', message: 'Debe de ingresar los appelidos del trabajador'},
+          {type:'notEmpty', message: 'Debe de ingresar un nombre usuario'},
           {type:'maxLength', length: 45, message: 'Nombre máximo 45 letras'},
         ]}
-        bind:valid={lastNamesValid} 
-        bind:this={inputLastNames}
+        bind:valid={userValid} 
+        bind:this={inputUser}
       />
     </div>
     <div class="col-md-3">
-      <InputText 
+      <InputPassword 
         label={'Contraseña'}
-        bind:value={lastNames}
-        placeholder={'Apellidos del trabajador'} 
-        disabled={disabled}
-        validations={[
-          {type:'notEmpty', message: 'Debe de ingresar los appelidos del trabajador'},
-          {type:'maxLength', length: 45, message: 'Nombre máximo 45 letras'},
-        ]}
-        bind:valid={lastNamesValid} 
-        bind:this={inputLastNames}
+        bind:value={password}
+        placeholder={'Contraseña del usuario'} 
+        disabled={true}
+        validations={[{type:'notEmpty', message: 'Debe de Generar una Contraseña'},]}
+        bind:this={inputPassword}
+        bind:valid={passwordValid} 
       />
     </div>
     <div class="col-md-3">
       <InputText 
         label={'Último Acceso'}
-        bind:value={lastNames}
-        placeholder={'Apellidos del trabajador'} 
+        bind:value={lastLogin}
+        placeholder={'Último acceso al sistema'} 
         disabled={true}
-        validations={[
-          {type:'notEmpty', message: 'Debe de ingresar los appelidos del trabajador'},
-          {type:'maxLength', length: 45, message: 'Nombre máximo 45 letras'},
-        ]}
-        bind:valid={lastNamesValid} 
-        bind:this={inputLastNames}
+        validations={[]}
+        valid={true} 
       />
     </div>
   </div>
   <div class="row">
     <div class="col-md-12 pull-right">
-      <button class="btn btn-success btn-actions" disabled="{disabled}" on:click="{saveDetail}"><i class="fa fa-check" aria-hidden="true"></i>
+      <button class="btn btn-success btn-actions" disabled="{disabled}" on:click="{saveWokerUser}"><i class="fa fa-check" aria-hidden="true"></i>
         Actualizar Datos de Usuario</button>
-      <button class="btn btn-primary btn-actions" disabled="{disabled}" on:click="{saveDetail}"><i class="fa fa-envelope-o" aria-hidden="true"></i>
+      <button class="btn btn-primary btn-actions" disabled="{disabled}" on:click="{sendResetMail}"><i class="fa fa-envelope-o" aria-hidden="true"></i>
         Enviar Correo de Cambio de Contraseña</button>
       <button class="btn btn-secondary btn-actions" disabled="{disabled}" on:click="{generatePassword}"><i class="fa fa-random" aria-hidden="true"></i>
         Generar Contraseña</button>

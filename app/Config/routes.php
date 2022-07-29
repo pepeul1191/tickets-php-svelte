@@ -43,6 +43,9 @@ $f3->route('GET  /admin/project/get', '\App\Controllers\Admin\ProjectController-
 ### admin - project_image
 $f3->route('GET  /admin/project/image/list', '\App\Controllers\Admin\ProjectImageController->list');
 $f3->route('POST /admin/project/image/save', '\App\Controllers\Admin\ProjectImageController->save');
+### access - user
+$f3->route('GET  /access/user/worker/get', '\App\Controllers\Access\UserController->workerGet');
+$f3->route('POST  /access/user/worker/update', '\App\Controllers\Access\UserController->workerUpdate');
 
 ### position
 $f3->route('GET  /admin/position/list', '\App\Controllers\Admin\PositionController->list');

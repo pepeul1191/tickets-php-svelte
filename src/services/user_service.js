@@ -24,15 +24,17 @@ export const getUser = () => {
   });
 }
 
-export const getUserById = (id) => {
+export const getUserWorkerById = (id) => {
   return new Promise((resolve, reject) => {
-    axios.get('user/get', {
-      params: {id: id}
+    axios.get('access/user/worker/get', {
+      params: {worker_id: id}
     }).then(function (response) {
       resolve(response);
     }).catch(function (error) {
       if(error.response.status == 404){
         console.error('Usuario no encontrado')
+      }else if(error.response.status == 501){
+        alert();
       }else{
         console.error(error.response.data);
       }
@@ -44,9 +46,9 @@ export const getUserById = (id) => {
   });
 }
 
-export const saveUserDetail = (params) => {
+export const updateUserPassword = (params) => {
   return new Promise((resolve, reject) => {
-    axios.post('user/detail/save', JSON.stringify(params), {
+    axios.post('access/user/worker/update', JSON.stringify(params), {
       headers: {
         'Content-Type': 'application/json',
       }

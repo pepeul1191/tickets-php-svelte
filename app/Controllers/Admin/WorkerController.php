@@ -209,14 +209,19 @@ class WorkerController extends BaseController
     // logic
     try {
       $r = \Model::factory('App\\Models\\Worker', 'app')->find_one($id);
-      $resp = json_encode(array(
-        'id' => $r->{'id'},
-        'names' => $r->{'names'},
-        'last_names' => $r->{'last_names'},
-        'phone' => $r->{'phone'},
-        'email' => $r->{'email'},
-        'position_id' => $r->{'position_id'},
-      ));
+      if($r == false){
+        $status = 404;
+        $resp = '';
+      }else{
+        $resp = json_encode(array(
+          'id' => $r->{'id'},
+          'names' => $r->{'names'},
+          'last_names' => $r->{'last_names'},
+          'phone' => $r->{'phone'},
+          'email' => $r->{'email'},
+          'position_id' => $r->{'position_id'},
+        ));
+      }
     }catch (\Exception $e) {
       $status = 500;
       $resp = json_encode(['ups', $e->getMessage()]);
