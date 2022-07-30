@@ -77,3 +77,4 @@ Fuentes:
 + https://stackoverflow.com/questions/25112510/how-to-set-environment-variables-from-within-package-json
 + https://gulpjs.com/docs/en/getting-started/creating-tasks
 + https://www.npmjs.com/package/cross-env
++ https://medium.com/@singdeep/secure-your-data-with-hash-sha256-encryption-and-decryption-method-using-php-8f3713ae467a

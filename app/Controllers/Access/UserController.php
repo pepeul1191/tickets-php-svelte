@@ -53,6 +53,8 @@ class UserController extends BaseController
 
   function workerUpdate($f3)
   {
+    // helper
+    parent::loadHelper('crypto');
     // data
     $resp = '';
     $status = 200;
@@ -71,7 +73,7 @@ class UserController extends BaseController
         if($tmpUser == false && $tmpWorker == false){
           $n = \Model::factory('App\\Models\\User', 'app')->create();
           $n->worker_id = $worker_id;
-          $n->password = $password;
+          $n->password = \Cripto::encrypt($password);
           $n->user = $user;
           $n->activation_key = \App\Libraries\RandomLib::stringNumber(20);
           $n->reset_key = \App\Libraries\RandomLib::stringNumber(20);
@@ -104,7 +106,7 @@ class UserController extends BaseController
         if($proceed){
           $e = \Model::factory('App\\Models\\User', 'app')->where('id', $id)->find_one();
           if($password != '1111111111'){
-            $e->password = $password;
+            $e->password = \Cripto::encrypt($password);
           }
           $e->user = $user; 
           $e->save();
