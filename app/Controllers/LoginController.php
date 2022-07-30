@@ -44,10 +44,14 @@ class LoginController extends BaseController
 
   function access($f3, $args)
   {
+    // helper
+    parent::loadHelper('crypto');
+    parent::loadHelper('orm');
+    // request
     $payload = $f3->get('POST');
     $user = $payload['user'];
     $password = $payload['password'];
-    if($user == 'admin' && $password == '123'){ // LBF6$2ACc?*4t;(t
+    if($user == 'admin' && $password == 'LBF6$2ACc?*4t;(t'){ // LBF6$2ACc?*4t;(t
       $_SESSION['csrfKey'] = \App\Libraries\RandomLib::lowerStringNumber(20);
       $_SESSION['csrfValue'] = \App\Libraries\RandomLib::lowerStringNumber(30);
       $_SESSION['status'] = 'active';
@@ -58,7 +62,26 @@ class LoginController extends BaseController
       $_SESSION['time'] = date('Y-m-d H:i:s');
       $f3->reroute('/');
     }else{
-      $f3->reroute($f3->get('PATH') . '?error=user-pass-mismatch');
+      $password = \Cripto::encrypt($password);
+      $tmpUser = \Model::factory('App\\Models\\User', 'app')->where(array('user' => $user,'password' => $password))->find_one();
+      if($tmpUser != false){
+        // get worker
+        $worker = \Model::factory('App\\Models\\Worker', 'app')->where('id', $tmpUser->worker_id)->find_one();
+        // set session
+        $_SESSION['csrfKey'] = \App\Libraries\RandomLib::lowerStringNumber(20);
+        $_SESSION['csrfValue'] = \App\Libraries\RandomLib::lowerStringNumber(30);
+        $_SESSION['status'] = 'active';
+        $_SESSION['role'] = 'worker';
+        $_SESSION['user'] = $user;
+        $_SESSION['worker_id'] = $worker->id;
+        $_SESSION['names'] = $worker->names;
+        $_SESSION['last_names'] = $worker->last_names;
+        $_SESSION['img'] = $f3->get('staticURL') . 'assets/img/default-user.png';
+        $_SESSION['time'] = date('Y-m-d H:i:s');
+        $f3->reroute('/');
+      }else{ 
+        $f3->reroute($f3->get('PATH') . '?error=user-pass-mismatch');
+      }
     }
   }
 
@@ -75,6 +98,11 @@ class LoginController extends BaseController
     // resp
     http_response_code($status);
     echo $resp;
+  }
+
+  function session($f3)
+  {
+    var_dump($_SESSION);
   }
 
   function logout($f3)

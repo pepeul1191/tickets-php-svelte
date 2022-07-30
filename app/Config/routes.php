@@ -8,6 +8,7 @@ $f3->route('GET  /api/service/project', '\App\Controllers\Admin\ApiController->p
 $f3->route('GET  /login', '\App\Controllers\LoginController->index');
 $f3->route('GET  /login/sign-in', '\App\Controllers\LoginController->index');
 $f3->route('GET  /login/reset-password', '\App\Controllers\LoginController->index');
+$f3->route('GET  /session', '\App\Controllers\LoginController->session');
 $f3->route('POST /login', '\App\Controllers\LoginController->access');
 $f3->route('GET  /log-out', '\App\Controllers\LoginController->logout');
 ### admin
@@ -46,6 +47,7 @@ $f3->route('POST /admin/project/image/save', '\App\Controllers\Admin\ProjectImag
 ### access - user
 $f3->route('GET  /access/user/worker/get', '\App\Controllers\Access\UserController->workerGet');
 $f3->route('POST  /access/user/worker/update', '\App\Controllers\Access\UserController->workerUpdate');
+$f3->route('GET  /access/user/menu', '\App\Controllers\Access\UserController->menu');
 
 ### position
 $f3->route('GET  /admin/position/list', '\App\Controllers\Admin\PositionController->list');

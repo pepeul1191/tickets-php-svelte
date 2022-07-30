@@ -19,12 +19,12 @@ class UserController extends BaseController
   {
     parent::beforeroute($f3);
     SessionTrueApiFilter::before($f3);
-    SessionAdminApiFilter::before($f3);
     //CsrfApiFilter::before($f3);
   }
 
   function workerGet($f3)
   {
+    SessionAdminApiFilter::before($f3);
     // data
     $resp = [];
     $status = 200;
@@ -53,6 +53,7 @@ class UserController extends BaseController
 
   function workerUpdate($f3)
   {
+    SessionAdminApiFilter::before($f3);
     // helper
     parent::loadHelper('crypto');
     // data
@@ -125,5 +126,47 @@ class UserController extends BaseController
     // resp
     http_response_code($status);
     echo $resp;
+  }
+
+  function menu($f3)
+  {
+    $resp = '';
+    $status = 200;
+    $role = $_SESSION['role'];
+    /*
+    {name: 'Home', url: '/admin', active: true, items: []}, 
+		{name: 'Recursos', url: '#', active: true, items: [
+			{name: 'Trabajadores', url: '/worker', active: true}, 
+			{name: 'Puestos de Trabajo', url: '/position', active: true}, 
+			{name: 'Tipos de Servicios', url: '/service_type', active: true}, 
+			{name: 'Sedes - Lima', url: '/branch/lima', active: false}, 
+			{name: 'Sedes - Provincias', url: '/branch/province', active: false}, 
+		]}, 
+		{name: 'Servicios', url: '/service', active: true, items: []}, 
+		{name: 'Incidencias', url: '/admin/service', active: true, items: []}, 
+		{name: 'S. Técnicos', url: '/admin/project', active: true, items: []}, 
+    */
+    if($role == 'admin'){
+      $resp = array(
+        array('name' => 'Home', 'url' => '/', 'items' => array()),
+        array('name' => 'Recursos', 'url' => '#', 'items' => array(
+          array('name' => 'Trabajadores', 'url' => '/worker', 'items' => array()), 
+          array('name' => 'Puestos de Trabajo', 'url' => '/position', 'items' => array()), 
+          array('name' => 'Tipos de Servicios', 'url' => '/service_type', 'items' => array()), 
+          array('name' => 'Sedes - Lima', 'url' => '/branch/lima', 'items' => array()), 
+          array('name' => 'Sedes - Provincias', 'url' => '/branch/province', 'items' => array()), 
+        )),
+      );
+    }else{
+      $resp = array(
+        array('name' => 'Home', 'url' => '/', 'items' => array()),
+        array('name' => 'Servicios', 'url' => '/service', 'items' => array()), 
+        array('name' => 'Incidencias', 'url' => '/admin/service', 'items' => array()), 
+        array('name' => 'S. Técnicos', 'url' => '/admin/project', 'items' => array()), 
+      );
+    }
+    // resp
+    http_response_code($status);
+    echo json_encode($resp);
   }
 }

@@ -1,26 +1,68 @@
 <script>
+	import axios from 'axios';
 	import { onMount } from 'svelte';
 	import { navigate } from 'svelte-routing';
 	import { getUser } from '../../services/user_service.js';
+	import { CSRF } from '../Stores/csrf.js';
 	export let items = [];
 	export let user = {};
 	let staticURL = STATIC_URL;
 	let showUser = true;
 
 	onMount(() => {
-		items = [
-			{name: 'Home', url: '/admin', active: true, items: []}, 
-			{name: 'Recursos', url: '#', active: true, items: [
-				{name: 'Trabajadores', url: '/worker', active: true}, 
-				{name: 'Puestos de Trabajo', url: '/position', active: true}, 
-				{name: 'Tipos de Servicios', url: '/service_type', active: true}, 
-				{name: 'Sedes - Lima', url: '/branch/lima', active: false}, 
-				{name: 'Sedes - Provincias', url: '/branch/province', active: false}, 
-			]}, 
-			{name: 'Servicios', url: '/service', active: true, items: []}, 
-			{name: 'Incidencias', url: '/admin/service', active: true, items: []}, 
-			{name: 'S. Técnicos', url: '/admin/project', active: true, items: []}, 
-		];
+		axios.get( // url, data, headers
+      '/access/user/menu', 
+      {
+        params: {},
+        headers:{
+          [CSRF.key]: CSRF.value,
+        }
+      },
+    )
+    .then(function (response) {
+			response.data.forEach((entry) => {
+				var subItems = [];
+				// submenu
+				if(entry.items.length > 0){
+					entry.items.forEach((item) => {
+						subItems.push(
+							{name: item.name, url: item.url, active: true}, 
+						);
+					});
+				}
+				// resp
+				items.push(
+					{name: entry.name, url: entry.url, active: true, items: subItems}, 
+				);
+			});
+			items = items;
+			/*
+			items = [
+				{name: 'Home', url: '/admin', active: true, items: []}, 
+				{name: 'Recursos', url: '#', active: true, items: [
+					{name: 'Trabajadores', url: '/worker', active: true}, 
+					{name: 'Puestos de Trabajo', url: '/position', active: true}, 
+					{name: 'Tipos de Servicios', url: '/service_type', active: true}, 
+					{name: 'Sedes - Lima', url: '/branch/lima', active: false}, 
+					{name: 'Sedes - Provincias', url: '/branch/province', active: false}, 
+				]}, 
+				{name: 'Servicios', url: '/service', active: true, items: []}, 
+				{name: 'Incidencias', url: '/admin/service', active: true, items: []}, 
+				{name: 'S. Técnicos', url: '/admin/project', active: true, items: []}, 
+			];
+			*/
+    })
+    .catch(function (error) {
+      console.error(error);
+      if (error.response) {
+        console.log(error.response.data);
+        console.log(error.response.status);
+        // console.log(error.response.headers);
+      }
+    })
+    .then(function () {
+      display = true;
+    });
 		// getUserInfo();
 	});  
 
