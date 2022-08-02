@@ -15,6 +15,7 @@
   export let url = '';
   export let queryParams = {};
   export let selectedValue = 'E';
+  export let customFunctionOnChange = null;
   export let key = {
     id: 'id',
     name: 'name',
@@ -49,51 +50,58 @@
 
   export const list = () => {
     // console.log(url);    console.log(columnSize);
-    axios.get( // url, data, headers
-      url, 
-      {
-        params: queryParams,
-        headers:{
-          [CSRF.key]: CSRF.value,
+    if(url == ''){
+      data = [];
+    }else{
+      axios.get( // url, data, headers
+        url, 
+        {
+          params: queryParams,
+          headers:{
+            [CSRF.key]: CSRF.value,
+          }
+        },
+      )
+      .then(function (response) {
+        response.data.forEach(record => {
+          data.push(record);
+        });
+        data = data;
+        // console.log(data);
+      })
+      .catch(function (error) {
+        console.error(error);
+        if (error.response) {
+          if(error.response.status == 404){
+            launchAlert({
+              message: messages.list404,
+              type: 'danger',
+              timeOut: 5000
+            });
+          }else{
+            launchAlert({
+              message: messages.list500,
+              type: 'danger',
+              timeOut: 5000
+            });
+          }
+          console.log(error.response.data);
+          console.log(error.response.status);
+          // console.log(error.response.headers);
         }
-      },
-    )
-    .then(function (response) {
-      response.data.forEach(record => {
-        data.push(record);
+      })
+      .then(function () {
+        display = true;
       });
-      data = data;
-      // console.log(data);
-    })
-    .catch(function (error) {
-      console.error(error);
-      if (error.response) {
-        if(error.response.status == 404){
-          launchAlert({
-            message: messages.list404,
-            type: 'danger',
-            timeOut: 5000
-          });
-        }else{
-          launchAlert({
-            message: messages.list500,
-            type: 'danger',
-            timeOut: 5000
-          });
-        }
-        console.log(error.response.data);
-        console.log(error.response.status);
-        // console.log(error.response.headers);
-      }
-    })
-    .then(function () {
-      display = true;
-    });
+    }
   };
 
   const selectChange = (event) => {
-    console.log(event);
+    // console.log(event);
     selectedValue = document.getElementById(randId).value;
+    if(customFunctionOnChange != null){
+      customFunctionOnChange()
+    }
   };
 </script>
 
@@ -111,5 +119,7 @@
 </small>
 
 <style>
-
+  .form-select{
+    border-radius: 0px;
+  }
 </style>

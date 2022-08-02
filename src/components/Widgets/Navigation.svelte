@@ -63,12 +63,12 @@
     .then(function () {
       display = true;
     });
-		// getUserInfo();
+		getUserInfo();
 	});  
 
 	const getUserInfo = () => {
 		getUser().then((resp) => {
-			(resp.data.name != null) ? user.name = resp.data.name : showUser = false;
+			(resp.data.names != null) ? user.name = resp.data.names : showUser = false;
 			(resp.data.img != null) ? user.img = resp.data.img : user.img = `${staticURL}assets/img/default-user.png`;
 			(resp.data.user != null) ? user.user = resp.data.user : user.user = null;
 		}).catch((resp) =>  {

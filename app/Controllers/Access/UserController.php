@@ -169,4 +169,20 @@ class UserController extends BaseController
     http_response_code($status);
     echo json_encode($resp);
   }
+
+  function info($f3) 
+  {
+    // data
+    $resp = json_encode([
+      'user' => $_SESSION['user'],
+      'names' => $_SESSION['names'],
+      'last_names' => $_SESSION['last_names'],
+      'role' => $_SESSION['role'],
+      'img' => $_SESSION['img'],
+    ]);
+    $status = 200;
+    // resp
+    http_response_code($status);
+    echo $resp;
+  }
 }

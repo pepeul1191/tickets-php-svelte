@@ -3,7 +3,7 @@ import { CSRF } from '../components/Stores/csrf.js';
 
 export const getUser = () => {
   return new Promise((resolve, reject) => {
-    axios.get('user/info', {
+    axios.get('access/user/info', {
       params: {},
       headers:{
         [CSRF.key]: CSRF.value,

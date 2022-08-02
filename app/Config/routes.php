@@ -48,6 +48,7 @@ $f3->route('POST /admin/project/image/save', '\App\Controllers\Admin\ProjectImag
 $f3->route('GET  /access/user/worker/get', '\App\Controllers\Access\UserController->workerGet');
 $f3->route('POST  /access/user/worker/update', '\App\Controllers\Access\UserController->workerUpdate');
 $f3->route('GET  /access/user/menu', '\App\Controllers\Access\UserController->menu');
+$f3->route('GET  /access/user/info', '\App\Controllers\Access\UserController->info');
 
 ### position
 $f3->route('GET  /admin/position/list', '\App\Controllers\Admin\PositionController->list');
@@ -58,6 +59,8 @@ $f3->route('POST /admin/service_type/save', '\App\Controllers\Admin\ServiceTypeC
 ### branch
 $f3->route('GET  /admin/branch/list', '\App\Controllers\Admin\BranchController->list');
 $f3->route('POST /admin/branch/save', '\App\Controllers\Admin\BranchController->save');
+### branch type
+$f3->route('GET  /admin/branch_type/list', '\App\Controllers\Admin\BranchTypeController->list');
 ### worker
 $f3->route('GET  /admin/worker/list', '\App\Controllers\Admin\WorkerController->list');
 $f3->route('POST /admin/worker/save', '\App\Controllers\Admin\WorkerController->save');

@@ -85,21 +85,6 @@ class LoginController extends BaseController
     }
   }
 
-  function info($f3) 
-  {
-    // data
-    $resp = json_encode([
-      'user' => $_SESSION['user'],
-      'name' => $_SESSION['name'],
-      'role' => $_SESSION['role'],
-      'img' => $_SESSION['img'],
-    ]);
-    $status = 200;
-    // resp
-    http_response_code($status);
-    echo $resp;
-  }
-
   function session($f3)
   {
     var_dump($_SESSION);
