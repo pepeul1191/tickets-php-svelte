@@ -175,6 +175,7 @@ class UserController extends BaseController
     // data
     $resp = json_encode([
       'user' => $_SESSION['user'],
+      'worker_id' => $_SESSION['worker_id'],
       'names' => $_SESSION['names'],
       'last_names' => $_SESSION['last_names'],
       'role' => $_SESSION['role'],

@@ -61,6 +61,10 @@ $f3->route('GET  /admin/branch/list', '\App\Controllers\Admin\BranchController->
 $f3->route('POST /admin/branch/save', '\App\Controllers\Admin\BranchController->save');
 ### branch type
 $f3->route('GET  /admin/branch_type/list', '\App\Controllers\Admin\BranchTypeController->list');
+### priority
+$f3->route('GET  /admin/priority/list', '\App\Controllers\Admin\PriorityController->list');
+### state
+$f3->route('GET  /admin/state/list', '\App\Controllers\Admin\StateController->list');
 ### worker
 $f3->route('GET  /admin/worker/list', '\App\Controllers\Admin\WorkerController->list');
 $f3->route('POST /admin/worker/save', '\App\Controllers\Admin\WorkerController->save');

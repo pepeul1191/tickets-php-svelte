@@ -16,8 +16,14 @@
   export let id; let idDisplayed = '';
   export let created = '-'; 
   export let edited = '-'; 
+  let workerId = '';
+  let description = '';
+  let resume = ''; let inputResume; let resumeValid = false;
   let branchTypeId; let inputBranchType; let branchTypeIdValid = false;
   let branchId; let inputBranch; let branchIdValid = false;
+  let stateId; let inputState; let stateIdValid = false;
+  let priorityId; let inputPriority; let priorityIdValid = false;
+  let ticketTypeId; let inputTicketType; let ticketTypeIdValid = false;
 
   onMount(() => {    
     alertMessageStore.subscribe(value => {
@@ -28,7 +34,7 @@
     });
     var idLength = 10;
     // ajax
-    if(id === 'E'){
+    if(id == 'E'){
       console.log('if')
       title = 'Crear Servicio';
       id = 'E';
@@ -48,11 +54,14 @@
     // load worker data
     getUserInfo();
     inputBranchType.list();
+    inputPriority.list();
+    inputState.list();
   });
   
   const getUserInfo = () => {
 		getUser().then((resp) => {
-      workerName = `${resp.data.last_names}, ${resp.data.names}`
+      workerName = `${resp.data.last_names}, ${resp.data.names}`;
+      workerId = resp.data.worker_id;
 			//(resp.data.names != null) ? user.name = resp.data.names : showUser = false;
 			//(resp.data.img != null) ? user.img = resp.data.img : user.img = `${staticURL}assets/img/default-user.png`;
 			//(resp.data.user != null) ? user.user = resp.data.user : user.user = null;
@@ -60,6 +69,48 @@
 			showUser = false;
 		});
 	};
+
+  const saveHeader = () => {
+    // run validations
+    /*
+    inputDate.validate();
+    inputName.validate();
+    inputDescription.validate();
+    */
+    // check if true
+    //if(dateValid && nameValid && descriptionValid) {
+    if(true){
+      var params = {
+        id: id,
+        names: names,
+        last_names: lastNames,
+        phone: phone,
+        email: email,
+        position_id: positionId,
+      };
+      console.log(params);
+      /*
+      saveWorkerDetail(params).then((resp) => {
+        var data = resp.data;
+        if(data != ''){
+          id = data;
+          title = 'Editar Trabajador';
+          launchAlert(null, 'Se ha creado un nuevo trabajador', 'success');
+          disabledProjectType = false;
+        }else{
+          launchAlert(null, 'Se ha editado un trabajador', 'success');
+        }
+      }).catch((resp) =>  {
+        if(resp.status == 404){
+          launchAlert(null, 'Recurso guardar detalle de trabajador no existe en el servidor', 'danger');
+        }else if(resp.status == 501){ 
+          launchAlert(null, resp.data, 'danger');
+        }else { 
+          launchAlert(null, 'Ocurrió un error en guardar los datos del trabajador', 'danger');
+        }
+      })*/
+    }
+  };
 </script>
 
 <svelte:head>
@@ -76,7 +127,7 @@
     <svelte:component this={alertMessage} {...alertMessageProps} />
     <div class="col-md-6">
       <br>
-      <h6>Detalles de la Incidencias de Servicios</h6>			
+      <h6>Detalles del Ticket</h6>			
     </div>
     <div class="row">
       <div class="col-md-2">
@@ -155,37 +206,48 @@
     </div>
     <div class="row" style="margin-top:10px;">
       <div class="col-md-2">
-        <InputText 
+        <InputSelect 
           label={'Prioridad'}
-          bind:value={id}
           placeholder={'Prioridad'} 
-          disabled={true}
-          style={'text-align:center;'}
+          disabled={disabled}
+          url={`${baseURL}admin/priority/list`}
           validations={[
-            {type:'notEmpty', message: 'Debe de ingresar un nombre proyecto'},
-            {type:'maxLength', length: 100, message: 'Nombre máximo 100 letras'},
+            {type:'notEmpty', message: 'Debe seleccionar la prioridad'},
           ]}
+          key = {{ id: 'id', name: 'name'}}
+          bind:selectedValue={priorityId}
+          bind:valid={priorityIdValid} 
+          bind:this={inputPriority}
         />
       </div>
       <div class="col-md-2">
-        <InputText 
+        <InputSelect 
           label={'Estado'}
-          bind:value={id}
           placeholder={'Estado'} 
-          disabled={true}
-          style={'text-align:center;'}
-          validations={[ ]}
+          disabled={disabled}
+          url={`${baseURL}admin/state/list`}
+          validations={[
+            {type:'notEmpty', message: 'Debe seleccionar el estado'},
+          ]}
+          key = {{ id: 'id', name: 'name'}}
+          bind:selectedValue={stateId}
+          bind:valid={stateIdValid} 
+          bind:this={inputState}
         />
       </div>
       <div class="col-md-6">
         <InputText 
-          label={'Resumen'}
-          bind:value={id}
-          placeholder={'Resumen'} 
-          disabled={true}
-          style={'text-align:center;'}
-          validations={[ ]}
-        />
+        label={'Resumen del servicio (máxmo 75 letras)'}
+        bind:value={resume}
+        placeholder={'Resumen'} 
+        disabled={disabled}
+        validations={[
+          {type:'notEmpty', message: 'Debe de ingresar un nombre proyecto'},
+          {type:'maxLength', length: 75, message: 'Nombre máximo 100 letras'},
+        ]}
+        bind:valid={resumeValid} 
+        bind:this={inputResume}
+      />
       </div>
       <div class="col-md-2">
         <InputText 
@@ -198,9 +260,24 @@
         />
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-12 pull-right">
+        <button class="btn btn-success btn-actions" disabled="{disabled}" on:click="{saveHeader}"><i class="fa fa-check" aria-hidden="true"></i>
+          {title}</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6"> 
+      <h6>Imágnes Adjuntas</h6>			
+    </div>
   </div>
 </div>
 
 <style>
-
+.btn-actions{
+    float:right;
+    margin-top:15px;
+    margin-left: 10px;
+  }
 </style>
