@@ -5,6 +5,7 @@
   import InputText from '../../Widgets/InputText.svelte';
   import InputSelect from '../../Widgets/InputSelect.svelte';
   import Worker from './Worker.svelte';
+  import TextArea from '../../Widgets/TextArea.svelte';
   let alertMessage = null;
   let alertMessageProps = {};
   let baseURL = BASE_URL;
@@ -17,13 +18,12 @@
   export let created = '-'; 
   export let edited = '-'; 
   let workerId = '';
-  let description = '';
   let resume = ''; let inputResume; let resumeValid = false;
+  let description = ''; let inputDescription; let descriptionValid = false;
   let branchTypeId; let inputBranchType; let branchTypeIdValid = false;
   let branchId; let inputBranch; let branchIdValid = false;
   let stateId; let inputState; let stateIdValid = false;
   let priorityId; let inputPriority; let priorityIdValid = false;
-  let ticketTypeId; let inputTicketType; let ticketTypeIdValid = false;
 
   onMount(() => {    
     alertMessageStore.subscribe(value => {
@@ -82,11 +82,14 @@
     if(true){
       var params = {
         id: id,
-        names: names,
-        last_names: lastNames,
-        phone: phone,
-        email: email,
-        position_id: positionId,
+        created: created,
+        edited: edited,
+        worker_id: workerId,
+        branch_id: branchId,
+        state_id: stateId,
+        priority_id: priorityId,
+        resume: resume,
+        description: inputDescription.getWYSIWYGContent(),
       };
       console.log(params);
       /*
@@ -257,6 +260,24 @@
           disabled={true}
           style={'text-align:center;'}
           validations={[ ]}
+        />
+      </div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+      <div class="col-md-12">
+        <TextArea 
+          label={'Descripción'}
+          bind:value={description}
+          placeholder={'Resumen'} 
+          disabled={disabled}
+          validations={[
+            {type:'notEmpty', message: 'Debe de ingresar un nombre proyecto'},
+          ]}
+          rows={5}
+          WYSIWYG={true}
+          height={150}
+          bind:valid={descriptionValid} 
+          bind:this={inputDescription}
         />
       </div>
     </div>
