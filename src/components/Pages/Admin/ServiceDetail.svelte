@@ -2,21 +2,24 @@
   import { onMount } from 'svelte';
   import { alertMessage as alertMessageStore} from '../../Stores/alertMessage.js';
   import { getUser } from '../../../services/user_service.js';
+  import { saveTicketDetail } from '../../../services/ticket_service.js';
   import InputText from '../../Widgets/InputText.svelte';
+  import AlertMessage from '../../Widgets/AlertMessage.svelte';
+  import DataTable from '../../Widgets/DataTable.svelte';
   import InputSelect from '../../Widgets/InputSelect.svelte';
-  import Worker from './Worker.svelte';
   import TextArea from '../../Widgets/TextArea.svelte';
   let alertMessage = null;
   let alertMessageProps = {};
   let baseURL = BASE_URL;
+  let staticURL = STATIC_URL;
   export let workerName = '';
   export let disabled = false;
   export let disabledBranch = true;
   let title = '';
   // service header data
   export let id; let idDisplayed = '';
-  export let created = '-'; 
-  export let edited = '-'; 
+  export let created = ''; 
+  export let edited = ''; 
   let workerId = '';
   let resume = ''; let inputResume; let resumeValid = false;
   let description = ''; let inputDescription; let descriptionValid = false;
@@ -24,6 +27,9 @@
   let branchId; let inputBranch; let branchIdValid = false;
   let stateId; let inputState; let stateIdValid = false;
   let priorityId; let inputPriority; let priorityIdValid = false;
+  let ticketTypeId = 1;
+  // ticket files
+  let ticketDataTable;
 
   onMount(() => {    
     alertMessageStore.subscribe(value => {
@@ -38,7 +44,7 @@
       console.log('if')
       title = 'Crear Servicio';
       id = 'E';
-      idDisplayed = '-'
+      idDisplayed = ''
       disabledProjectType = true;
     }else{
       console.log('else')
@@ -56,7 +62,21 @@
     inputBranchType.list();
     inputPriority.list();
     inputState.list();
+    // files
+    ticketDataTable.urlServices.list = `${baseURL}admin/ticket/image/list?ticket=${id}`;
+    ticketDataTable.list();
+    ticketDataTable.extraData.ticket = id;
   });
+
+  const launchAlert = (event, message, type) => {
+    alertMessage = null;
+    alertMessage = AlertMessage;
+    alertMessageProps = {
+      message: message,
+      type: type,
+      timeOut: 5000
+    }
+  };
   
   const getUserInfo = () => {
 		getUser().then((resp) => {
@@ -72,14 +92,15 @@
 
   const saveHeader = () => {
     // run validations
-    /*
-    inputDate.validate();
-    inputName.validate();
     inputDescription.validate();
-    */
+    inputResume.validate();
+    inputDescription.validate();
+    inputBranchType.validate();
+    inputBranch.validate();
+    inputState.validate();
+    inputPriority.validate();
     // check if true
-    //if(dateValid && nameValid && descriptionValid) {
-    if(true){
+    if(resumeValid && descriptionValid && branchTypeIdValid && branchIdValid && stateIdValid && priorityIdValid){
       var params = {
         id: id,
         created: created,
@@ -90,28 +111,32 @@
         priority_id: priorityId,
         resume: resume,
         description: inputDescription.getWYSIWYGContent(),
+        ticket_type_id: ticketTypeId,
       };
-      console.log(params);
-      /*
-      saveWorkerDetail(params).then((resp) => {
+      // console.log(params);
+      saveTicketDetail(params).then((resp) => {
         var data = resp.data;
-        if(data != ''){
-          id = data;
-          title = 'Editar Trabajador';
-          launchAlert(null, 'Se ha creado un nuevo trabajador', 'success');
-          disabledProjectType = false;
+        console.log(data);
+        if(typeof data === 'string' || data instanceof String){
+          edited = data;
+          launchAlert(null, 'Se ha editado un ticket', 'success');
         }else{
-          launchAlert(null, 'Se ha editado un trabajador', 'success');
+          id = data.id;
+          edited = data.edited;
+          created = data.created;
+          title = 'Editar Ticket';
+          launchAlert(null, 'Se ha creado un nuevo ticket', 'success');
+          disabledProjectType = false;
         }
       }).catch((resp) =>  {
         if(resp.status == 404){
-          launchAlert(null, 'Recurso guardar detalle de trabajador no existe en el servidor', 'danger');
+          launchAlert(null, 'Recurso guardar detalle de ticket no existe en el servidor', 'danger');
         }else if(resp.status == 501){ 
           launchAlert(null, resp.data, 'danger');
         }else { 
-          launchAlert(null, 'Ocurrió un error en guardar los datos del trabajador', 'danger');
+          launchAlert(null, 'Ocurrió un error en guardar los datos del ticket', 'danger');
         }
-      })*/
+      });
     }
   };
 </script>
@@ -137,7 +162,7 @@
         <InputText 
           label={'Número de Ticket'}
           bind:value={idDisplayed}
-          placeholder={'Nombre del proyecto'} 
+          placeholder={'Por generar'} 
           disabled={true}
           style={'text-align:center;'}
           validations={[
@@ -200,7 +225,7 @@
         <InputText 
           label={'Fecha de Creación'}
           bind:value={created}
-          placeholder={'Fecha de Creación'} 
+          placeholder={'Por generar'} 
           disabled={true}
           style={'text-align:center;'}
           validations={[ ]}
@@ -256,7 +281,7 @@
         <InputText 
           label={'Última Edición'}
           bind:value={edited}
-          placeholder={'Última Edición'} 
+          placeholder={'Por generar'} 
           disabled={true}
           style={'text-align:center;'}
           validations={[ ]}
@@ -283,14 +308,71 @@
     </div>
     <div class="row">
       <div class="col-md-12 pull-right">
-        <button class="btn btn-success btn-actions" disabled="{disabled}" on:click="{saveHeader}"><i class="fa fa-check" aria-hidden="true"></i>
-          {title}</button>
+        <button class="btn btn-success btn-actions" disabled="{disabled}" on:click="{saveHeader}"><i class="fa fa-check" aria-hidden="true"></i>{title}</button>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6"> 
-      <h6>Imágnes Adjuntas</h6>			
+    <div class="col-md-12" style="padding-right: 25px;"> 
+      <h6>Archivos Adjuntos</h6>
+      <DataTable bind:this={ticketDataTable} 
+				urlServices={{ 
+					list: `${baseURL}admin/ticket/file/list`, 
+					save: `${baseURL}admin/ticket/file/save` 
+				}}
+				buttonSave={true},
+        buttonAddRow={true},
+				rows={{
+					id: {
+						style: 'color: red; display:none;',
+						type: 'id',
+					},
+					description:{
+						type: 'input[text]',
+					},
+          url:{
+						type: 'upload',
+            style: 'text-align: center',
+            tableKeyURL: 'url',
+            tableRecordKey: 'id',
+					},
+          actions:{
+						type: 'actions',
+						buttons: [
+							{
+								type: 'delete',
+							},
+						],
+						style: 'text-align:center;'
+					},
+				}}
+				headers={[
+					{
+						caption: 'codigo',
+						style: 'display:none;',
+					},
+					{
+						caption: 'Descripción',
+					},
+          {
+						caption: 'Archivos del Ticket',
+            style: 'text-align: center',
+					},
+          {
+						caption: 'Operaciones',
+						style:'text-align: center;',
+					},
+				]}
+				messages={{
+					notChanges: 'No ha ejecutado cambios en la tabla de imágenes del proyecto',
+					list404: 'Rercuso no encontrado para listar los elmentos de la tabla de imágenes del proyecto',
+					list500: 'Ocurrió un error en listar los elementos de la tabla de imágenes del proyecto',
+					save404: 'Rercuso no encontrado para guardar los cambios de la tabla de imágenes del proyecto',
+					save500: 'Ocurrió un error para guardar los cambios de la table de imágenes del proyecto',
+					save200: 'Se han actualizado los registros de la tabla de imágenes del proyecto',
+				}}
+        disabled={disabled}
+			/>
     </div>
   </div>
 </div>

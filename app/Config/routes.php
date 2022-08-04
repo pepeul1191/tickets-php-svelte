@@ -49,7 +49,6 @@ $f3->route('GET  /access/user/worker/get', '\App\Controllers\Access\UserControll
 $f3->route('POST  /access/user/worker/update', '\App\Controllers\Access\UserController->workerUpdate');
 $f3->route('GET  /access/user/menu', '\App\Controllers\Access\UserController->menu');
 $f3->route('GET  /access/user/info', '\App\Controllers\Access\UserController->info');
-
 ### position
 $f3->route('GET  /admin/position/list', '\App\Controllers\Admin\PositionController->list');
 $f3->route('POST /admin/position/save', '\App\Controllers\Admin\PositionController->save');
@@ -72,6 +71,10 @@ $f3->route('GET  /admin/worker/get', '\App\Controllers\Admin\WorkerController->g
 $f3->route('GET  /admin/worker/branch', '\App\Controllers\Admin\WorkerController->branch');
 $f3->route('POST  /admin/worker/branch/save', '\App\Controllers\Admin\WorkerController->branchSave');
 $f3->route('POST /admin/worker/detail/save', '\App\Controllers\Admin\WorkerController->saveDetail');
+### admin - project
+// $f3->route('GET  /admin/project/list', '\App\Controllers\Admin\ProjectController->list');
+// $f3->route('GET  /admin/project/project-type', '\App\Controllers\Admin\ProjectController->projectType');
+$f3->route('POST /admin/ticket/detail/save', '\App\Controllers\Admin\TicketController->save');
 #### rest - file
 $f3->route('POST /upload', '\App\Controllers\FileController->upload');
 # error handler

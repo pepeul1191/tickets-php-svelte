@@ -38,7 +38,11 @@
     validations.forEach(validation => {
       if(validation.type == 'notEmpty'){
         // console.log('notEmpty')
-        if(value == ''){
+        var content = value;
+        if(WYSIWYG){
+          content = getWYSIWYGContent();
+        }
+        if(content == ''){
           var message = 'Este campo debe de estar lleno';
           if (typeof validation.message !== 'undefined'){
             message = validation.message;
@@ -110,7 +114,7 @@
 
 <label for="{randId}" class="form-label {validationMessageClass}">{label}</label>
 {#if WYSIWYG}
-  <div class="btn-row">
+  <div class="btn-row {(validationMessageClass == 'text-danger') ? 'is-invalid' : ''}">
     <button class="btn" on:click="{bold}">
       <i class="fa fa-bold" aria-hidden="true"></i>
     </button>
@@ -140,6 +144,12 @@
     border-top: 1px solid #ced4da;
     border-left: 1px solid #ced4da;
     border-right: 1px solid #ced4da;
+  }
+
+  .is-invalid{
+    border-top: 1px solid #dc3545;
+    border-left: 1px solid #dc3545;
+    border-right: 1px solid #dc3545;
   }
 
   .form-control{

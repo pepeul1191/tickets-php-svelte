@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Filters\SessionTrueFilter;
+use App\Filters\SessionHomeGoLoginFilter;
 
 class HomeController extends BaseController
 {
@@ -14,6 +15,7 @@ class HomeController extends BaseController
 
   function beforeroute($f3) 
   {
+    SessionHomeGoLoginFilter::before($f3);
     parent::beforeroute($f3);
     $path = $f3->get('PATH');
     $method = $f3->get('VERB');

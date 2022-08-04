@@ -6,6 +6,8 @@ require 'vendor/autoload.php';
 define('BASE_PATH', dirname(__FILE__));
 define('VIEW_PATH', BASE_PATH . '/app/Views');
 define('UPLOAD_PATH', BASE_PATH . '/public/uploads/');
+// timezone
+date_default_timezone_set('America/Lima');
 // load .env
 $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();

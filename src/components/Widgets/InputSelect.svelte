@@ -31,7 +31,7 @@
     validations.forEach(validation => {
       if(validation.type == 'notEmpty'){
         // console.log('notEmpty')
-        if(value == ''){
+        if(selectedValue == '' || selectedValue == 'E'){
           var message = 'Este campo debe de estar lleno';
           if (typeof validation.message !== 'undefined'){
             message = validation.message;
@@ -101,6 +101,19 @@
     selectedValue = document.getElementById(randId).value;
     if(customFunctionOnChange != null){
       customFunctionOnChange()
+    }
+    if(selectedValue == '' || selectedValue == 'E'){
+      var message = 'Este campo debe de estar lleno';
+      if (typeof validation.message !== 'undefined'){
+        message = validation.message;
+      }
+      validationMessage = message;
+      valid = false;
+      validationMessageClass = 'text-danger';
+    }else{
+      validationMessage = '';
+      validationMessageClass = '';
+      valid = true;
     }
   };
 </script>
