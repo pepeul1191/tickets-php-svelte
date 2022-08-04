@@ -46,7 +46,7 @@
         colspanFooter={8},
 				rows={{
 					id: {
-						style: 'color: red; display:none;',
+						style: 'text-align:center;',
 						type: 'id',
 					},
 					state_name:{
@@ -89,8 +89,8 @@
 				}}
 				headers={[
 					{
-						caption: 'codigo',
-						style: 'display:none',
+						caption: 'N° Ticket',
+						style: 'text-align:center;',
 					},
           {
 						caption: 'Estado',

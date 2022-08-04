@@ -84,6 +84,56 @@ class TicketController extends BaseController
     http_response_code($status);
     echo $resp;
   }
+
+  function get($f3)
+  {
+    // data
+    $resp = [];
+    $status = 200;
+    $id = $f3->get('GET.id');
+    // logic
+    try {
+      $pdo = \ORM::get_db('app');
+      $query = "
+        SELECT 
+          T.id, T.created, T.edited, T.resume, T.description, 
+          T.priority_id, T.state_id, T.ticket_type_id, 
+          T.branch_id, TT.id AS branch_type_id, 
+          T.worker_id, CONCAT(W.last_names, ', ',W.names) AS worker_name
+        FROM tickets T 
+        JOIN ticket_types TT ON TT.id = T.ticket_type_id 
+        JOIN workers W ON W.id = T.worker_id 
+        WHERE T.id = %d;";
+      $rs = '';
+      foreach($pdo->query(sprintf($query, $id)) as $r) {
+        $rs = array(
+          'id' => $r['id'],
+          'branch_id' => $r['branch_id'],
+          'description' => $r['description'],
+          'priority_id' => $r['priority_id'],
+          'branch_type_id' => $r['branch_type_id'],
+          'resume' => $r['resume'],
+          'state_id' => $r['state_id'],
+          'ticket_type_id' => $r['ticket_type_id'],
+          'worker_id' => $r['worker_id'],
+          'created' => $r['created'],
+          'edited' => $r['edited'],
+        );
+      }
+      if($rs == false){
+        $resp = 'No existe el ticket a editar';
+        $status = 404;
+      }else{
+        $resp = json_encode($rs);
+      }
+    }catch (\Exception $e) {
+      $status = 500;
+      $resp = json_encode(['ups', $e->getMessage()]);
+    }
+    // resp
+    http_response_code($status);
+    echo $resp;
+  }
 }
 
 ?>

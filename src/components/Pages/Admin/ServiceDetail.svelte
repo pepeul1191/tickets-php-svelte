@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { alertMessage as alertMessageStore} from '../../Stores/alertMessage.js';
   import { getUser } from '../../../services/user_service.js';
-  import { saveTicketDetail } from '../../../services/ticket_service.js';
+  import { saveTicketDetail, getTicketById } from '../../../services/ticket_service.js';
   import InputText from '../../Widgets/InputText.svelte';
   import AlertMessage from '../../Widgets/AlertMessage.svelte';
   import DataTable from '../../Widgets/DataTable.svelte';
@@ -51,11 +51,6 @@
       loadDetail(id);
       disabledProjectType = false;
     }
-    if(id != 'E'){
-      while(id.length != idLength){
-        id = '0' + id;
-      }
-    }
     // load worker data
     getUserInfo();
     inputBranchType.list();
@@ -63,7 +58,7 @@
     inputState.list();
     // files
     if(id != 'E'){
-      ticketDataTable.urlServices.list = `${baseURL}admin/ticket/image/list?ticket=${id}`;
+      ticketDataTable.urlServices.list = `${baseURL}admin/ticket_file/list?ticket_id=${id}`;
     }else{
       ticketDataTable.data = [];
     }
@@ -79,6 +74,31 @@
       type: type,
       timeOut: 5000
     }
+  };
+
+  const loadDetail = (id) => {
+    getTicketById(id).then((resp) => {
+      var data = resp.data;
+      id = data.id;
+      generatedDisplayedId();
+      created = data.created;
+      edited = data.edited;
+      workerId = data.worker_id;
+      branchId = data.branch_id;
+      branchTypeId = data.branch_type_id;
+      stateId = data.state_id;
+      priorityId = data.priority_id;
+      resume = data.resume;
+      //inputDescription.getWYSIWYGContent() = data.description;
+      ticketTypeId = data.ticket_type_id;
+    }).catch((resp) =>  {
+      disabled = true;
+      if(resp.status == 404){
+        launchAlert(null, 'Ticket a editar no existe', 'warning');
+      }else{
+        launchAlert(null, 'Ocurrió un error en obtener los datos del ticket', 'danger');
+      }
+    })
   };
   
   const getUserInfo = () => {

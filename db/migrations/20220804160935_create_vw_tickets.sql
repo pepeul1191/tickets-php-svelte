@@ -15,7 +15,8 @@ CREATE VIEW vw_tickets AS
   JOIN states S ON S.id = T.state_id
   JOIN branches B ON B.id = T.branch_id 
   JOIN ticket_types TT ON TT.id = T.ticket_type_id 
-  JOIN branch_types BT ON B.branch_type_id = BT.id;
+  JOIN branch_types BT ON B.branch_type_id = BT.id
+  ORDER BY T.created;
 
 -- migrate:down
 

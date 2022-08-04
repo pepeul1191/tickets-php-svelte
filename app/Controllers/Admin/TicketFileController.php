@@ -26,7 +26,6 @@ class TicketFileController extends FileController
       $status = 500;
       $resp = 'Debe de generar primero el ticket';
       http_response_code($status);
-      echo $resp;
     }else{
       $dirname = UPLOAD_PATH. $f3->get('POST.ticket_type') . '/' . $f3->get('POST.ticket_id');
       if(!file_exists($dirname)){
@@ -92,6 +91,29 @@ class TicketFileController extends FileController
       \ORM::get_db('app')->commit();
       // response data
       $resp = json_encode($createdIds);
+    }catch (\Exception $e) {
+      $status = 500;
+      $resp = json_encode(['ups', $e->getMessage()]);
+    }
+    // resp
+    http_response_code($status);
+    echo $resp;
+  }
+
+  function list($f3)
+  {
+    // data
+    $resp = [];
+    $status = 200;
+    // logic
+    try {
+      $rs = \Model::factory('App\\Models\\TicketFile', 'app')
+        ->select('id')
+        ->select('description')
+        ->select('url')
+        ->where('ticket_id', $f3->get('GET.ticket_id'))
+        ->find_array();
+      $resp = json_encode($rs);
     }catch (\Exception $e) {
       $status = 500;
       $resp = json_encode(['ups', $e->getMessage()]);

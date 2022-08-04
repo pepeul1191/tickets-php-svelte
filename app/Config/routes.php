@@ -21,6 +21,7 @@ $f3->route('GET  /worker/edit/@num', '\App\Controllers\HomeController->index');
 $f3->route('GET  /service_type', '\App\Controllers\HomeController->index');
 $f3->route('GET  /service', '\App\Controllers\HomeController->index');
 $f3->route('GET  /service/add', '\App\Controllers\HomeController->index');
+$f3->route('GET  /service/edit/@num', '\App\Controllers\HomeController->index');
 $f3->route('GET  /branch/lima', '\App\Controllers\HomeController->index');
 $f3->route('GET  /branch/province', '\App\Controllers\HomeController->index');
 $f3->route('GET  /admin/project-type', '\App\Controllers\AdminController->index');
@@ -75,9 +76,11 @@ $f3->route('POST /admin/worker/detail/save', '\App\Controllers\Admin\WorkerContr
 // $f3->route('GET  /admin/project/list', '\App\Controllers\Admin\ProjectController->list');
 // $f3->route('GET  /admin/project/project-type', '\App\Controllers\Admin\ProjectController->projectType');
 $f3->route('POST /admin/ticket/detail/save', '\App\Controllers\Admin\TicketController->save');
+$f3->route('GET  /admin/ticket/get', '\App\Controllers\Admin\TicketController->get');
 ### admin - ticket_file
 $f3->route('POST /admin/ticket_file/upload', '\App\Controllers\Admin\TicketFileController->upload');
 $f3->route('POST /admin/ticket_file/save', '\App\Controllers\Admin\TicketFileController->save');
+$f3->route('GET  /admin/ticket_file/list', '\App\Controllers\Admin\TicketFileController->list');
 #### rest - file
 $f3->route('POST /upload', '\App\Controllers\FileController->upload');
 # error handler

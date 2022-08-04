@@ -38,11 +38,11 @@ class BranchController extends BaseController
       $rs = [];
       if ($type_id == 1 || $type_id == 2){
         $rs = \Model::factory('App\\Models\\Branch', 'app')
-        ->where_equal('branch_type_id', $type_id)
-        ->find_array();
+          ->where_equal('branch_type_id', $type_id)
+          ->find_array();
       }else{
         $rs = \Model::factory('App\\Models\\Branch', 'app')
-        ->find_array();
+          ->find_array();
       }
       $resp = json_encode($rs);
     }catch (\Exception $e) {
