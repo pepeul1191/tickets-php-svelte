@@ -41,7 +41,6 @@
     var idLength = 10;
     // ajax
     if(id == 'E'){
-      console.log('if')
       title = 'Crear Servicio';
       id = 'E';
       idDisplayed = ''
@@ -63,9 +62,13 @@
     inputPriority.list();
     inputState.list();
     // files
-    ticketDataTable.urlServices.list = `${baseURL}admin/ticket/image/list?ticket=${id}`;
+    if(id != 'E'){
+      ticketDataTable.urlServices.list = `${baseURL}admin/ticket/image/list?ticket=${id}`;
+    }else{
+      ticketDataTable.data = [];
+    }
     ticketDataTable.list();
-    ticketDataTable.extraData.ticket = id;
+    ticketDataTable.extraData.ticket_id = id;
   });
 
   const launchAlert = (event, message, type) => {
@@ -116,17 +119,19 @@
       // console.log(params);
       saveTicketDetail(params).then((resp) => {
         var data = resp.data;
-        console.log(data);
+        //console.log(data);
         if(typeof data === 'string' || data instanceof String){
           edited = data;
           launchAlert(null, 'Se ha editado un ticket', 'success');
         }else{
           id = data.id;
+          generatedDisplayedId();
           edited = data.edited;
           created = data.created;
-          title = 'Editar Ticket';
+          title = 'Editar Servicio';
           launchAlert(null, 'Se ha creado un nuevo ticket', 'success');
           disabledProjectType = false;
+          ticketDataTable.extraData.ticket_id = id;
         }
       }).catch((resp) =>  {
         if(resp.status == 404){
@@ -139,6 +144,13 @@
       });
     }
   };
+
+  const generatedDisplayedId = () => {
+    idDisplayed = id;
+    while(idDisplayed.length <= 8){
+      idDisplayed = '0' + idDisplayed;
+    }
+  }
 </script>
 
 <svelte:head>
@@ -164,7 +176,7 @@
           bind:value={idDisplayed}
           placeholder={'Por generar'} 
           disabled={true}
-          style={'text-align:center;'}
+          style={'text-align:left;'}
           validations={[
             {type:'notEmpty', message: 'Debe de ingresar un nombre proyecto'},
             {type:'maxLength', length: 100, message: 'Nombre máximo 100 letras'},
@@ -317,8 +329,8 @@
       <h6>Archivos Adjuntos</h6>
       <DataTable bind:this={ticketDataTable} 
 				urlServices={{ 
-					list: `${baseURL}admin/ticket/file/list`, 
-					save: `${baseURL}admin/ticket/file/save` 
+					list: `${baseURL}admin/ticket_file/list`, 
+					save: `${baseURL}admin/ticket_file/save` 
 				}}
 				buttonSave={true},
         buttonAddRow={true},
@@ -335,6 +347,15 @@
             style: 'text-align: center',
             tableKeyURL: 'url',
             tableRecordKey: 'id',
+            validationExtension: {
+              allowed: ['image/jpeg', 'image/png', 'image/jpg', 'application/x-php'], 
+              message: 'Extensión del archivo no es válida'
+            },
+            url: '/admin/ticket_file/upload',
+            extraPOSTData: {
+              ticket_id: id,
+              ticket_type: 'services'
+            },
 					},
           actions:{
 						type: 'actions',

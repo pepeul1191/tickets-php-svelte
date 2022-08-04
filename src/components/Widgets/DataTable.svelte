@@ -394,6 +394,9 @@
               bind:rowId={record[rowProps.rowId]} 
               bind:tableKeyURL={rowProps.tableKeyURL} 
               bind:tableRecordKey={rowProps.tableRecordKey} 
+              bind:validationExtension={rowProps.validationExtension} 
+              bind:url={rowProps.url} 
+              bind:extraPOSTData={rowProps.extraPOSTData} 
               bind:tableRecordId={record.id}
             />
           {/if}

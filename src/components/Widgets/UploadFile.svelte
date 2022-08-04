@@ -16,6 +16,7 @@
   export let disabled = false;
   export let tableRecordId = null;
   export let tableRecordKey = null;
+  export let extraPOSTData = {};
   export let validationSize = {
     size: 3, // MB, (MB = B / 1024^2) ... https://www.to-convert.com/en/computer/convert-byte-to-mb.php
     message: 'Archivo del tamaño supera el máximo permitido'
@@ -129,6 +130,9 @@
   const uploadFile = () => {
     var formData = new FormData();
     formData.append(`${fileName}`, inputFile);
+    for (let key in extraPOSTData) {
+      formData.append(key, extraPOSTData[key]);
+    }
     axios.post(`${url}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'

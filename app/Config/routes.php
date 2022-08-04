@@ -71,10 +71,13 @@ $f3->route('GET  /admin/worker/get', '\App\Controllers\Admin\WorkerController->g
 $f3->route('GET  /admin/worker/branch', '\App\Controllers\Admin\WorkerController->branch');
 $f3->route('POST  /admin/worker/branch/save', '\App\Controllers\Admin\WorkerController->branchSave');
 $f3->route('POST /admin/worker/detail/save', '\App\Controllers\Admin\WorkerController->saveDetail');
-### admin - project
+### admin - ticket
 // $f3->route('GET  /admin/project/list', '\App\Controllers\Admin\ProjectController->list');
 // $f3->route('GET  /admin/project/project-type', '\App\Controllers\Admin\ProjectController->projectType');
 $f3->route('POST /admin/ticket/detail/save', '\App\Controllers\Admin\TicketController->save');
+### admin - ticket_file
+$f3->route('POST /admin/ticket_file/upload', '\App\Controllers\Admin\TicketFileController->upload');
+$f3->route('POST /admin/ticket_file/save', '\App\Controllers\Admin\TicketFileController->save');
 #### rest - file
 $f3->route('POST /upload', '\App\Controllers\FileController->upload');
 # error handler

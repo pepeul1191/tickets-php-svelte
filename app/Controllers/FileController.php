@@ -8,8 +8,11 @@ use App\Filters\CsrfApiFilter;
 
 class FileController extends BaseController
 {
+  protected $extrPath = '';
+
   function __construct()
   {
+    
     parent::__construct();
   }
 
@@ -30,11 +33,20 @@ class FileController extends BaseController
       $status = 200;
       $path = UPLOAD_PATH. $rand . '.' . $extension;
       $response_path = 'uploads/' . $rand . '.' . $extension;
+      // extra path is in POST param
       if(
         $f3->get('POST.path') != null
       ){
         $path = UPLOAD_PATH. $rand . '.' . $extension;
         $response_path = 'uploads/' . $f3->get('POST.path') . '/' . $rand . '.' . $extension;
+      }
+      // extra path is children class 
+      if(
+        $this->extraPath != ''
+      ){
+        $dirname =  UPLOAD_PATH. $this->extraPath;
+        $path = $dirname . $rand . '.' . $extension;
+        $response_path = 'uploads/' . $this->extraPath . $rand . '.' . $extension;
       }
       move_uploaded_file(
         $_FILES['file']['tmp_name'], 
