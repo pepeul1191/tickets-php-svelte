@@ -28,70 +28,32 @@ class ServiceController extends BaseController
     $status = 200;
     // logic
     try {
-      $rs = \Model::factory('App\\Models\\Service', 'app')
-        ->find_array();
-      $resp = json_encode($rs);
-    }catch (\Exception $e) {
-      $status = 500;
-      $resp = json_encode(['ups', $e->getMessage()]);
-    }
-    // resp
-    http_response_code($status);
-    echo $resp;
-  }
-
-  function save($f3)
-  {
-    // data
-    $resp = [];
-    $status = 200;
-    $payload = json_decode(file_get_contents('php://input'), true);
-    $createdIds = [];
-    $news = $payload['news'];
-		$edits = $payload['edits'];
-    $deletes = $payload['deletes'];
-    // logic
-    \ORM::get_db('app')->beginTransaction();
-    try {
-      // news
-      if(count($news) > 0){
-				foreach ($news as &$new) {
-          if ($new['url'] == 'E'){
-            $new['url'] = 'assets/img/default-service.png';
-          }
-				  $n = \Model::factory('App\\Models\\Service', 'app')->create();
-					$n->name = $new['name'];
-          $n->url = $new['url'];
-					$n->save();
-				  $temp = [];
-				  $temp['tempId'] = $new['id'];
-	        $temp['newId'] = $n->id;
-	        array_push($createdIds, array(
-            'tmp' => $new['id'],
-            'id' => $n->id,
-          ));
-				}
+      $stmt = \Model::factory('App\\Models\\VWTicket', 'app')
+        ->where_equal('ticket_type_name', 'SERVICIOS');
+      // filter user
+      if(
+        $f3->get('GET.name') != null
+      ){
+        $stmt = $stmt->where_like('name', '%' . $f3->get('GET.name') . '%');
       }
-      // edits
-      if(count($edits) > 0){
-				foreach ($edits as &$edit) {
-          $e = \Model::factory('App\\Models\\Service', 'app')->find_one($edit['id']);
-					$e->name = $edit['name'];
-          $e->url = $edit['url'];
-					$e->save();
-        }
+      // pages with final statement
+      $pages = ceil(
+        $stmt->count()
+        / $f3->get('GET.step')
+      );
+      // pagination
+      if(
+        $f3->get('GET.step') != null && 
+        $f3->get('GET.page') != null
+      ){
+        $offset = ($f3->get('GET.page') - 1) * $f3->get('GET.step');
+        $stmt = $stmt->offset($offset)->limit($f3->get('GET.step'));
       }
-      // deletes
-      if(count($deletes) > 0){
-				foreach ($deletes as &$delete) {
-			    $d = \Model::factory('App\\Models\\Service', 'app')->find_one($delete['id']);
-			    $d->delete();
-				}
-      }
-      // commit
-      \ORM::get_db('app')->commit();
-      // response data
-      $resp = json_encode($createdIds);
+      $rs = $stmt->find_array();
+      $resp = json_encode(array(
+        'list' => $rs,
+        'pages' => $pages,
+      ));
     }catch (\Exception $e) {
       $status = 500;
       $resp = json_encode(['ups', $e->getMessage()]);

@@ -170,7 +170,7 @@ CREATE TABLE `ticket_files` (
   PRIMARY KEY (`id`),
   KEY `ticket_id` (`ticket_id`),
   CONSTRAINT `ticket_files_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -214,7 +214,7 @@ CREATE TABLE `tickets` (
   CONSTRAINT `tickets_ibfk_3` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`id`) ON DELETE CASCADE,
   CONSTRAINT `tickets_ibfk_4` FOREIGN KEY (`state_id`) REFERENCES `states` (`id`) ON DELETE CASCADE,
   CONSTRAINT `tickets_ibfk_5` FOREIGN KEY (`ticket_type_id`) REFERENCES `ticket_types` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,6 +238,29 @@ CREATE TABLE `users` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Temporary view structure for view `vw_tickets`
+--
+
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `vw_tickets` AS SELECT
+ 1 AS `id`,
+ 1 AS `resume`,
+ 1 AS `created`,
+ 1 AS `edited`,
+ 1 AS `worker_id`,
+ 1 AS `worker_name`,
+ 1 AS `priority_id`,
+ 1 AS `priority_name`,
+ 1 AS `state_id`,
+ 1 AS `state_name`,
+ 1 AS `ticket_type_id`,
+ 1 AS `ticket_type_name`,
+ 1 AS `branch_id`,
+ 1 AS `branch_name`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `workers`
 --
 
@@ -259,6 +282,24 @@ CREATE TABLE `workers` (
 --
 -- Dumping routines for database 'tickets'
 --
+
+--
+-- Final view structure for view `vw_tickets`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vw_tickets`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vw_tickets` AS select `T`.`id` AS `id`,`T`.`resume` AS `resume`,date_format(`T`.`created`,'%Y/%m/%d') AS `created`,date_format(`T`.`edited`,'%Y/%m/%d') AS `edited`,`T`.`worker_id` AS `worker_id`,concat(`W`.`last_names`,', ',`W`.`names`) AS `worker_name`,`T`.`priority_id` AS `priority_id`,`P`.`name` AS `priority_name`,`T`.`state_id` AS `state_id`,`S`.`name` AS `state_name`,`T`.`ticket_type_id` AS `ticket_type_id`,`TT`.`name` AS `ticket_type_name`,`T`.`branch_id` AS `branch_id`,concat(`BT`.`name`,', ',`B`.`name`) AS `branch_name` from ((((((`tickets` `T` join `workers` `W` on((`W`.`id` = `T`.`worker_id`))) join `priorities` `P` on((`P`.`id` = `T`.`priority_id`))) join `states` `S` on((`S`.`id` = `T`.`state_id`))) join `branches` `B` on((`B`.`id` = `T`.`branch_id`))) join `ticket_types` `TT` on((`TT`.`id` = `T`.`ticket_type_id`))) join `branch_types` `BT` on((`B`.`branch_type_id` = `BT`.`id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -299,5 +340,6 @@ INSERT INTO `schema_migrations` (version) VALUES
   ('20220726020959'),
   ('20220726230401'),
   ('20220729030323'),
-  ('20220804151900');
+  ('20220804151900'),
+  ('20220804160935');
 UNLOCK TABLES;
