@@ -4341,7 +4341,7 @@
 											"top": 607,
 											"width": 83.5986328125,
 											"height": 13,
-											"text": "ServiceTicket"
+											"text": "Service"
 										},
 										{
 											"_type": "LabelView",
@@ -7810,7 +7810,7 @@
 											"top": 743,
 											"width": 131.853515625,
 											"height": 13,
-											"text": "ServiceTicketType"
+											"text": "ServiceServiceType"
 										},
 										{
 											"_type": "LabelView",
@@ -7904,7 +7904,7 @@
 											"top": 781,
 											"width": 131.853515625,
 											"height": 13,
-											"text": "+service_ticket_id: INT",
+											"text": "+service_id: INT",
 											"horizontalAlignment": 0
 										},
 										{
@@ -10459,7 +10459,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "ServiceTicket",
+					"name": "Service",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -11051,7 +11051,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "ServiceTicketType",
+					"name": "ServiceServiceType",
 					"attributes": [
 						{
 							"_type": "UMLAttribute",
@@ -11068,7 +11068,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGCOEHkHJ4+3Ao="
 							},
-							"name": "service_ticket_id",
+							"name": "service_id",
 							"type": "INT"
 						},
 						{

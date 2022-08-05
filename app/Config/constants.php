@@ -2,8 +2,8 @@
 
 if($_ENV['FF_ENVIRONMENT'] == 'production'){
   return array(
-    'baseURL' => 'https://antergo.pe/',
-    'staticURL' => 'https://antergo.pe/public/',
+    'baseURL' => 'https://tickets.softweb.pe/',
+    'staticURL' => 'https://tickets.softweb.pe/public/',
     'csrfKey' => 'demo_',
     'csrfValue' => '123_',
   );
